@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  CurrencyConverter
+
+  Created by Marwin Carino on 10/7/22.
+  
+*/
+
+app.title = "Currency Converter";
+
+convert.nav.title = "Convert";
