@@ -46,6 +46,8 @@ class User {
   init() {
     wallets = []
 
-    wallets.append(.init(amount: 12345, currency: .init(locale: "en_US", code: "USD")))
+    wallets.append(.init(balance: 12345, currency: .init(locale: "en_US", code: "USD")))
+    wallets.append(.init(balance: 12345, currency: .init(locale: "es_ES", code: "EUR")))
+    wallets.append(.init(balance: 12345, currency: .init(locale: "ja_JP", code: "YEN")))
   }
 }
