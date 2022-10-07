@@ -89,17 +89,26 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 2 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 3 storyboards.
   struct storyboard {
-    /// Storyboard `LaunchScreen`.
-    static let launchScreen = _R.storyboard.launchScreen()
+    /// Storyboard `Landing`.
+    static let landing = _R.storyboard.landing()
+    /// Storyboard `Launch`.
+    static let launch = _R.storyboard.launch()
     /// Storyboard `Wallet`.
     static let wallet = _R.storyboard.wallet()
 
     #if os(iOS) || os(tvOS)
-    /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
-    static func launchScreen(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.launchScreen)
+    /// `UIStoryboard(name: "Landing", bundle: ...)`
+    static func landing(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.landing)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Launch", bundle: ...)`
+    static func launch(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.launch)
     }
     #endif
 
@@ -155,19 +164,19 @@ struct R: Rswift.Validatable {
 
   /// This `R.nib` struct is generated, and contains static references to 1 nibs.
   struct nib {
-    /// Nib `CurrencyTableCell`.
-    static let currencyTableCell = _R.nib._CurrencyTableCell()
+    /// Nib `WalletTableCell`.
+    static let walletTableCell = _R.nib._WalletTableCell()
 
     #if os(iOS) || os(tvOS)
-    /// `UINib(name: "CurrencyTableCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.currencyTableCell) instead")
-    static func currencyTableCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.currencyTableCell)
+    /// `UINib(name: "WalletTableCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.walletTableCell) instead")
+    static func walletTableCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.walletTableCell)
     }
     #endif
 
-    static func currencyTableCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> CurrencyTableCell? {
-      return R.nib.currencyTableCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? CurrencyTableCell
+    static func walletTableCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> WalletTableCell? {
+      return R.nib.walletTableCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? WalletTableCell
     }
 
     fileprivate init() {}
@@ -175,8 +184,8 @@ struct R: Rswift.Validatable {
 
   /// This `R.reuseIdentifier` struct is generated, and contains static references to 1 reuse identifiers.
   struct reuseIdentifier {
-    /// Reuse identifier `CurrencyTableCell`.
-    static let currencyTableCell: Rswift.ReuseIdentifier<CurrencyTableCell> = Rswift.ReuseIdentifier(identifier: "CurrencyTableCell")
+    /// Reuse identifier `WalletTableCell`.
+    static let walletTableCell: Rswift.ReuseIdentifier<WalletTableCell> = Rswift.ReuseIdentifier(identifier: "WalletTableCell")
 
     fileprivate init() {}
   }
@@ -244,15 +253,15 @@ struct _R: Rswift.Validatable {
 
   #if os(iOS) || os(tvOS)
   struct nib {
-    struct _CurrencyTableCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
-      typealias ReusableType = CurrencyTableCell
+    struct _WalletTableCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = WalletTableCell
 
       let bundle = R.hostingBundle
-      let identifier = "CurrencyTableCell"
-      let name = "CurrencyTableCell"
+      let identifier = "WalletTableCell"
+      let name = "WalletTableCell"
 
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> CurrencyTableCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? CurrencyTableCell
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> WalletTableCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? WalletTableCell
       }
 
       fileprivate init() {}
@@ -266,7 +275,10 @@ struct _R: Rswift.Validatable {
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
       #if os(iOS) || os(tvOS)
-      try launchScreen.validate()
+      try landing.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try launch.validate()
       #endif
       #if os(iOS) || os(tvOS)
       try wallet.validate()
@@ -274,11 +286,35 @@ struct _R: Rswift.Validatable {
     }
 
     #if os(iOS) || os(tvOS)
-    struct launchScreen: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+    struct landing: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = LandingController
+
+      let bundle = R.hostingBundle
+      let landingController = StoryboardViewControllerResource<LandingController>(identifier: "LandingController")
+      let name = "Landing"
+
+      func landingController(_: Void = ()) -> LandingController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: landingController)
+      }
+
+      static func validate() throws {
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "arrow.down") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'arrow.down' is used in storyboard 'Landing', but couldn't be loaded.") } }
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "arrow.up") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'arrow.up' is used in storyboard 'Landing', but couldn't be loaded.") } }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.landing().landingController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'landingController' could not be loaded from storyboard 'Landing' as 'LandingController'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct launch: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = UIKit.UIViewController
 
       let bundle = R.hostingBundle
-      let name = "LaunchScreen"
+      let name = "Launch"
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {

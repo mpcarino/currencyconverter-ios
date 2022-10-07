@@ -9,12 +9,16 @@ import Foundation
 import UIKit
 
 extension AppDelegate {
-    func updateRootController() {
-        setRootToWallet()
-    }
+  func updateRootController() {
+    setRootToWallet()
+  }
 
-    func setRootToWallet() {
-        let controller = R.storyboard.wallet.instantiateInitialViewController()
-        window?.rootViewController = controller
-    }
+  func setRootToWallet() {
+    let navigationController = R.storyboard.wallet.instantiateInitialViewController()
+    
+    let walletController = navigationController?.viewControllers.first as! WalletController
+    walletController.viewModel = WalletViewModel()
+    
+    window?.rootViewController = navigationController
+  }
 }

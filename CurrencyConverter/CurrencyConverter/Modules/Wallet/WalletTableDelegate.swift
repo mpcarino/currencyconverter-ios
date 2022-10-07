@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CurrencyTableDelegate: NSObject, UITableViewDelegate {
+class WalletTableDelegate: NSObject, UITableViewDelegate {
     // MARK: - Properties
     
     var onSelect: ((IndexPath) -> Void) = { _ in }

@@ -9,32 +9,43 @@ import Foundation
 import UIKit
 
 final class App {
-    static let shared = App()
+  static let shared = App()
 
-    // MARK: - Properties
+  // MARK: - Properties
 
-    private(set) var currencyDataService: CurrencyDataService!
+  private(set) var user: User
+  private(set) var currencyDataService: CurrencyDataService!
+  private(set) var supportedCurrencies: [Currency]
 
-    private(set) var supportedCurrencies: [Currency]
+  // MARK: - Init
 
-    // MARK: - Init
-
-    init() {
-        supportedCurrencies = []
-    }
+  init() {
+    user = User()
+    supportedCurrencies = []
+  }
 }
 
 // MARK: - Methods
 
 extension App {
-    func bootstrap(
-        with application: UIApplication,
-        launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-    ) {
-        currencyDataService = CurrencyDataService()
+  func bootstrap(
+    with application: UIApplication,
+    launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) {
+    currencyDataService = CurrencyDataService()
 
-        if let supportedCurrencies = currencyDataService.load() {
-            self.supportedCurrencies = supportedCurrencies
-        }
+    if UserDefaults.isFirstAppOpen {
+      
     }
+  }
+}
+
+class User {
+  var wallets: [Wallet]
+
+  init() {
+    wallets = []
+
+    wallets.append(.init(amount: 12345, currency: .init(locale: "en_US", code: "USD")))
+  }
 }

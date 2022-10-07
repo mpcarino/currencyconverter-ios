@@ -281,7 +281,9 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="balanceContainerView" destination="oY9-IG-cOZ" id="kPs-Pc-2MF"/>
+                        <outlet property="destinationAmountTextField" destination="rGi-VD-82R" id="TGK-mC-zIf"/>
                         <outlet property="destinationContainerView" destination="KmR-1v-RqZ" id="PYx-2a-bBC"/>
+                        <outlet property="sourceAmountTextField" destination="JJI-QR-HBH" id="aGg-Wj-5Y0"/>
                         <outlet property="sourceContainerVIew" destination="lRD-yZ-JeH" id="kY1-kj-mgB"/>
                     </connections>
                 </viewController>

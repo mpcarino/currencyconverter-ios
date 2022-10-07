@@ -9,11 +9,18 @@ import Foundation
 import UIKit
 
 class ConvertController: UIViewController {
-    @IBOutlet weak var balanceContainerView: UIView!
-    @IBOutlet weak var feeContainerView: UIView!
+    // MARK: - Properties
     
+    
+    // MARK: - IBOutlets
+    
+    @IBOutlet weak var balanceContainerView: UIView!
     @IBOutlet weak var sourceContainerVIew: UIView!
+    @IBOutlet weak var sourceAmountTextField: UITextField!
     @IBOutlet weak var destinationContainerView: UIView!
+    @IBOutlet weak var destinationAmountTextField: UITextField!
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +32,6 @@ class ConvertController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
-    
 }
 
 // MARK: - Methods

@@ -1,5 +1,5 @@
 //
-//  CurrencyTableCell.swift
+//  WalletTableCell.swift
 //  CurrencyConverter
 //
 //  Created by Marwin Carino on 10/7/22.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CurrencyTableCell: UITableViewCell {
+class WalletTableCell: UITableViewCell {
     // MARK: - Properties
     
     static var preferredHeight: CGFloat { 74.0 }
@@ -25,13 +25,13 @@ class CurrencyTableCell: UITableViewCell {
         super.awakeFromNib()
         
         configureUI()
-//        setup()
+        setup()
     }
 }
 
 // MARK: - Methods
 
-private extension CurrencyTableCell {
+private extension WalletTableCell {
     func configureUI() {
         containerView.layer.cornerRadius = 10.0
     }
