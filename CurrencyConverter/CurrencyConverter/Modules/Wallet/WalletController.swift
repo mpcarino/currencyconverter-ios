@@ -70,7 +70,7 @@ private extension WalletController {
         return { [weak self] indexPath in
             guard let self = self else { return }
             
-            self.navigateToConvert()
+            self.showConvert()
         }
     }
 }
@@ -78,7 +78,7 @@ private extension WalletController {
 // MARK: - Navigation
 
 private extension WalletController {
-    func navigateToConvert() {
+    func showConvert() {
         let controller = R.storyboard.wallet.convertController()!
         show(controller, sender: self)
     }

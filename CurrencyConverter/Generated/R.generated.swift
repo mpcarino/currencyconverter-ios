@@ -293,6 +293,8 @@ struct _R: Rswift.Validatable {
       }
 
       static func validate() throws {
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "arrow.down") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'arrow.down' is used in storyboard 'Wallet', but couldn't be loaded.") } }
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "arrow.up") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'arrow.up' is used in storyboard 'Wallet', but couldn't be loaded.") } }
         if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "chevron.down") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'chevron.down' is used in storyboard 'Wallet', but couldn't be loaded.") } }
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
