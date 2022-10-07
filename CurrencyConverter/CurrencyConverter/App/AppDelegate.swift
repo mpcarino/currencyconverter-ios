@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         
+        App.shared.bootstrap(with: application, launchOptions: launchOptions)
+        
+        
         return true
     }
 

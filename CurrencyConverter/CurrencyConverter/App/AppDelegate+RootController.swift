@@ -12,7 +12,7 @@ extension AppDelegate {
     func updateRootController() {
         setRootToWallet()
     }
-    
+
     func setRootToWallet() {
         let controller = R.storyboard.wallet.instantiateInitialViewController()
         window?.rootViewController = controller
