@@ -9,35 +9,48 @@ import Foundation
 import UIKit
 
 class WalletTableCell: UITableViewCell {
-    // MARK: - Properties
-    
-    static var preferredHeight: CGFloat { 74.0 }
-    
-    // MARK: - IBOutlets
-    
-    @IBOutlet private weak var containerView: UIView!
-    @IBOutlet private weak var currencyLabel: UILabel!
-    @IBOutlet private weak var balanceLabel: UILabel!
-    
-    // MARK: - Life Cycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        configureUI()
-        setup()
+  // MARK: - Properties
+
+  var viewModel: WalletTableCellViewModelProtocol! {
+    didSet {
+      refresh()
     }
+  }
+
+  static var preferredHeight: CGFloat { 74.0 }
+
+  // MARK: - IBOutlets
+
+  @IBOutlet private var containerView: UIView!
+  @IBOutlet private var balanceLabel: UILabel!
+  @IBOutlet private var currencyLabel: UILabel!
+
+  // MARK: - Life Cycle
+
+  override func awakeFromNib() {
+    super.awakeFromNib()
+
+    configureUI()
+    setup()
+  }
 }
 
 // MARK: - Methods
 
 private extension WalletTableCell {
-    func configureUI() {
-        containerView.layer.cornerRadius = 10.0
-    }
+  func configureUI() {
+    containerView.layer.cornerRadius = 10.0
+  }
+
+  func setup() {
+    balanceLabel.text = nil
+    currencyLabel.text = nil
+  }
+  
+  func refresh() {
+    guard viewModel != nil else { return }
     
-    func setup() {
-        currencyLabel.text = nil
-        balanceLabel.text = nil
-    }
+    balanceLabel.text = viewModel.balanceText
+    currencyLabel.text = viewModel.currencyText
+  }
 }

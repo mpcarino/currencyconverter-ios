@@ -13,7 +13,6 @@ class WalletTableDelegate: NSObject, UITableViewDelegate {
     
     var onSelect: ((IndexPath) -> Void) = { _ in }
     
-    
     // MARK: - Methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
