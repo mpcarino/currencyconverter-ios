@@ -25,25 +25,19 @@ class CurrencyTableCell: UITableViewCell {
         super.awakeFromNib()
         
         configureUI()
-        setup()
+//        setup()
     }
 }
 
-// MARK: - Setup
+// MARK: - Methods
 
 private extension CurrencyTableCell {
+    func configureUI() {
+        containerView.layer.cornerRadius = 10.0
+    }
+    
     func setup() {
         currencyLabel.text = nil
         balanceLabel.text = nil
-    }
-    
-    func configureUI() {
-        containerView.layer.cornerRadius = 8.0
-        containerView.layer.borderColor = UIColor.black.cgColor
-        containerView.layer.borderWidth = 0.25
-        containerView.layer.shadowRadius = 2.5
-        containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowOpacity = 0.10
-        containerView.layer.shadowOffset = .init(width: 0.0, height: 2.5)
     }
 }

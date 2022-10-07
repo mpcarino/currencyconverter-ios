@@ -11,8 +11,12 @@ import UIKit
 class WalletController: UIViewController {
     // MARK: - Properties
     
-    private lazy var currencyTableDataSource: CurrencyTableDataSource = {
+    private lazy var tableDataSource: CurrencyTableDataSource = {
         return CurrencyTableDataSource()
+    }()
+    
+    private lazy var tableDelegate: CurrencyTableDelegate = {
+        return CurrencyTableDelegate()
     }()
     
     // MARK: - IBOutlets
@@ -37,6 +41,7 @@ class WalletController: UIViewController {
 private extension WalletController {
     func setup() {
         setupTableView()
+        setupClosures()
     }
     
     func setupTableView() {
@@ -45,12 +50,36 @@ private extension WalletController {
             forCellReuseIdentifier: CurrencyTableCell.reuseIdentifier
         )
         
+        tableView.dataSource = tableDataSource
+        tableView.delegate = tableDelegate
+        
+        tableView.contentInset.top = 8.0
+        tableView.contentInset.bottom = 8.0
         tableView.rowHeight = CurrencyTableCell.preferredHeight
-        tableView.dataSource = currencyTableDataSource
-        tableView.delegate = self
+    }
+    
+    func setupClosures() {
+        tableDelegate.onSelect = handleTableDelegateSelect()
     }
 }
 
-extension WalletController: UITableViewDelegate {
-    
+// MARK: - Handlers
+
+private extension WalletController {
+    func handleTableDelegateSelect() -> ((IndexPath) -> Void) {
+        return { [weak self] indexPath in
+            guard let self = self else { return }
+            
+            self.navigateToConvert()
+        }
+    }
+}
+
+// MARK: - Navigation
+
+private extension WalletController {
+    func navigateToConvert() {
+        let controller = R.storyboard.wallet.convertController()!
+        show(controller, sender: self)
+    }
 }
