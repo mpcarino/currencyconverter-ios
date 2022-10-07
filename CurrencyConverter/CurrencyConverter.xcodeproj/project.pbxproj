@@ -13,6 +13,7 @@
 		DD7AD82028EFD55600F59DA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD7AD81F28EFD55600F59DA2 /* Assets.xcassets */; };
 		DD7AD82328EFD55600F59DA2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD7AD82128EFD55600F59DA2 /* LaunchScreen.storyboard */; };
 		DD7AD82E28EFD55600F59DA2 /* CurrencyConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7AD82D28EFD55600F59DA2 /* CurrencyConverterTests.swift */; };
+		DD7AD85628EFE16F00F59DA2 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7AD85528EFE16F00F59DA2 /* R.generated.swift */; };
 		E851900B59CCDED0C51E857B /* Pods_CurrencyConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73C557A145784254FC9B8D9C /* Pods_CurrencyConverter.framework */; };
 		F6CD199715DDB4B2E001A98F /* Pods_CurrencyConverterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FE9AA4BD9AF561CE835359 /* Pods_CurrencyConverterTests.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		DD7AD82928EFD55600F59DA2 /* CurrencyConverterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrencyConverterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD7AD82D28EFD55600F59DA2 /* CurrencyConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterTests.swift; sourceTree = "<group>"; };
 		DD7AD83328EFD55600F59DA2 /* CurrencyConverterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrencyConverterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD7AD85528EFE16F00F59DA2 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = R.generated.swift; path = Generated/R.generated.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				DD7AD84828EFD6B800F59DA2 /* Modules */,
 				DD7AD84A28EFD6D600F59DA2 /* Database */,
 				DD7AD84B28EFD71400F59DA2 /* Resources */,
+				DD7AD85428EFE06A00F59DA2 /* Generated */,
 			);
 			path = CurrencyConverter;
 			sourceTree = "<group>";
@@ -149,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				DD7AD84C28EFD87F00F59DA2 /* Launch */,
-				DD7AD84E28EFD89000F59DA2 /* Converter */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -186,11 +188,12 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
-		DD7AD84E28EFD89000F59DA2 /* Converter */ = {
+		DD7AD85428EFE06A00F59DA2 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				DD7AD85528EFE16F00F59DA2 /* R.generated.swift */,
 			);
-			path = Converter;
+			path = Generated;
 			sourceTree = "<group>";
 		};
 		F4B961BC871CED24BE9625BE /* Frameworks */ = {
@@ -211,9 +214,11 @@
 			buildConfigurationList = DD7AD83D28EFD55600F59DA2 /* Build configuration list for PBXNativeTarget "CurrencyConverter" */;
 			buildPhases = (
 				61D80673B04B89231F7C44FE /* [CP] Check Pods Manifest.lock */,
+				DD7AD85328EFE04A00F59DA2 /* R.swift */,
 				DD7AD80C28EFD55500F59DA2 /* Sources */,
 				DD7AD80D28EFD55500F59DA2 /* Frameworks */,
 				DD7AD80E28EFD55500F59DA2 /* Resources */,
+				ADC683E4FC81B548727ADF2A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -251,6 +256,7 @@
 				DD7AD82F28EFD55600F59DA2 /* Sources */,
 				DD7AD83028EFD55600F59DA2 /* Frameworks */,
 				DD7AD83128EFD55600F59DA2 /* Resources */,
+				772BAEFB5A8B329AE4480D30 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -354,6 +360,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		772BAEFB5A8B329AE4480D30 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CurrencyConverter-CurrencyConverterUITests/Pods-CurrencyConverter-CurrencyConverterUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CurrencyConverter-CurrencyConverterUITests/Pods-CurrencyConverter-CurrencyConverterUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CurrencyConverter-CurrencyConverterUITests/Pods-CurrencyConverter-CurrencyConverterUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A8DDB8D234C77308F083F48B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -375,6 +398,43 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		ADC683E4FC81B548727ADF2A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CurrencyConverter/Pods-CurrencyConverter-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CurrencyConverter/Pods-CurrencyConverter-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CurrencyConverter/Pods-CurrencyConverter-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DD7AD85328EFE04A00F59DA2 /* R.swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = R.swift;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/Generated/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/Generated/R.generated.swift\"\n";
 		};
 		DDB09904BCDDE2AB5B663C82 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -407,6 +467,7 @@
 			files = (
 				DD7AD81E28EFD55500F59DA2 /* CurrencyConverter.xcdatamodeld in Sources */,
 				DD7AD81428EFD55500F59DA2 /* AppDelegate.swift in Sources */,
+				DD7AD85628EFE16F00F59DA2 /* R.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +563,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -556,6 +618,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -576,6 +639,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CurrencyConverter/Info/Info.plist;
+				INFOPLIST_KEY_NSMainStoryboardFile = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -607,6 +671,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CurrencyConverter/Info/Info.plist;
+				INFOPLIST_KEY_NSMainStoryboardFile = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
