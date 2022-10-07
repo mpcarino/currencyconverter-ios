@@ -38,6 +38,7 @@
 		DDF95C6728F08F9E00FD619F /* Landing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDF95C6628F08F9E00FD619F /* Landing.storyboard */; };
 		DDF95C6928F08FB600FD619F /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDF95C6828F08FB600FD619F /* Launch.storyboard */; };
 		DDF95C6B28F0909700FD619F /* LandingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF95C6A28F0909700FD619F /* LandingController.swift */; };
+		DDF95C6D28F095B000FD619F /* WalletTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF95C6C28F095AF00FD619F /* WalletTableCellViewModel.swift */; };
 		E851900B59CCDED0C51E857B /* Pods_CurrencyConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73C557A145784254FC9B8D9C /* Pods_CurrencyConverter.framework */; };
 		F6CD199715DDB4B2E001A98F /* Pods_CurrencyConverterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FE9AA4BD9AF561CE835359 /* Pods_CurrencyConverterTests.framework */; };
 /* End PBXBuildFile section */
@@ -96,6 +97,7 @@
 		DDF95C6628F08F9E00FD619F /* Landing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Landing.storyboard; sourceTree = "<group>"; };
 		DDF95C6828F08FB600FD619F /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		DDF95C6A28F0909700FD619F /* LandingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingController.swift; sourceTree = "<group>"; };
+		DDF95C6C28F095AF00FD619F /* WalletTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +278,7 @@
 			children = (
 				DD7AD86D28EFF9C500F59DA2 /* WalletTableCell.xib */,
 				DD7AD86F28EFFAFA00F59DA2 /* WalletTableCell.swift */,
+				DDF95C6C28F095AF00FD619F /* WalletTableCellViewModel.swift */,
 			);
 			path = WalletTableCell;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				DD7AD81E28EFD55500F59DA2 /* CurrencyConverter.xcdatamodeld in Sources */,
 				DD7AD81428EFD55500F59DA2 /* AppDelegate.swift in Sources */,
 				DDF95C4928F0568400FD619F /* Currency.swift in Sources */,
+				DDF95C6D28F095B000FD619F /* WalletTableCellViewModel.swift in Sources */,
 				DDF95C5C28F0793F00FD619F /* UserDefaults+.swift in Sources */,
 				DDF95C6228F08A1C00FD619F /* Wallet.swift in Sources */,
 				DDF95C5528F0731100FD619F /* CurrencyDataService.swift in Sources */,
