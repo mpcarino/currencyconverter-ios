@@ -137,13 +137,13 @@
 				DD7AD84928EFD6C500F59DA2 /* Info */,
 				DD7AD84728EFD6B000F59DA2 /* App */,
 				DD7AD84828EFD6B800F59DA2 /* Modules */,
-				DD7AD84A28EFD6D600F59DA2 /* Database */,
 				DDF95C4B28F062D900FD619F /* Models */,
+				DD7AD84A28EFD6D600F59DA2 /* Database */,
+				DDF95C4E28F063AE00FD619F /* Data */,
 				DDF95C4A28F062C200FD619F /* Utils */,
 				DD7AD86828EFF7CE00F59DA2 /* Extensions */,
 				DD7AD84B28EFD71400F59DA2 /* Resources */,
 				DD7AD85428EFE06A00F59DA2 /* Generated */,
-				DDF95C4628F055CC00FD619F /* SupportedCurrencies.json */,
 			);
 			path = CurrencyConverter;
 			sourceTree = "<group>";
@@ -285,6 +285,14 @@
 				DDF95C4828F0568400FD619F /* Currency.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		DDF95C4E28F063AE00FD619F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DDF95C4628F055CC00FD619F /* SupportedCurrencies.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		F4B961BC871CED24BE9625BE /* Frameworks */ = {
