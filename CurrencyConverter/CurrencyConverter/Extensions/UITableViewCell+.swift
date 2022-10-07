@@ -11,8 +11,4 @@ extension UITableViewCell {
     static var reuseIdentifier: String {
         String(describing: self)
     }
-    
-    static var preferredHeight: CGFloat {
-        UITableView.automaticDimension
-    }
 }

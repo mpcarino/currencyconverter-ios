@@ -212,42 +212,33 @@
         <!--Wallet-->
         <scene sceneID="Juc-aj-SYZ">
             <objects>
-                <viewController id="kcM-Qf-d5Q" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletController" id="kcM-Qf-d5Q" customClass="WalletController" customModule="CurrencyConverter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f4v-cg-xnY">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="G5i-vS-2jo">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ehy-jB-HQm">
                                 <rect key="frame" x="0.0" y="149.66666666666669" width="390" height="660.33333333333326"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xip-zy-4dU" userLabel="Spacer">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="16"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="16" id="E9s-Yk-mQi"/>
-                                        </constraints>
-                                    </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ehy-jB-HQm">
-                                        <rect key="frame" x="0.0" y="16" width="390" height="644.33333333333337"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </tableView>
-                                </subviews>
-                            </stackView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5RC-tt-6h9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="G5i-vS-2jo" firstAttribute="leading" secondItem="5RC-tt-6h9" secondAttribute="leading" id="S5F-jc-773"/>
-                            <constraint firstItem="5RC-tt-6h9" firstAttribute="bottom" secondItem="G5i-vS-2jo" secondAttribute="bottom" id="c54-hw-y48"/>
-                            <constraint firstItem="G5i-vS-2jo" firstAttribute="top" secondItem="5RC-tt-6h9" secondAttribute="top" id="knI-jH-8wS"/>
-                            <constraint firstItem="5RC-tt-6h9" firstAttribute="trailing" secondItem="G5i-vS-2jo" secondAttribute="trailing" id="tFJ-gh-4cG"/>
+                            <constraint firstItem="ehy-jB-HQm" firstAttribute="top" secondItem="5RC-tt-6h9" secondAttribute="top" id="97B-ld-GMu"/>
+                            <constraint firstItem="ehy-jB-HQm" firstAttribute="trailing" secondItem="5RC-tt-6h9" secondAttribute="trailing" id="UMA-Pw-TsJ"/>
+                            <constraint firstItem="5RC-tt-6h9" firstAttribute="bottom" secondItem="ehy-jB-HQm" secondAttribute="bottom" id="if2-i3-Mm8"/>
+                            <constraint firstItem="ehy-jB-HQm" firstAttribute="leading" secondItem="5RC-tt-6h9" secondAttribute="leading" id="t40-cE-bkR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Wallet" largeTitleDisplayMode="always" id="4rJ-34-pCo"/>
+                    <connections>
+                        <outlet property="tableView" destination="ehy-jB-HQm" id="hIZ-VL-0Ng"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="39i-sY-Ath" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="980" y="-28"/>
+            <point key="canvasLocation" x="980" y="-28.436018957345969"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pbc-Er-Faj">

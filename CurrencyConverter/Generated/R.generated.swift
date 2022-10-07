@@ -139,6 +139,34 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
+  /// This `R.nib` struct is generated, and contains static references to 1 nibs.
+  struct nib {
+    /// Nib `CurrencyTableCell`.
+    static let currencyTableCell = _R.nib._CurrencyTableCell()
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "CurrencyTableCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.currencyTableCell) instead")
+    static func currencyTableCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.currencyTableCell)
+    }
+    #endif
+
+    static func currencyTableCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> CurrencyTableCell? {
+      return R.nib.currencyTableCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? CurrencyTableCell
+    }
+
+    fileprivate init() {}
+  }
+
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 1 reuse identifiers.
+  struct reuseIdentifier {
+    /// Reuse identifier `CurrencyTableCell`.
+    static let currencyTableCell: Rswift.ReuseIdentifier<CurrencyTableCell> = Rswift.ReuseIdentifier(identifier: "CurrencyTableCell")
+
+    fileprivate init() {}
+  }
+
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
     /// This `R.string.localizable` struct is generated, and contains static references to 2 localization keys.
@@ -201,6 +229,26 @@ struct _R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
+  struct nib {
+    struct _CurrencyTableCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = CurrencyTableCell
+
+      let bundle = R.hostingBundle
+      let identifier = "CurrencyTableCell"
+      let name = "CurrencyTableCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> CurrencyTableCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? CurrencyTableCell
+      }
+
+      fileprivate init() {}
+    }
+
+    fileprivate init() {}
+  }
+  #endif
+
+  #if os(iOS) || os(tvOS)
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
       #if os(iOS) || os(tvOS)
@@ -234,9 +282,14 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let convertController = StoryboardViewControllerResource<ConvertController>(identifier: "ConvertController")
       let name = "Wallet"
+      let walletController = StoryboardViewControllerResource<WalletController>(identifier: "WalletController")
 
       func convertController(_: Void = ()) -> ConvertController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: convertController)
+      }
+
+      func walletController(_: Void = ()) -> WalletController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: walletController)
       }
 
       static func validate() throws {
@@ -244,6 +297,7 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.wallet().convertController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'convertController' could not be loaded from storyboard 'Wallet' as 'ConvertController'.") }
+        if _R.storyboard.wallet().walletController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'walletController' could not be loaded from storyboard 'Wallet' as 'WalletController'.") }
       }
 
       fileprivate init() {}
