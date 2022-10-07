@@ -10,11 +10,11 @@ import UIKit
 
 extension AppDelegate {
     func updateRootController() {
-        setRootToConvert()
+        setRootToWallet()
     }
     
-    func setRootToConvert() {
-        let controller = R.storyboard.convert.convertController()!
-        window?.rootViewController = UINavigationController(rootViewController: controller)
+    func setRootToWallet() {
+        let controller = R.storyboard.wallet.instantiateInitialViewController()
+        window?.rootViewController = controller
     }
 }

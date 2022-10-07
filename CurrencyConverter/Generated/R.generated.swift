@@ -91,22 +91,22 @@ struct R: Rswift.Validatable {
   #if os(iOS) || os(tvOS)
   /// This `R.storyboard` struct is generated, and contains static references to 2 storyboards.
   struct storyboard {
-    /// Storyboard `Convert`.
-    static let convert = _R.storyboard.convert()
     /// Storyboard `LaunchScreen`.
     static let launchScreen = _R.storyboard.launchScreen()
-
-    #if os(iOS) || os(tvOS)
-    /// `UIStoryboard(name: "Convert", bundle: ...)`
-    static func convert(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.convert)
-    }
-    #endif
+    /// Storyboard `Wallet`.
+    static let wallet = _R.storyboard.wallet()
 
     #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
     static func launchScreen(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.launchScreen)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Wallet", bundle: ...)`
+    static func wallet(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.wallet)
     }
     #endif
 
@@ -204,35 +204,12 @@ struct _R: Rswift.Validatable {
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
       #if os(iOS) || os(tvOS)
-      try convert.validate()
-      #endif
-      #if os(iOS) || os(tvOS)
       try launchScreen.validate()
       #endif
+      #if os(iOS) || os(tvOS)
+      try wallet.validate()
+      #endif
     }
-
-    #if os(iOS) || os(tvOS)
-    struct convert: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
-      typealias InitialController = UIKit.UINavigationController
-
-      let bundle = R.hostingBundle
-      let convertController = StoryboardViewControllerResource<ConvertController>(identifier: "ConvertController")
-      let name = "Convert"
-
-      func convertController(_: Void = ()) -> ConvertController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: convertController)
-      }
-
-      static func validate() throws {
-        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "chevron.down") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'chevron.down' is used in storyboard 'Convert', but couldn't be loaded.") } }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-        }
-        if _R.storyboard.convert().convertController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'convertController' could not be loaded from storyboard 'Convert' as 'ConvertController'.") }
-      }
-
-      fileprivate init() {}
-    }
-    #endif
 
     #if os(iOS) || os(tvOS)
     struct launchScreen: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
@@ -244,6 +221,29 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct wallet: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = UIKit.UINavigationController
+
+      let bundle = R.hostingBundle
+      let convertController = StoryboardViewControllerResource<ConvertController>(identifier: "ConvertController")
+      let name = "Wallet"
+
+      func convertController(_: Void = ()) -> ConvertController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: convertController)
+      }
+
+      static func validate() throws {
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "chevron.down") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'chevron.down' is used in storyboard 'Wallet', but couldn't be loaded.") } }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.wallet().convertController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'convertController' could not be loaded from storyboard 'Wallet' as 'ConvertController'.") }
       }
 
       fileprivate init() {}
