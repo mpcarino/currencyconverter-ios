@@ -139,6 +139,20 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
+  /// This `R.file` struct is generated, and contains static references to 1 files.
+  struct file {
+    /// Resource file `SupportedCurrencies.json`.
+    static let supportedCurrenciesJson = Rswift.FileResource(bundle: R.hostingBundle, name: "SupportedCurrencies", pathExtension: "json")
+
+    /// `bundle.url(forResource: "SupportedCurrencies", withExtension: "json")`
+    static func supportedCurrenciesJson(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.supportedCurrenciesJson
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    fileprivate init() {}
+  }
+
   /// This `R.nib` struct is generated, and contains static references to 1 nibs.
   struct nib {
     /// Nib `CurrencyTableCell`.

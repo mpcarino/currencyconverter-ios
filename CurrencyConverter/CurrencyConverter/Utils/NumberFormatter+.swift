@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 extension NumberFormatter {
     func stringWithCode(amount: NSNumber) -> String? {
         return "\(currencyCode ?? "") \(string(from: amount) ?? "0")"
