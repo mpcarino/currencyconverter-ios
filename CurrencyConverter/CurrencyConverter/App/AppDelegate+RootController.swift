@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension AppDelegate {
     func updateRootController() {
@@ -13,7 +14,7 @@ extension AppDelegate {
     }
     
     func setRootToConvert() {
-        let controller = R.storyboard.convert.instantiateInitialViewController()
-        window?.rootViewController = controller
+        let controller = R.storyboard.convert.convertController()!
+        window?.rootViewController = UINavigationController(rootViewController: controller)
     }
 }
