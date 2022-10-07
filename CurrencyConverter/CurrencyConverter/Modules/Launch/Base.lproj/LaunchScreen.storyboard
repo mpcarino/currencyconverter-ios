@@ -18,11 +18,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="R9q-QM-g8f">
-                                <rect key="frame" x="32" y="369.33333333333331" width="326" height="105.33333333333331"/>
+                                <rect key="frame" x="32" y="369.33333333333331" width="326" height="105.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency Converter" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ala-Yb-wzp">
-                                        <rect key="frame" x="0.0" y="0.0" width="326" height="105.33333333333333"/>
-                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="326" height="105.66666666666667"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="44"/>
                                         <color key="textColor" systemColor="systemGreenColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
