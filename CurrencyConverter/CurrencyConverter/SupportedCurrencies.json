@@ -1,0 +1,14 @@
+[
+    {
+        "locale": "es_ES",
+        "code": "EUR"
+    },
+    {
+        "locale": "en_US",
+        "code": "USD"
+    },
+    {
+        "locale": "ja_JP",
+        "code": "YEN"
+    }
+]
