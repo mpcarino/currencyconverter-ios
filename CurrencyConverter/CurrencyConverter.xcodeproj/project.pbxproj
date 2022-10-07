@@ -14,6 +14,9 @@
 		DD7AD82328EFD55600F59DA2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD7AD82128EFD55600F59DA2 /* LaunchScreen.storyboard */; };
 		DD7AD82E28EFD55600F59DA2 /* CurrencyConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7AD82D28EFD55600F59DA2 /* CurrencyConverterTests.swift */; };
 		DD7AD85628EFE16F00F59DA2 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7AD85528EFE16F00F59DA2 /* R.generated.swift */; };
+		DD7AD85B28EFE24400F59DA2 /* Convert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD7AD85A28EFE24400F59DA2 /* Convert.storyboard */; };
+		DD7AD85D28EFE3ED00F59DA2 /* ConvertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7AD85C28EFE3ED00F59DA2 /* ConvertController.swift */; };
+		DD7AD86128EFE4CE00F59DA2 /* AppDelegate+RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7AD86028EFE4CE00F59DA2 /* AppDelegate+RootController.swift */; };
 		E851900B59CCDED0C51E857B /* Pods_CurrencyConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73C557A145784254FC9B8D9C /* Pods_CurrencyConverter.framework */; };
 		F6CD199715DDB4B2E001A98F /* Pods_CurrencyConverterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FE9AA4BD9AF561CE835359 /* Pods_CurrencyConverterTests.framework */; };
 /* End PBXBuildFile section */
@@ -55,6 +58,9 @@
 		DD7AD82D28EFD55600F59DA2 /* CurrencyConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterTests.swift; sourceTree = "<group>"; };
 		DD7AD83328EFD55600F59DA2 /* CurrencyConverterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrencyConverterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD7AD85528EFE16F00F59DA2 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = R.generated.swift; path = Generated/R.generated.swift; sourceTree = SOURCE_ROOT; };
+		DD7AD85A28EFE24400F59DA2 /* Convert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Convert.storyboard; sourceTree = "<group>"; };
+		DD7AD85C28EFE3ED00F59DA2 /* ConvertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertController.swift; sourceTree = "<group>"; };
+		DD7AD86028EFE4CE00F59DA2 /* AppDelegate+RootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+RootController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				DD7AD81328EFD55500F59DA2 /* AppDelegate.swift */,
+				DD7AD86028EFE4CE00F59DA2 /* AppDelegate+RootController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -152,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				DD7AD84C28EFD87F00F59DA2 /* Launch */,
+				DD7AD85928EFE23100F59DA2 /* Convert */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -194,6 +202,15 @@
 				DD7AD85528EFE16F00F59DA2 /* R.generated.swift */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		DD7AD85928EFE23100F59DA2 /* Convert */ = {
+			isa = PBXGroup;
+			children = (
+				DD7AD85A28EFE24400F59DA2 /* Convert.storyboard */,
+				DD7AD85C28EFE3ED00F59DA2 /* ConvertController.swift */,
+			);
+			path = Convert;
 			sourceTree = "<group>";
 		};
 		F4B961BC871CED24BE9625BE /* Frameworks */ = {
@@ -316,6 +333,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD7AD85B28EFE24400F59DA2 /* Convert.storyboard in Resources */,
 				DD7AD82328EFD55600F59DA2 /* LaunchScreen.storyboard in Resources */,
 				DD7AD82028EFD55600F59DA2 /* Assets.xcassets in Resources */,
 			);
@@ -465,9 +483,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD7AD86128EFE4CE00F59DA2 /* AppDelegate+RootController.swift in Sources */,
 				DD7AD81E28EFD55500F59DA2 /* CurrencyConverter.xcdatamodeld in Sources */,
 				DD7AD81428EFD55500F59DA2 /* AppDelegate.swift in Sources */,
 				DD7AD85628EFE16F00F59DA2 /* R.generated.swift in Sources */,
+				DD7AD85D28EFE3ED00F59DA2 /* ConvertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,7 +662,7 @@
 				INFOPLIST_KEY_NSMainStoryboardFile = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIMainStoryboardFile = Convert;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -674,7 +694,7 @@
 				INFOPLIST_KEY_NSMainStoryboardFile = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIMainStoryboardFile = Convert;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
