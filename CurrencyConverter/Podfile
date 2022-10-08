@@ -10,6 +10,8 @@ def app_pods
   pod 'RxCocoa',              '6.5.0'
   pod 'RxRelay',              '6.5.0'
   pod 'NSObject+Rx',          '5.2.2'
+  
+  pod 'SVProgressHUD'
 end
 
 target 'CurrencyConverter' do

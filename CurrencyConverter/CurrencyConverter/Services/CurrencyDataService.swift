@@ -12,7 +12,7 @@ class CurrencyDataService: JSONDataServiceProtocol {
     
     private let fileName = "SupportedCurrencies"
     
-    func load() -> T? {
+    func load() -> [Currency]? {
         guard let path = Bundle.main.path(forResource: fileName, ofType: "json") else {
             return nil
         }

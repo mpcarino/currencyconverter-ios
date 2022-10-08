@@ -211,12 +211,14 @@ struct R: Rswift.Validatable {
 
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 2 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 3 localization keys.
     struct localizable {
       /// Value: Convert
       static let convertNavTitle = Rswift.StringResource(key: "convert.nav.title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Currency Converter
       static let appTitle = Rswift.StringResource(key: "app.title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: http://api.evp.lt/currency/commercial/exchange/%@-%@/%@/latest
+      static let endpointCurrencyExchange = Rswift.StringResource(key: "endpoint.currency-exchange", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
 
       /// Value: Convert
       static func convertNavTitle(preferredLanguages: [String]? = nil) -> String {
@@ -242,6 +244,21 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("app.title", bundle: bundle, comment: "")
+      }
+
+      /// Value: http://api.evp.lt/currency/commercial/exchange/%@-%@/%@/latest
+      static func endpointCurrencyExchange(_ value1: String, _ value2: String, _ value3: String, preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          let format = NSLocalizedString("endpoint.currency-exchange", bundle: hostingBundle, comment: "")
+          return String(format: format, locale: applicationLocale, value1, value2, value3)
+        }
+
+        guard let (locale, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "endpoint.currency-exchange"
+        }
+
+        let format = NSLocalizedString("endpoint.currency-exchange", bundle: bundle, comment: "")
+        return String(format: format, locale: locale, value1, value2, value3)
       }
 
       fileprivate init() {}

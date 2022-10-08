@@ -8,12 +8,21 @@
 import Foundation
 
 struct Wallet: Codable {
+  static var `default`: Self {
+    .init(
+      balance: .zero,
+      currency: Currency.default
+    )
+  }
+  
   let balance: Decimal
   let currency: Currency
 }
 
+// MARK: - Getters
+
 extension Wallet {
   var formattedBalance: String {
-    currency.formatter.stringWithSymbol(amount: balance as NSNumber) ?? ""
+    currency.formatter.stringWithSymbol(amount: balance as NSNumber) ?? .empty
   }
 }

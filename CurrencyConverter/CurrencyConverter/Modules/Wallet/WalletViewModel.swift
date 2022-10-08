@@ -9,51 +9,52 @@ import Foundation
 
 
 protocol WalletViewModelProtocol {
-  var supportedCurrencies: [Currency] { get }
-  
+  var defaultWallet: Wallet { get }
   var wallets: [Wallet] { get }
   
-  func loadData()
+  func getWallet(at index: Int) -> Wallet
+  func createConvertVM(for index: Int) -> ConvertViewModelProtocol
 }
 
 class WalletViewModel: WalletViewModelProtocol {
   private let user: User
-  private let currencyDataService: CurrencyDataService
   
-  private(set) var supportedCurrencies: [Currency]
-  
-  
-  
-  init(
-    user: User = App.shared.user,
-    currencyDataService: CurrencyDataService = App.shared.currencyDataService,
-    supportedCurrencies: [Currency] = App.shared.supportedCurrencies
-  ) {
+  init(user: User) {
     self.user = user
-    self.currencyDataService = currencyDataService
-    self.supportedCurrencies = supportedCurrencies
   }
 }
 
 // MARK: - Methods
 
 extension WalletViewModel {
-  func loadData() {
-    loadSupportedCurrencies()
-  }
-  
-  private func loadSupportedCurrencies() {
-    guard let currencies = currencyDataService.load() else {
-      return
+  func getWallet(at index: Int) -> Wallet {
+    guard index < wallets.count else {
+      preconditionFailure("Index must be less than the size of wallets")
     }
     
-    self.supportedCurrencies = currencies
+    return wallets[index]
   }
+  
+  func createConvertVM(for index: Int) -> ConvertViewModelProtocol {
+    let sourceWallet = getWallet(at: index)
+    
+    return ConvertViewModel(sourceWallet: sourceWallet)
+  }
+}
+
+// MARK: - Helpers
+
+private extension WalletViewModel {
+  
 }
 
 // MARK: - Getters
 
 extension WalletViewModel {
+  var defaultWallet: Wallet {
+    App.shared.config.defaultWallet
+  }
+  
   var wallets: [Wallet] {
     user.wallets
   }

@@ -17,7 +17,9 @@ extension AppDelegate {
     let navigationController = R.storyboard.wallet.instantiateInitialViewController()
     
     let walletController = navigationController?.viewControllers.first as! WalletController
-    walletController.viewModel = WalletViewModel()
+    walletController.viewModel = WalletViewModel(
+      user: App.shared.user
+    )
     
     window?.rootViewController = navigationController
   }

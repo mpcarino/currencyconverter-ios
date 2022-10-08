@@ -6,6 +6,14 @@
   
 */
 
+/* App */
+
 app.title = "Currency Converter";
 
+/* Convert */
+
 convert.nav.title = "Convert";
+
+/* Endpoint */
+
+endpoint.currency-exchange = "http://api.evp.lt/currency/commercial/exchange/%@-%@/%@/latest";

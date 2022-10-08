@@ -22,6 +22,6 @@ extension WalletTableCellViewModel {
   }
   
   var currencyText: String {
-    "\(wallet.currency.formatter.currencyCode ?? "")"
+    wallet.currency.formatter.currencyCode ?? .empty
   }
 }

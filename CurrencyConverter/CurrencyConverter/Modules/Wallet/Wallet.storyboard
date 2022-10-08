@@ -233,6 +233,9 @@
                                                         <color key="tintColor" systemColor="systemBlueColor"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="CONVERT"/>
+                                                        <connections>
+                                                            <action selector="didTapConvertButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ag5-gr-6ks"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -270,9 +273,12 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="balanceContainerView" destination="oY9-IG-cOZ" id="kPs-Pc-2MF"/>
+                        <outlet property="balanceLabel" destination="m9f-MU-tWt" id="AiF-Y0-0Od"/>
                         <outlet property="destinationAmountTextField" destination="rGi-VD-82R" id="TGK-mC-zIf"/>
+                        <outlet property="destinationCodeButton" destination="wWL-95-Rd7" id="tsE-hU-dA8"/>
                         <outlet property="destinationContainerView" destination="KmR-1v-RqZ" id="PYx-2a-bBC"/>
                         <outlet property="sourceAmountTextField" destination="JJI-QR-HBH" id="aGg-Wj-5Y0"/>
+                        <outlet property="sourceCodeLabel" destination="0mG-HD-Dky" id="4x2-Wi-GaX"/>
                         <outlet property="sourceContainerVIew" destination="lRD-yZ-JeH" id="kY1-kj-mgB"/>
                     </connections>
                 </viewController>

@@ -30,8 +30,6 @@ class WalletController: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
-    viewModel.loadData()
   }
 }
 
@@ -68,10 +66,10 @@ private extension WalletController {
 
 private extension WalletController {
   func handleTableDelegateSelect() -> ((IndexPath) -> Void) {
-    return { [weak self] _ in
+    return { [weak self] indexPath in
       guard let self = self else { return }
 
-      self.showConvert()
+      self.showConvert(for: indexPath.row)
     }
   }
 }
@@ -79,8 +77,10 @@ private extension WalletController {
 // MARK: - Navigation
 
 private extension WalletController {
-  func showConvert() {
+  func showConvert(for index: Int) {
     let controller = R.storyboard.wallet.convertController()!
+    controller.viewModel = viewModel.createConvertVM(for: index)
+    
     show(controller, sender: self)
   }
 }

@@ -15,6 +15,7 @@ PODS:
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - "NSObject+Rx (= 5.2.2)"
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - RxCocoa (= 6.5.0)
   - RxRelay (= 6.5.0)
   - RxSwift (= 6.5.0)
+  - SVProgressHUD
 
 SPEC REPOS:
   trunk:
@@ -33,6 +35,7 @@ SPEC REPOS:
     - RxCocoa
     - RxRelay
     - RxSwift
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
@@ -42,7 +45,8 @@ SPEC CHECKSUMS:
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: ab796bb31570e4d18e97ec6ea848531ee2f3ab50
+PODFILE CHECKSUM: a9c4aaf78ba4dac7a3ab8c9d17f2df58ce16c042
 
 COCOAPODS: 1.11.3

@@ -13,13 +13,16 @@ final class App {
 
   // MARK: - Properties
 
+  private(set) var config: AppConfigProtocol
   private(set) var user: User
-  private(set) var currencyDataService: CurrencyDataService!
   private(set) var supportedCurrencies: [Currency]
+  
+  private var currencyDataService: CurrencyDataService!
 
   // MARK: - Init
 
   init() {
+    config = AppConfig()
     user = User()
     supportedCurrencies = []
   }
@@ -33,10 +36,19 @@ extension App {
     launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) {
     currencyDataService = CurrencyDataService()
+    loadSupportedCurrencies()
+  }
+}
 
-    if UserDefaults.isFirstAppOpen {
-      
+// MARK: - Helpers
+
+private extension App {
+  func loadSupportedCurrencies() {
+    guard let currencies = currencyDataService.load() else {
+      return
     }
+    
+    self.supportedCurrencies = currencies
   }
 }
 
@@ -48,6 +60,6 @@ class User {
 
     wallets.append(.init(balance: 12345, currency: .init(locale: "en_US", code: "USD")))
     wallets.append(.init(balance: 12345, currency: .init(locale: "es_ES", code: "EUR")))
-    wallets.append(.init(balance: 12345, currency: .init(locale: "ja_JP", code: "YEN")))
+    wallets.append(.init(balance: 12345, currency: .init(locale: "ja_JP", code: "JPY")))
   }
 }
