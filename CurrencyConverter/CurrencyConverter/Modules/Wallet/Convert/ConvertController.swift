@@ -39,8 +39,8 @@ class ConvertController: UIViewController {
 private extension ConvertController {
     func configureUI() {
         balanceContainerView.layer.cornerRadius = 8.0
-        sourceContainerVIew.layer.cornerRadius = 8.0
-        destinationContainerView.layer.cornerRadius = 8.0
+        sourceContainerVIew.layer.cornerRadius = 10.0
+        destinationContainerView.layer.cornerRadius = 10.0
     }
     
     func setup() {

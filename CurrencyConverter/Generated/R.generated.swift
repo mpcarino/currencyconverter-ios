@@ -123,10 +123,12 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 1 colors.
+  /// This `R.color` struct is generated, and contains static references to 2 colors.
   struct color {
     /// Color `AccentColor`.
     static let accentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentColor")
+    /// Color `greenFaded`.
+    static let greenFaded = Rswift.ColorResource(bundle: R.hostingBundle, name: "greenFaded")
 
     #if os(iOS) || os(tvOS)
     /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
@@ -137,11 +139,28 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "greenFaded", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func greenFaded(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.greenFaded, compatibleWith: traitCollection)
+    }
+    #endif
+
     #if os(watchOS)
     /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
     static func accentColor(_: Void = ()) -> UIKit.UIColor? {
       return UIKit.UIColor(named: R.color.accentColor.name)
+    }
+    #endif
+
+    #if os(watchOS)
+    /// `UIColor(named: "greenFaded", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func greenFaded(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.greenFaded.name)
     }
     #endif
 
@@ -347,6 +366,7 @@ struct _R: Rswift.Validatable {
         if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "arrow.up") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'arrow.up' is used in storyboard 'Wallet', but couldn't be loaded.") } }
         if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "chevron.down") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'chevron.down' is used in storyboard 'Wallet', but couldn't be loaded.") } }
         if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "greenFaded", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'greenFaded' is used in storyboard 'Wallet', but couldn't be loaded.") }
         }
         if _R.storyboard.wallet().convertController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'convertController' could not be loaded from storyboard 'Wallet' as 'ConvertController'.") }
         if _R.storyboard.wallet().walletController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'walletController' could not be loaded from storyboard 'Wallet' as 'WalletController'.") }
