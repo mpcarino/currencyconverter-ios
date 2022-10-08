@@ -17,10 +17,19 @@ struct Currency: Codable {
 }
 
 extension Currency {
-  var formatter: NumberFormatter {
+  var currencyFormatter: NumberFormatter {
     let formatter = NumberFormatter()
     formatter.locale = Locale(identifier: locale)
-    formatter.currencyCode = code
+    formatter.numberStyle = .currency
+    formatter.minimumFractionDigits = App.shared.config.minimumFractionDigits
+    formatter.maximumFractionDigits = App.shared.config.maximumFractionDigits
+
+    return formatter
+  }
+  
+  var decimalFormatter: NumberFormatter {
+    let formatter = NumberFormatter()
+    formatter.locale = Locale(identifier: locale)
     formatter.numberStyle = .decimal
     formatter.minimumFractionDigits = App.shared.config.minimumFractionDigits
     formatter.maximumFractionDigits = App.shared.config.maximumFractionDigits

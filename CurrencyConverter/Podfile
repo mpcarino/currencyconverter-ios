@@ -2,6 +2,8 @@
 # platform :ios, '9.0'
 
 def app_pods
+  pod 'IQKeyboardManagerSwift', '6.3.0'
+  
   pod 'R.swift',              '6.1.0'
   
   pod 'Reusable',             '4.1.2'

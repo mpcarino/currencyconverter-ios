@@ -50,7 +50,7 @@ private extension WalletTableCell {
   func refresh() {
     guard viewModel != nil else { return }
     
-    balanceLabel.text = viewModel.balanceText
     currencyLabel.text = viewModel.currencyText
+    balanceLabel.text = viewModel.balanceText
   }
 }

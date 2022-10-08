@@ -8,6 +8,8 @@
 import CoreData
 import UIKit
 
+import IQKeyboardManagerSwift
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
   static var shared: AppDelegate { UIApplication.shared.delegate as! AppDelegate }
@@ -22,10 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       with: application,
       launchOptions: launchOptions
     )
+    
+    IQKeyboardManager.shared.enable = true
+    IQKeyboardManager.shared.enableAutoToolbar = true
+    IQKeyboardManager.shared.keyboardDistanceFromTextField = 24.0
 
     return true
   }
-
+  
   // MARK: - Core Data stack
 
   lazy var persistentContainer: NSPersistentContainer = {

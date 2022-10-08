@@ -1,5 +1,5 @@
 //
-//  Alias.swift
+//  Typealias.swift
 //  CurrencyConverter
 //
 //  Created by Marwin Carino on 10/8/22.

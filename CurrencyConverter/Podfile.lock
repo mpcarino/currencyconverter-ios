@@ -1,4 +1,5 @@
 PODS:
+  - IQKeyboardManagerSwift (6.3.0)
   - "NSObject+Rx (5.2.2)":
     - RxSwift (~> 6.2)
   - R.swift (6.1.0):
@@ -18,6 +19,7 @@ PODS:
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - IQKeyboardManagerSwift (= 6.3.0)
   - "NSObject+Rx (= 5.2.2)"
   - R.swift (= 6.1.0)
   - Reusable (= 4.1.2)
@@ -28,6 +30,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - IQKeyboardManagerSwift
     - "NSObject+Rx"
     - R.swift
     - R.swift.Library
@@ -38,6 +41,7 @@ SPEC REPOS:
     - SVProgressHUD
 
 SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
   R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
@@ -47,6 +51,6 @@ SPEC CHECKSUMS:
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: a9c4aaf78ba4dac7a3ab8c9d17f2df58ce16c042
+PODFILE CHECKSUM: dbbde0a8c9f691b7f11e93038466f3223bcab864
 
 COCOAPODS: 1.11.3

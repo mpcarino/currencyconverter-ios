@@ -9,7 +9,7 @@ import Foundation
 
 protocol CurrencyExchangeServiceProtocol {
   associatedtype T
-  
+
   func convert(
     amount: String,
     sourceCode: String,
@@ -19,7 +19,7 @@ protocol CurrencyExchangeServiceProtocol {
 
 class CurrencyExchangeService: CurrencyExchangeServiceProtocol {
   typealias T = CurrencyExchangeResponse
-  
+
   private let session = URLSession.shared
 
   func convert(
@@ -32,11 +32,11 @@ class CurrencyExchangeService: CurrencyExchangeServiceProtocol {
       sourceCode.uppercased(),
       destinationCode.uppercased()
     )
-    
+
     if let url = URL(string: endpoint) {
       let (data, _) = try await session.data(from: url)
       let decodedData = try JSONDecoder().decode(CurrencyExchangeResponse.self, from: data)
-      
+
       return decodedData
     } else {
       return nil

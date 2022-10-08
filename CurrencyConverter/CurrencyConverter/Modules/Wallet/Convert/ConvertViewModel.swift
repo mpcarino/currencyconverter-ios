@@ -6,16 +6,32 @@
 //
 
 import Foundation
+import RxSwift
 import RxRelay
 
+enum ContentState {
+  case loading
+  case ready
+  case error
+}
+
 protocol ConvertViewModelProtocol {
+  var state: PublishSubject<ContentState> { get }
+  var sourceCurrencyExchange: PublishSubject<CurrencyExchangeResponse> { get }
+  var destinationCurrencyExchange: PublishSubject<CurrencyExchangeResponse> { get }
   var sourceWallet: Wallet { get }
   var destinationWallet: Wallet { get }
   
-  func getCurrencyExchange(for amount: String, source: Wallet, destination: Wallet)
+  func getSourceCurrencyExchange(for amount: String)
+  
+  func getDestinationCurrencyExchange(for amount: String)
 }
 
 class ConvertViewModel: ConvertViewModelProtocol {
+  let state = PublishSubject<ContentState>()
+  let sourceCurrencyExchange = PublishSubject<CurrencyExchangeResponse>()
+  let destinationCurrencyExchange = PublishSubject<CurrencyExchangeResponse>()
+  
   private(set) var sourceWallet: Wallet
   private(set) var destinationWallet: Wallet
 
@@ -33,16 +49,36 @@ class ConvertViewModel: ConvertViewModelProtocol {
 // MARK: - Methods
 
 extension ConvertViewModel {
-  func getCurrencyExchange(for amount: String, source: Wallet, destination: Wallet) {
+  func getSourceCurrencyExchange(for amount: String) {
     Task.init {
       do {
-        let modelResponse = try await service.convert(
+        guard let currencyExchange = try await service.convert(
           amount: amount,
-          sourceCode: source.currency.code,
-          destinationCode: destination.currency.code
-        )
+          sourceCode: sourceWallet.currency.code,
+          destinationCode: destinationWallet.currency.code
+        ) else {
+          return
+        }
         
-        print(modelResponse)
+        destinationCurrencyExchange.onNext(currencyExchange)
+      } catch {
+        print(error.localizedDescription)
+      }
+    }
+  }
+  
+  func getDestinationCurrencyExchange(for amount: String) {
+    Task.init {
+      do {
+        guard let currencyExchange = try await service.convert(
+          amount: amount,
+          sourceCode: destinationWallet.currency.code,
+          destinationCode: sourceWallet.currency.code
+        ) else {
+          return
+        }
+        
+        sourceCurrencyExchange.onNext(currencyExchange)
       } catch {
         print(error.localizedDescription)
       }

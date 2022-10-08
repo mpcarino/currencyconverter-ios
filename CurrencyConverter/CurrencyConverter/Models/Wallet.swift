@@ -23,6 +23,6 @@ struct Wallet: Codable {
 
 extension Wallet {
   var formattedBalance: String {
-    currency.formatter.stringWithSymbol(amount: balance as NSNumber) ?? .empty
+    currency.currencyFormatter.string(amount: balance as NSNumber)
   }
 }

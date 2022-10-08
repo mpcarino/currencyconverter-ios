@@ -9,4 +9,5 @@ import Foundation
 
 extension String {
   static var empty: Self { "" }
+  static var zero: Self { "0" }
 }

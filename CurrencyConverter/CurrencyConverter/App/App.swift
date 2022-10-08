@@ -8,22 +8,26 @@
 import Foundation
 import UIKit
 
+import IQKeyboardManagerSwift
+
 final class App {
   static let shared = App()
 
   // MARK: - Properties
 
   private(set) var config: AppConfigProtocol
+  
   private(set) var user: User
+  
+  private(set) var supportedCurrencyService: SupportedCurrencyService
   private(set) var supportedCurrencies: [Currency]
   
-  private var currencyDataService: CurrencyDataService!
-
   // MARK: - Init
 
   init() {
     config = AppConfig()
     user = User()
+    supportedCurrencyService = SupportedCurrencyService()
     supportedCurrencies = []
   }
 }
@@ -35,7 +39,6 @@ extension App {
     with application: UIApplication,
     launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) {
-    currencyDataService = CurrencyDataService()
     loadSupportedCurrencies()
   }
 }
@@ -44,11 +47,13 @@ extension App {
 
 private extension App {
   func loadSupportedCurrencies() {
-    guard let currencies = currencyDataService.load() else {
+    guard let supportedCurrencies = supportedCurrencyService.load() else {
       return
     }
     
-    self.supportedCurrencies = currencies
+    self.supportedCurrencies = supportedCurrencies
+    
+    print("Supported Currencies: ", supportedCurrencies)
   }
 }
 
