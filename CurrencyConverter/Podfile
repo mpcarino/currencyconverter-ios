@@ -5,6 +5,11 @@ def app_pods
   pod 'R.swift',              '6.1.0'
   
   pod 'Reusable',             '4.1.2'
+  
+  pod 'RxSwift',              '6.5.0'
+  pod 'RxCocoa',              '6.5.0'
+  pod 'RxRelay',              '6.5.0'
+  pod 'NSObject+Rx',          '5.2.2'
 end
 
 target 'CurrencyConverter' do
@@ -17,10 +22,6 @@ target 'CurrencyConverter' do
 
   target 'CurrencyConverterTests' do
     inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'CurrencyConverterUITests' do
     # Pods for testing
   end
 
