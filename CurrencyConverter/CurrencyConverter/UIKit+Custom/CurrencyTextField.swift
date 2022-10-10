@@ -13,7 +13,12 @@ import NSObject_Rx
 
 class CurrencyTextField: UITextField {
   var amount: Decimal = .zero
-  var currency: Currency = .default
+  var currency: Currency = .default {
+    didSet {
+      updatePlaceHolder()
+      
+    }
+  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -31,7 +36,7 @@ class CurrencyTextField: UITextField {
   
   private func prepare() {
     configure()
-    subscribeToEvents()
+    bind()
   }
   
   private func configure() {
@@ -43,7 +48,15 @@ class CurrencyTextField: UITextField {
     enablesReturnKeyAutomatically = true
   }
   
-  private func subscribeToEvents() {
+  private func updatePlaceHolder() {
+    placeholder = currency.currencyFormatter.string(amount: NSNumber(value: 0.0))
+  }
+}
+
+// MARK: - Rx
+
+private extension CurrencyTextField {
+  private func bind() {
     rx.controlEvent(.editingDidBegin)
       .subscribe(onNext: { [unowned self]  in
         self.text = nil
@@ -57,7 +70,11 @@ class CurrencyTextField: UITextField {
       })
       .disposed(by: rx.disposeBag)
   }
-  
+}
+
+// MARK: - Methods
+
+extension CurrencyTextField {
   func formatText() {
     if let text = self.text,
        let decimal = Decimal(string: text) {

@@ -8,18 +8,14 @@
 import Foundation
 
 protocol CurrencyExchangeServiceProtocol {
-  associatedtype T
-
   func convert(
     amount: String,
     sourceCode: String,
     destinationCode: String
-  ) async throws -> T?
+  ) async throws -> CurrencyExchangeResponse?
 }
 
 class CurrencyExchangeService: CurrencyExchangeServiceProtocol {
-  typealias T = CurrencyExchangeResponse
-
   private let session = URLSession.shared
 
   func convert(

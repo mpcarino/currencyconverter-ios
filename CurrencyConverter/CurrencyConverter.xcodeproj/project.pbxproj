@@ -34,6 +34,7 @@
 		DDB131A128F182FA0038F883 /* JSONDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB131A028F182FA0038F883 /* JSONDataService.swift */; };
 		DDB131A428F183BF0038F883 /* Error+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB131A328F183BF0038F883 /* Error+.swift */; };
 		DDB131A728F1A6900038F883 /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB131A628F1A6900038F883 /* CurrencyTextField.swift */; };
+		DDDC6CE728F40D85002D20A7 /* ConvertViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC6CE628F40D85002D20A7 /* ConvertViewModelProtocol.swift */; };
 		DDF95C4228F04AEA00FD619F /* NumberFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF95C4128F04AEA00FD619F /* NumberFormatterTests.swift */; };
 		DDF95C4528F04E9700FD619F /* NumberFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF95C4428F04E9700FD619F /* NumberFormatter+.swift */; };
 		DDF95C4728F055CC00FD619F /* SupportedCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = DDF95C4628F055CC00FD619F /* SupportedCurrencies.json */; };
@@ -102,6 +103,7 @@
 		DDB131A028F182FA0038F883 /* JSONDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDataService.swift; sourceTree = "<group>"; };
 		DDB131A328F183BF0038F883 /* Error+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+.swift"; sourceTree = "<group>"; };
 		DDB131A628F1A6900038F883 /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
+		DDDC6CE628F40D85002D20A7 /* ConvertViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertViewModelProtocol.swift; sourceTree = "<group>"; };
 		DDF95C4128F04AEA00FD619F /* NumberFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterTests.swift; sourceTree = "<group>"; };
 		DDF95C4428F04E9700FD619F /* NumberFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+.swift"; sourceTree = "<group>"; };
 		DDF95C4628F055CC00FD619F /* SupportedCurrencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SupportedCurrencies.json; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 			children = (
 				DD7AD85C28EFE3ED00F59DA2 /* ConvertController.swift */,
 				DD01AEF528F13C1100F922D5 /* ConvertViewModel.swift */,
+				DDDC6CE628F40D85002D20A7 /* ConvertViewModelProtocol.swift */,
 			);
 			path = Convert;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				DDB1319F28F182E50038F883 /* SupportedCurrencyService.swift in Sources */,
 				DD01AF0228F1576700F922D5 /* Typealias.swift in Sources */,
 				DD7AD85628EFE16F00F59DA2 /* R.generated.swift in Sources */,
+				DDDC6CE728F40D85002D20A7 /* ConvertViewModelProtocol.swift in Sources */,
 				DD7AD87428F004CA00F59DA2 /* UIView+Nib.swift in Sources */,
 				DDF95C5E28F0857D00FD619F /* WalletViewModel.swift in Sources */,
 				DDF95C6B28F0909700FD619F /* LandingController.swift in Sources */,

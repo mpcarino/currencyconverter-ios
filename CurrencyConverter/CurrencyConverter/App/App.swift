@@ -15,19 +15,18 @@ final class App {
 
   // MARK: - Properties
 
-  private(set) var config: AppConfigProtocol
+  private(set) var config: AppConfigProtocol!
+  private(set) var currencyExchangeService: CurrencyExchangeServiceProtocol!
+  private(set) var supportedCurrencyService: SupportedCurrencyService!
   
   private(set) var user: User
-  
-  private(set) var supportedCurrencyService: SupportedCurrencyService
   private(set) var supportedCurrencies: [Currency]
   
   // MARK: - Init
 
   init() {
-    config = AppConfig()
     user = User()
-    supportedCurrencyService = SupportedCurrencyService()
+    
     supportedCurrencies = []
   }
 }
@@ -39,6 +38,10 @@ extension App {
     with application: UIApplication,
     launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) {
+    config = AppConfig()
+    currencyExchangeService = CurrencyExchangeService()
+    supportedCurrencyService = SupportedCurrencyService()
+    
     loadSupportedCurrencies()
   }
 }
@@ -52,8 +55,6 @@ private extension App {
     }
     
     self.supportedCurrencies = supportedCurrencies
-    
-    print("Supported Currencies: ", supportedCurrencies)
   }
 }
 

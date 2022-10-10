@@ -10,6 +10,7 @@ import UIKit
 
 import NSObject_Rx
 import RxCocoa
+import RxRelay
 import RxSwift
 
 import SVProgressHUD
@@ -32,17 +33,20 @@ class ConvertController: UIViewController {
   @IBOutlet private var destinationAmountTextField: CurrencyTextField!
   @IBOutlet private var destinationCodeButton: UIButton!
 
+  @IBOutlet private var convertButton: UIButton!
+
   // MARK: - Life Cycle
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     configure()
     setup()
     bind()
   }
 
   @IBAction func didTapConvertButton(_ sender: Any) {
+    presentErrorAlert(message: "here")
   }
 }
 
@@ -79,6 +83,20 @@ private extension ConvertController {
 
   func bindUI() {
     sourceAmountTextField.rx
+      .controlEvent(.editingDidBegin)
+      .subscribe(onNext: { [unowned self] in
+        self.convertButton.isEnabled = false
+      })
+      .disposed(by: rx.disposeBag)
+
+    destinationAmountTextField.rx
+      .controlEvent(.editingDidBegin)
+      .subscribe(onNext: { [unowned self] in
+        self.convertButton.isEnabled = false
+      })
+      .disposed(by: rx.disposeBag)
+
+    sourceAmountTextField.rx
       .controlEvent(.editingDidEnd)
       .subscribe(onNext: { [unowned self] in
         self.viewModel.getSourceCurrencyExchange(for: "\(sourceAmountTextField.amount)")
@@ -94,10 +112,10 @@ private extension ConvertController {
   }
 
   func bindModel() {
-    viewModel.state
+    viewModel.contentState
       .observe(on: MainScheduler.instance)
-      .subscribe(onNext: { state in
-        switch state {
+      .subscribe(onNext: { [unowned self] contentState in
+        switch contentState {
         case .loading:
           SVProgressHUD.show()
         case .ready:
@@ -110,17 +128,40 @@ private extension ConvertController {
       })
       .disposed(by: rx.disposeBag)
 
+    viewModel.isValidSourceAmount
+      .startWith(false)
+      .observe(on: MainScheduler.instance)
+      .subscribe({ [unowned self] event in
+        switch event {
+        case let .next(isValid):
+          print(isValid)
+          self.convertButton.isEnabled = isValid
+        case let .error(error):
+          self.convertButton.isEnabled = false
+          print(error.localizedDescription)
+        default:
+          return
+        }
+      })
+      .disposed(by: rx.disposeBag)
+
     viewModel.sourceCurrencyExchange
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { [unowned self] currencyExchange in
-        self.updateCurrencyTextField(sourceAmountTextField, with: currencyExchange.amount)
+        self.updateCurrencyTextField(
+          sourceAmountTextField,
+          with: currencyExchange.amount
+        )
       })
       .disposed(by: rx.disposeBag)
 
     viewModel.destinationCurrencyExchange
       .observe(on: MainScheduler.instance)
       .subscribe(onNext: { [unowned self] currencyExchange in
-        self.updateCurrencyTextField(destinationAmountTextField, with: currencyExchange.amount)
+        self.updateCurrencyTextField(
+          destinationAmountTextField,
+          with: currencyExchange.amount
+        )
       })
       .disposed(by: rx.disposeBag)
   }
@@ -129,8 +170,20 @@ private extension ConvertController {
 // MARK: - Methods
 
 private extension ConvertController {
-  func updateCurrencyTextField(_ textField: CurrencyTextField, with amount: String) {
+  func updateCurrencyTextField(
+    _ textField: CurrencyTextField,
+    with amount: String
+  ) {
     textField.text = amount
     textField.formatText()
+  }
+
+  func presentErrorAlert(message: String) {
+    let alertController = UIAlertController(
+      title: "",
+      message: message, preferredStyle: .alert
+    )
+
+    alertController.addAction(.init(title: nil, style: .default))
   }
 }

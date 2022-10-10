@@ -274,6 +274,7 @@
                     <connections>
                         <outlet property="balanceContainerView" destination="oY9-IG-cOZ" id="kPs-Pc-2MF"/>
                         <outlet property="balanceLabel" destination="m9f-MU-tWt" id="AiF-Y0-0Od"/>
+                        <outlet property="convertButton" destination="RlE-KP-88X" id="1Mo-Sh-EAy"/>
                         <outlet property="destinationAmountTextField" destination="rGi-VD-82R" id="TGK-mC-zIf"/>
                         <outlet property="destinationCodeButton" destination="wWL-95-Rd7" id="tsE-hU-dA8"/>
                         <outlet property="destinationContainerView" destination="KmR-1v-RqZ" id="PYx-2a-bBC"/>

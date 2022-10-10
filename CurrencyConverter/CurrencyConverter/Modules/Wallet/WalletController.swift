@@ -19,7 +19,7 @@ class WalletController: UIViewController {
   // MARK: - IBOutlets
 
   @IBOutlet private var tableView: UITableView!
-
+  
   // MARK: - Life Cycle
 
   override func viewDidLoad() {
@@ -29,7 +29,7 @@ class WalletController: UIViewController {
   }
 
   override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+    super.viewWillAppear(animated) 
   }
 }
 

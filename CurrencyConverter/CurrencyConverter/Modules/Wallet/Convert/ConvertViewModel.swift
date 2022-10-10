@@ -12,57 +12,61 @@ import RxRelay
 enum ContentState {
   case loading
   case ready
-  case error
-}
-
-protocol ConvertViewModelProtocol {
-  var state: PublishSubject<ContentState> { get }
-  var sourceCurrencyExchange: PublishSubject<CurrencyExchangeResponse> { get }
-  var destinationCurrencyExchange: PublishSubject<CurrencyExchangeResponse> { get }
-  var sourceWallet: Wallet { get }
-  var destinationWallet: Wallet { get }
-  
-  func getSourceCurrencyExchange(for amount: String)
-  
-  func getDestinationCurrencyExchange(for amount: String)
+  case error(Error)
 }
 
 class ConvertViewModel: ConvertViewModelProtocol {
-  let state = PublishSubject<ContentState>()
+  
+  // MARK: - Properties
+  
+  let contentState = PublishSubject<ContentState>()
+  let isValidSourceAmount = BehaviorRelay<Bool>(value: false)
   let sourceCurrencyExchange = PublishSubject<CurrencyExchangeResponse>()
   let destinationCurrencyExchange = PublishSubject<CurrencyExchangeResponse>()
   
   private(set) var sourceWallet: Wallet
   private(set) var destinationWallet: Wallet
+  private(set) var currencyExchangeService: CurrencyExchangeServiceProtocol
+  
+  private var sourceAmount: Decimal = .zero
 
-  private let service = CurrencyExchangeService()
-
+  // MARK: - Init
+  
   init(
     sourceWallet: Wallet,
-    destinationWallet: Wallet = App.shared.config.defaultDestinationWallet
+    destinationWallet: Wallet = App.shared.config.defaultDestinationWallet,
+    currencyExchangeService: CurrencyExchangeServiceProtocol = App.shared.currencyExchangeService
   ) {
     self.sourceWallet = sourceWallet
     self.destinationWallet = destinationWallet
+    self.currencyExchangeService = currencyExchangeService
   }
 }
 
 // MARK: - Methods
 
 extension ConvertViewModel {
+  
   func getSourceCurrencyExchange(for amount: String) {
     Task.init {
       do {
-        guard let currencyExchange = try await service.convert(
+        contentState.onNext(.loading)
+        
+        guard let currencyExchange = try await currencyExchangeService.convert(
           amount: amount,
           sourceCode: sourceWallet.currency.code,
           destinationCode: destinationWallet.currency.code
         ) else {
+          contentState.onNext(.error(APIError.dataNotFound))
           return
         }
         
+        updateSourceAmount(with: Decimal(string: amount))
+        
         destinationCurrencyExchange.onNext(currencyExchange)
+        contentState.onNext(.ready)
       } catch {
-        print(error.localizedDescription)
+        contentState.onNext(.error(error))
       }
     }
   }
@@ -70,17 +74,23 @@ extension ConvertViewModel {
   func getDestinationCurrencyExchange(for amount: String) {
     Task.init {
       do {
-        guard let currencyExchange = try await service.convert(
+        contentState.onNext(.loading)
+        
+        guard let currencyExchange = try await currencyExchangeService.convert(
           amount: amount,
           sourceCode: destinationWallet.currency.code,
           destinationCode: sourceWallet.currency.code
         ) else {
+          contentState.onNext(.error(APIError.dataNotFound))
           return
         }
         
+        updateSourceAmount(with: Decimal(string: currencyExchange.amount))
+        
         sourceCurrencyExchange.onNext(currencyExchange)
+        contentState.onNext(.ready)
       } catch {
-        print(error.localizedDescription)
+        contentState.onNext(.error(error))
       }
     }
   }
@@ -89,5 +99,14 @@ extension ConvertViewModel {
 // MARK: - Helpers
 
 private extension ConvertViewModel {
-  
+  func updateSourceAmount(with amount: Decimal?) {
+    sourceAmount = amount ?? .zero
+    
+    if sourceAmount > 0,
+       sourceAmount < sourceWallet.balance {
+      isValidSourceAmount.accept(true)
+    } else {
+      isValidSourceAmount.accept(false)
+    }
+  }
 }
