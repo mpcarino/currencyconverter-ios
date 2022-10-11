@@ -8,7 +8,12 @@
 import UIKit
 
 extension Constant {
-    struct App {
-        static let kFirstAppOpen = "kFirstAppOpen"
-    }
+  struct App {
+    static let kHasUsedInitialWallets = "kHasUsedInitialWallets"
+  }
+  
+  struct JSON {
+    static let supportedCurrencies = "SupportedCurrencies"
+    static let initialUserWallets = "InitialUserWallets"
+  }
 }

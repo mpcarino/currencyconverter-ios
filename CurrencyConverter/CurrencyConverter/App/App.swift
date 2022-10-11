@@ -16,17 +16,17 @@ final class App {
   // MARK: - Properties
 
   private(set) var config: AppConfigProtocol!
-  private(set) var currencyExchangeService: CurrencyExchangeServiceProtocol!
-  private(set) var supportedCurrencyService: SupportedCurrencyService!
-  
   private(set) var user: User
   private(set) var supportedCurrencies: [Currency]
-  
+
+  private(set) var currencyExchangeService: CurrencyExchangeServiceProtocol!
+  private(set) var supportedCurrencyDataService: JSONDataService<[Currency]>!
+  private(set) var walletDataService: JSONDataService<[Wallet]>!
+
   // MARK: - Init
 
   init() {
-    user = User()
-    
+    user = User(wallets: [])
     supportedCurrencies = []
   }
 }
@@ -39,10 +39,16 @@ extension App {
     launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) {
     config = AppConfig()
+
     currencyExchangeService = CurrencyExchangeService()
-    supportedCurrencyService = SupportedCurrencyService()
-    
+    supportedCurrencyDataService = JSONDataService<[Currency]>(decoder: config.jsonDecoder)
+    walletDataService = JSONDataService<[Wallet]>(decoder: config.jsonDecoder)
+
     loadSupportedCurrencies()
+
+    if !UserDefaults.hasUsedInitialWallets {
+      loadInitialUserWallet()
+    }
   }
 }
 
@@ -50,22 +56,38 @@ extension App {
 
 private extension App {
   func loadSupportedCurrencies() {
-    guard let supportedCurrencies = supportedCurrencyService.load() else {
+    guard let supportedCurrencies = supportedCurrencyDataService.load(fileName: config.supportedCurrenciesFileName) else {
+      return
+    }
+
+    self.supportedCurrencies = supportedCurrencies
+  }
+
+  func loadInitialUserWallet() {
+    guard let wallets = walletDataService.load(fileName: config.initialUserWalletsFileName) else {
       return
     }
     
-    self.supportedCurrencies = supportedCurrencies
+    wallets.forEach({ user.addWallet($0) })
   }
 }
 
 class User {
-  var wallets: [Wallet]
+  private(set) var wallets: [Wallet]
 
-  init() {
-    wallets = []
+  init(wallets: [Wallet]) {
+    self.wallets = wallets
+  }
 
-    wallets.append(.init(balance: 12345, currency: .init(locale: "en_US", code: "USD")))
-    wallets.append(.init(balance: 12345, currency: .init(locale: "es_ES", code: "EUR")))
-    wallets.append(.init(balance: 12345, currency: .init(locale: "ja_JP", code: "JPY")))
+  func addWallet(_ wallet: Wallet) {
+    wallets.append(wallet)
+  }
+
+  func removeWallet(_ wallet: Wallet) {
+    guard let index = wallets.firstIndex(where: {
+      $0.currency == wallet.currency
+    }) else { return }
+
+    wallets.remove(at: index)
   }
 }

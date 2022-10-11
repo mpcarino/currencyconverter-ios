@@ -2,19 +2,44 @@
 //  JSONDataService.swift
 //  CurrencyConverter
 //
-//  Created by Marwin Carino on 10/8/22.
+//  Created by Marwin Carino on 10/11/22.
 //
 
 import Foundation
 
-protocol JSONDataServiceProtocol {
-  associatedtype T
+final class JSONDataService<T: Decodable>: LocalDataServiceProtocol {
+  // MARK: - Properties
+  
+  let decoder: JSONDecoder
 
-  var fileExtension: String { get }
+  // MARK: - Init
+  
+  init(decoder: JSONDecoder = JSONDecoder()) {
+    self.decoder = decoder
+  }
+  
+  // MARK: - Methods
+  
+  func load(fileName: String) -> T? {
+    guard let path = Bundle.main.path(forResource: fileName, ofType: fileExtension) else {
+      return nil
+    }
 
-  func load() -> T?
+    let url = URL(fileURLWithPath: path)
+
+    if let data = try? Data(contentsOf: url),
+       let decodedData = try? decoder.decode(T.self, from: data) {
+      return decodedData
+    }
+
+    return nil
+  }
 }
 
-extension JSONDataServiceProtocol {
-  var fileExtension: String { "json" }
+// MARK: - Getters
+
+extension JSONDataService {
+  var fileExtension: String {
+    "json"
+  }
 }

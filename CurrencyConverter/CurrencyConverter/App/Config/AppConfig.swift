@@ -13,6 +13,11 @@ protocol AppConfigProtocol {
   
   var minimumFractionDigits: Int { get }
   var maximumFractionDigits: Int { get }
+  
+  var supportedCurrenciesFileName: String { get }
+  var initialUserWalletsFileName: String { get }
+  
+  var jsonDecoder: JSONDecoder { get }
 }
 
 extension AppConfigProtocol {
@@ -21,6 +26,16 @@ extension AppConfigProtocol {
   
   var minimumFractionDigits: Int { 2 }
   var maximumFractionDigits: Int { 2 }
+  
+  var supportedCurrenciesFileName: String { Constant.JSON.supportedCurrencies }
+  var initialUserWalletsFileName: String { Constant.JSON.initialUserWallets }
+  
+  var jsonDecoder: JSONDecoder {
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    
+    return decoder
+  }
 }
 
 class AppConfig: AppConfigProtocol { }

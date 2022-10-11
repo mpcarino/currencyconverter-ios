@@ -16,6 +16,12 @@ struct Currency: Codable {
   let code: String
 }
 
+extension Currency: Equatable {
+  static func == (lhs: Currency, rhs: Currency) -> Bool {
+    return lhs.locale == rhs.locale && lhs.code == rhs.code
+  }
+}
+
 extension Currency {
   var currencyFormatter: NumberFormatter {
     let formatter = NumberFormatter()

@@ -19,6 +19,12 @@ struct Wallet: Codable {
   let currency: Currency
 }
 
+extension Wallet: Equatable {
+  static func == (lhs: Wallet, rhs: Wallet) -> Bool {
+    lhs.currency == rhs.currency
+  }
+}
+
 // MARK: - Getters
 
 extension Wallet {

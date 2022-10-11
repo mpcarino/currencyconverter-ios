@@ -8,13 +8,13 @@
 import Foundation
 
 extension UserDefaults {
-    static var isFirstAppOpen: Bool {
+    static var hasUsedInitialWallets: Bool {
         get {
-            UserDefaults.standard.bool(forKey: Constant.App.kFirstAppOpen)
+            UserDefaults.standard.bool(forKey: Constant.App.kHasUsedInitialWallets)
         }
         
         set {
-            UserDefaults.standard.set(newValue, forKey: Constant.App.kFirstAppOpen)
+            UserDefaults.standard.set(newValue, forKey: Constant.App.kHasUsedInitialWallets)
         }
     }
 }
