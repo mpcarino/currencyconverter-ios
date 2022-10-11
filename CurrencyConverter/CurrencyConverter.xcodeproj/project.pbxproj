@@ -390,9 +390,9 @@
 		DDF95C4F28F065F100FD619F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				DD01AF0328F15CAD00F922D5 /* CurrencyExchangeService.swift */,
 				DDBDB3DA28F598290023C321 /* LocalDataService.swift */,
 				DDBDB3DC28F5988F0023C321 /* JSONDataService.swift */,
+				DD01AF0328F15CAD00F922D5 /* CurrencyExchangeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
