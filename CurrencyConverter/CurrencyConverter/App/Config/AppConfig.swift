@@ -14,6 +14,8 @@ protocol AppConfigProtocol {
   var minimumFractionDigits: Int { get }
   var maximumFractionDigits: Int { get }
   
+  var commissionRate: Double { get }
+  
   var supportedCurrenciesFileName: String { get }
   var initialUserWalletsFileName: String { get }
   
@@ -26,6 +28,8 @@ extension AppConfigProtocol {
   
   var minimumFractionDigits: Int { 2 }
   var maximumFractionDigits: Int { 2 }
+  
+  var commissionRate: Double { 0.7 }
   
   var supportedCurrenciesFileName: String { Constant.JSON.supportedCurrencies }
   var initialUserWalletsFileName: String { Constant.JSON.initialUserWallets }

@@ -8,28 +8,31 @@
 import Foundation
 import UIKit
 
+import RxSwift
+
 class WalletController: UIViewController {
   // MARK: - Properties
 
   var viewModel: WalletViewModelProtocol!
 
-  private var tableDataSource = WalletTableDataSource(wallets: [])
+  private var tableDataSource = WalletTableDataSource()
   private var tableDelegate = WalletTableDelegate()
 
   // MARK: - IBOutlets
 
   @IBOutlet private var tableView: UITableView!
-  
+
   // MARK: - Life Cycle
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     setup()
+    bind()
   }
 
   override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated) 
+    super.viewWillAppear(animated)
   }
 }
 
@@ -38,12 +41,13 @@ class WalletController: UIViewController {
 private extension WalletController {
   func setup() {
     setupTableView()
-    setupClosures()
+    setupHandlers()
   }
+  
 
   func setupTableView() {
-    tableDataSource = WalletTableDataSource(wallets: viewModel.wallets)
-    
+    tableDataSource.wallets = viewModel.wallets
+
     tableView.register(
       WalletTableCell.nib,
       forCellReuseIdentifier: WalletTableCell.reuseIdentifier
@@ -57,8 +61,36 @@ private extension WalletController {
     tableView.rowHeight = WalletTableCell.preferredHeight
   }
 
-  func setupClosures() {
+  func setupHandlers() {
     tableDelegate.onSelect = handleTableDelegateSelect()
+  }
+}
+
+// MARK: - Binding
+
+private extension WalletController {
+  func bind() {
+    bindNotifications()
+  }
+  
+  func bindNotifications() {
+    NotificationCenter.default.rx.notification(User.Notification.didUpdateWallets)
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { [unowned self] _ in
+        reloadTable()
+      })
+      .disposed(by: rx.disposeBag)
+  }
+
+}
+
+
+// MARK: - Helpers
+
+private extension WalletController {
+  func reloadTable() {
+    self.tableDataSource.wallets = viewModel.wallets
+    self.tableView.reloadData()
   }
 }
 
@@ -80,7 +112,7 @@ private extension WalletController {
   func showConvert(for index: Int) {
     let controller = R.storyboard.wallet.convertController()!
     controller.viewModel = viewModel.createConvertVM(for: index)
-    
+
     show(controller, sender: self)
   }
 }

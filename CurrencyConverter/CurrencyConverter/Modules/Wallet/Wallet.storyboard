@@ -218,12 +218,24 @@
                                                             <constraint firstAttribute="height" constant="24" id="a5V-L3-BXy"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-Mf-4P9">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SNF-EY-OrU" userLabel="Info Container View">
                                                         <rect key="frame" x="0.0" y="330.33333333333331" width="358" height="16.333333333333314"/>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                        <color key="textColor" systemColor="systemBlueColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-Mf-4P9">
+                                                                <rect key="frame" x="32" y="0.0" width="294" height="16.333333333333332"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                                <color key="textColor" systemColor="systemCyanColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="Ikc-Mf-4P9" secondAttribute="bottom" id="5bs-4N-0Ac"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Ikc-Mf-4P9" secondAttribute="trailing" constant="32" id="SGq-77-mMW"/>
+                                                            <constraint firstItem="Ikc-Mf-4P9" firstAttribute="top" secondItem="SNF-EY-OrU" secondAttribute="top" id="YMc-VQ-Um7"/>
+                                                            <constraint firstItem="Ikc-Mf-4P9" firstAttribute="leading" secondItem="SNF-EY-OrU" secondAttribute="leading" constant="32" id="xIi-q4-9UL"/>
+                                                        </constraints>
+                                                    </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vtf-DT-Vmh" userLabel="Spacer">
                                                         <rect key="frame" x="0.0" y="346.66666666666674" width="358" height="302.33333333333326"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -284,6 +296,7 @@
                         <outlet property="destinationContainerView" destination="KmR-1v-RqZ" id="PYx-2a-bBC"/>
                         <outlet property="destinationCurrencyButton" destination="zzP-KZ-aDB" id="BGE-FE-2zF"/>
                         <outlet property="destinationCurrencyTextField" destination="FGA-sd-wgu" id="25F-Ak-cOY"/>
+                        <outlet property="infoLabel" destination="Ikc-Mf-4P9" id="Fhp-d2-b3S"/>
                         <outlet property="sourceAmountTextField" destination="JJI-QR-HBH" id="aGg-Wj-5Y0"/>
                         <outlet property="sourceCodeLabel" destination="0mG-HD-Dky" id="4x2-Wi-GaX"/>
                         <outlet property="sourceContainerVIew" destination="lRD-yZ-JeH" id="kY1-kj-mgB"/>
@@ -375,6 +388,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemCyanColor">
+            <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

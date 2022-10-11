@@ -18,7 +18,7 @@ protocol WalletViewModelProtocol {
 class WalletViewModel: WalletViewModelProtocol {
   private let user: User
   
-  init(user: User) {
+  init(user: User = App.shared.user) {
     self.user = user
   }
 }
@@ -37,7 +37,25 @@ extension WalletViewModel {
   func createConvertVM(for index: Int) -> ConvertViewModelProtocol {
     let sourceWallet = getWallet(at: index)
     
-    return ConvertViewModel(sourceWallet: sourceWallet)
+    let convertVM = ConvertViewModel(
+      sourceWallet: sourceWallet,
+      onConvert: handleConvert()
+    )
+    
+    return convertVM
+  }
+}
+
+// MARK: - Handlers
+
+private extension WalletViewModel {
+  func handleConvert() -> CurrencyConversionClosure {
+    return { [weak self] (sourceWallet, destinationWallet) in
+      guard let self = self else { return }
+      
+      self.user.updateWallets(with: sourceWallet)
+      self.user.updateWallets(with: destinationWallet)
+    }
   }
 }
 

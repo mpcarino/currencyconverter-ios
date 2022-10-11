@@ -12,23 +12,32 @@ import RxSwift
 enum ContentState {
   case loading
   case ready
+  case success
   case error(Error)
 }
 
 class ConvertViewModel: ConvertViewModelProtocol {
   // MARK: - Properties
 
+  var onUpdateSourceAmount: ((Decimal) -> Void) = { _ in }
+  var onUpdateDestinationAmount: ((Decimal) -> Void) = { _ in }
+  
+  private(set) var onConvert: CurrencyConversionClosure = { (_, _) in }
+  
   let contentState = PublishSubject<ContentState>()
+  
   let isValidSourceAmount = BehaviorRelay<Bool>(value: false)
-  let sourceCurrencyExchange = PublishSubject<CurrencyExchangeResponse>()
-  let destinationCurrencyExchange = PublishSubject<CurrencyExchangeResponse>()
-
+  let conversionInfo = BehaviorRelay<String>(value: .empty)
+  
   private(set) var sourceWallet: Wallet
   private(set) var destinationWallet: Wallet
   private(set) var supportedCurrencies: [Currency]
-  private(set) var currencyExchangeService: CurrencyExchangeServiceProtocol
+  private(set) var commissionRate: Double
 
   private var sourceAmount: Decimal = .zero
+  private var destinationAmount: Decimal = .zero
+ 
+  private var currencyExchangeService: CurrencyExchangeServiceProtocol
 
   // MARK: - Init
 
@@ -36,19 +45,47 @@ class ConvertViewModel: ConvertViewModelProtocol {
     sourceWallet: Wallet,
     destinationWallet: Wallet = App.shared.config.defaultDestinationWallet,
     supportedCurrencies: [Currency] = App.shared.supportedCurrencies,
-    currencyExchangeService: CurrencyExchangeServiceProtocol = App.shared.currencyExchangeService
+    commissionRate: Double = App.shared.config.commissionRate,
+    currencyExchangeService: CurrencyExchangeServiceProtocol = App.shared.currencyExchangeService,
+    onConvert: @escaping CurrencyConversionClosure
   ) {
     self.sourceWallet = sourceWallet
     self.destinationWallet = destinationWallet
     self.supportedCurrencies = supportedCurrencies
+    self.commissionRate = commissionRate
     self.currencyExchangeService = currencyExchangeService
+    self.onConvert = onConvert
   }
 }
 
 // MARK: - Methods
 
 extension ConvertViewModel {
-  func getSourceCurrencyExchange(for amount: Decimal) {
+  func convert() {
+    guard sourceAmount < sourceWallet.balance else { return }
+    
+    let commissionFee = calculateCommissionFee()
+    let totalSourceDeductible = sourceAmount + commissionFee
+    
+    guard totalSourceDeductible <= sourceWallet.balance else { return }
+    
+    contentState.onNext(.loading)
+    
+    // Adding delay for the purpose of mimicking API call
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+      guard let self = self else { return }
+      
+      self.sourceWallet.subtract(amount: totalSourceDeductible)
+      self.destinationWallet.add(amount: self.destinationAmount)
+      
+      self.contentState.onNext(.success)
+      
+      self.onConvert(self.sourceWallet, self.destinationWallet)
+    }
+  }
+  
+  func exchangeSourceToDestination(for amount: Decimal) {
     validate(amount: amount)
 
     guard isValidSourceAmount.value else { return }
@@ -67,16 +104,20 @@ extension ConvertViewModel {
         }
 
         sourceAmount = amount
-
-        destinationCurrencyExchange.onNext(currencyExchange)
+        destinationAmount = Decimal(string: currencyExchange.amount) ?? .zero
+        
+        updateConversionInfo()
+        
         contentState.onNext(.ready)
+        
+        onUpdateDestinationAmount(destinationAmount)
       } catch {
         contentState.onNext(.error(error))
       }
     }
   }
 
-  func getDestinationCurrencyExchange(for amount: Decimal) {
+  func exchangeDestinationToSource(for amount: Decimal) {
     validate(amount: amount)
 
     guard isValidSourceAmount.value else { return }
@@ -94,10 +135,14 @@ extension ConvertViewModel {
           return
         }
 
-        sourceAmount = amount
-
-        sourceCurrencyExchange.onNext(currencyExchange)
+        destinationAmount = amount
+        sourceAmount = Decimal(string: currencyExchange.amount) ?? .zero
+        
+        updateConversionInfo()
+   
         contentState.onNext(.ready)
+        
+        onUpdateSourceAmount(sourceAmount)
       } catch {
         contentState.onNext(.error(error))
       }
@@ -142,5 +187,23 @@ private extension ConvertViewModel {
     }
 
     return supportedCurrencies[index]
+  }
+  
+  func updateConversionInfo() {
+    let commissionFee = calculateCommissionFee()
+    let totalSourceDeductible = sourceAmount + commissionFee
+    
+    let info = S.convertConversionInfo(
+      "\(commissionRate)%",
+      sourceWallet.currency.currencyFormatter.string(amount: commissionFee as NSNumber),
+      sourceWallet.currency.currencyFormatter.string(amount: totalSourceDeductible as NSNumber),
+      destinationWallet.currency.currencyFormatter.string(amount: destinationAmount as NSNumber)
+    )
+    
+    conversionInfo.accept(info)
+  }
+  
+  func calculateCommissionFee() -> Decimal {
+    return (sourceAmount * Decimal(commissionRate)) / 100.0
   }
 }

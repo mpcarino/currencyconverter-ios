@@ -40,6 +40,8 @@ class ConvertController: UIViewController {
   @IBOutlet private(set) var destinationCurrencyTextField: UITextField!
   @IBOutlet private(set) var destinationCurrencyButton: UIButton!
   
+  @IBOutlet private(set) var infoLabel: UILabel!
+  
   @IBOutlet private var convertButton: UIButton!
 
   // MARK: - Life Cycle
@@ -53,7 +55,7 @@ class ConvertController: UIViewController {
   }
 
   @IBAction func didTapConvertButton(_ sender: Any) {
-    presentErrorAlert(message: "Error test")
+    viewModel.convert()
   }
 }
 
@@ -73,6 +75,7 @@ private extension ConvertController {
   func setup() {
     setupLabels()
     setupTextFields()
+    setupHandlers()
   }
 
   func setupLabels() {
@@ -88,6 +91,11 @@ private extension ConvertController {
     destinationCurrencyTextField.inputView = currencyPickerView
     currencyPickerView.delegate = self
     currencyPickerView.dataSource = self
+  }
+  
+  func setupHandlers() {
+    viewModel.onUpdateSourceAmount = handleUpdateSourceAmount()
+    viewModel.onUpdateDestinationAmount = handleUpdateDestinationAmount()
   }
 }
 
@@ -120,7 +128,7 @@ private extension ConvertController {
       .subscribe(onNext: { [unowned self] in
         guard self.isValidTextInput(from: sourceAmountTextField) else { return }
 
-        self.viewModel.getSourceCurrencyExchange(for: sourceAmountTextField.amount)
+        self.viewModel.exchangeSourceToDestination(for: sourceAmountTextField.amount)
       })
       .disposed(by: rx.disposeBag)
 
@@ -129,7 +137,7 @@ private extension ConvertController {
       .subscribe(onNext: { [unowned self] in
         guard self.isValidTextInput(from: destinationAmountTextField) else { return }
 
-        self.viewModel.getDestinationCurrencyExchange(for: destinationAmountTextField.amount)
+        self.viewModel.exchangeDestinationToSource(for: destinationAmountTextField.amount)
       })
       .disposed(by: rx.disposeBag)
   }
@@ -142,9 +150,13 @@ private extension ConvertController {
         case .loading:
           SVProgressHUD.show()
         case .ready:
-          if SVProgressHUD.isVisible() {
-            SVProgressHUD.dismiss()
-          }
+          SVProgressHUD.dismiss()
+        case .success:
+          SVProgressHUD.dismiss()
+          
+          balanceLabel.text = viewModel.sourceWallet.formattedBalance
+          sourceAmountTextField.text = nil
+          destinationAmountTextField.text = nil
         case .error:
           SVProgressHUD.showError(withStatus: "")
         }
@@ -167,24 +179,20 @@ private extension ConvertController {
         }
       })
       .disposed(by: rx.disposeBag)
-
-    viewModel.sourceCurrencyExchange
+    
+    viewModel.conversionInfo
+      .startWith(.empty)
       .observe(on: MainScheduler.instance)
-      .subscribe(onNext: { [unowned self] currencyExchange in
-        self.updateCurrencyTextField(
-          sourceAmountTextField,
-          with: currencyExchange.amount
-        )
-      })
-      .disposed(by: rx.disposeBag)
-
-    viewModel.destinationCurrencyExchange
-      .observe(on: MainScheduler.instance)
-      .subscribe(onNext: { [unowned self] currencyExchange in
-        self.updateCurrencyTextField(
-          destinationAmountTextField,
-          with: currencyExchange.amount
-        )
+      .subscribe({ [unowned self] event in
+        
+        switch event {
+        case let .next(info):
+          self.infoLabel.text = info
+        case let .error(error):
+          self.infoLabel.text = error.localizedDescription
+        default:
+          return
+        }
       })
       .disposed(by: rx.disposeBag)
   }
@@ -205,7 +213,7 @@ private extension ConvertController {
     destinationCurrencyButton.setTitle(viewModel.destinationWallet.currency.code.uppercased(), for: .normal)
     destinationAmountTextField.currency = viewModel.destinationWallet.currency
     
-    viewModel.getSourceCurrencyExchange(for: sourceAmountTextField.amount)
+    viewModel.exchangeSourceToDestination(for: sourceAmountTextField.amount)
   }
 
   func isValidTextInput(from textField: UITextField) -> Bool {
@@ -224,6 +232,36 @@ private extension ConvertController {
     alertController.addAction(.init(title: S.alertButtonOk(), style: .default))
     
     present(alertController, animated: true)
+  }
+}
+
+// MARK: - Handlers
+
+private extension ConvertController {
+  func handleUpdateSourceAmount() -> ((Decimal) -> Void) {
+    return { [weak self] amount in
+      guard let self = self else { return }
+      
+      DispatchQueue.main.async {
+        self.updateCurrencyTextField(
+          self.sourceAmountTextField,
+          with: "\(amount)"
+        )
+      }
+    }
+  }
+  
+  func handleUpdateDestinationAmount() -> ((Decimal) -> Void) {
+    return { [weak self] amount in
+      guard let self = self else { return }
+      
+      DispatchQueue.main.async {
+        self.updateCurrencyTextField(
+          self.destinationAmountTextField,
+          with: "\(amount)"
+        )
+      }
+    }
   }
 }
 

@@ -73,21 +73,44 @@ private extension App {
 }
 
 class User {
+  struct Notification { }
+  
+  // MARK: - Properties
+  
   private(set) var wallets: [Wallet]
-
+  
+  // MARK: - Init
+  
   init(wallets: [Wallet]) {
     self.wallets = wallets
   }
-
+  
+  // MARK: - Methods
   func addWallet(_ wallet: Wallet) {
     wallets.append(wallet)
   }
-
+  
   func removeWallet(_ wallet: Wallet) {
     guard let index = wallets.firstIndex(where: {
       $0.currency == wallet.currency
     }) else { return }
-
+    
     wallets.remove(at: index)
   }
+  
+  func updateWallets(with wallet: Wallet) {
+    guard let index = wallets.firstIndex(where: {
+      $0.currency == wallet.currency
+    }) else { return }
+    
+    wallets[index] = wallet
+    
+    NotificationCenter.default.post(name: Notification.didUpdateWallets, object: nil)
+  }
+}
+
+// MARK: - Notifications
+
+extension User.Notification {
+  static let didUpdateWallets = Notification.Name(rawValue: "notification.name.user.didUpdateWallets")
 }

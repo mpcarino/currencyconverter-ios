@@ -8,3 +8,7 @@
 import Foundation
 
 typealias S = R.string.localizable
+
+// MARK: - Closures
+
+typealias CurrencyConversionClosure = ((Wallet, Wallet) -> Void)

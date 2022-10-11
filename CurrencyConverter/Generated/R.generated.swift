@@ -219,7 +219,7 @@ struct R: Rswift.Validatable {
 
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 6 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 7 localization keys.
     struct localizable {
       /// Value: Convert
       static let convertNavTitle = Rswift.StringResource(key: "convert.nav.title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
@@ -229,6 +229,8 @@ struct R: Rswift.Validatable {
       static let alertButtonNo = Rswift.StringResource(key: "alert.button.no", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: OK
       static let alertButtonOk = Rswift.StringResource(key: "alert.button.ok", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: This transaction has commission rate of %@ which amounts to %@. A total of %@ will be deducted from your balance and you will receive a total of %@.
+      static let convertConversionInfo = Rswift.StringResource(key: "convert.conversion-info", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Yes
       static let alertButtonYes = Rswift.StringResource(key: "alert.button.yes", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: http://api.evp.lt/currency/commercial/exchange/%@-%@/%@/latest
@@ -284,6 +286,21 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("alert.button.ok", bundle: bundle, comment: "")
+      }
+
+      /// Value: This transaction has commission rate of %@ which amounts to %@. A total of %@ will be deducted from your balance and you will receive a total of %@.
+      static func convertConversionInfo(_ value1: String, _ value2: String, _ value3: String, _ value4: String, preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          let format = NSLocalizedString("convert.conversion-info", bundle: hostingBundle, comment: "")
+          return String(format: format, locale: applicationLocale, value1, value2, value3, value4)
+        }
+
+        guard let (locale, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "convert.conversion-info"
+        }
+
+        let format = NSLocalizedString("convert.conversion-info", bundle: bundle, comment: "")
+        return String(format: format, locale: locale, value1, value2, value3, value4)
       }
 
       /// Value: Yes

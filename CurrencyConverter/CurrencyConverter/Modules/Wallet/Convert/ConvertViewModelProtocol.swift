@@ -10,18 +10,25 @@ import RxSwift
 import RxRelay
 
 protocol ConvertViewModelProtocol {
+  var onUpdateSourceAmount: ((Decimal) -> Void) { get set }
+  var onUpdateDestinationAmount: ((Decimal) -> Void) { get set }
+  
+  var onConvert: CurrencyConversionClosure { get }
+  
   var contentState: PublishSubject<ContentState> { get }
   var isValidSourceAmount: BehaviorRelay<Bool> { get }
-  var sourceCurrencyExchange: PublishSubject<CurrencyExchangeResponse> { get }
-  var destinationCurrencyExchange: PublishSubject<CurrencyExchangeResponse> { get }
+  var conversionInfo: BehaviorRelay<String> { get }
   
   var sourceWallet: Wallet { get }
   var destinationWallet: Wallet { get }
   var supportedCurrencies: [Currency] { get }
+  var commissionRate: Double { get }
   
-  func getSourceCurrencyExchange(for amount: Decimal)
+  func convert()
   
-  func getDestinationCurrencyExchange(for amount: Decimal)
+  func exchangeSourceToDestination(for amount: Decimal)
+  
+  func exchangeDestinationToSource(for amount: Decimal)
   
   func changeDestinationWallet(to index: Int)
   

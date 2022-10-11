@@ -15,13 +15,27 @@ struct Wallet: Codable {
     )
   }
   
-  let balance: Decimal
+  var balance: Decimal
   let currency: Currency
 }
 
 extension Wallet: Equatable {
   static func == (lhs: Wallet, rhs: Wallet) -> Bool {
     lhs.currency == rhs.currency
+  }
+}
+
+// MARK: - Helpers
+
+extension Wallet {
+  mutating func subtract(amount: Decimal) {
+    guard amount <= balance else { return }
+    
+    balance -= amount
+  }
+  
+  mutating func add(amount: Decimal) {
+    balance += amount
   }
 }
 

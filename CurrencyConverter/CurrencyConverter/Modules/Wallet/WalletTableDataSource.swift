@@ -9,18 +9,16 @@ import Foundation
 import UIKit
 
 class WalletTableDataSource: NSObject, UITableViewDataSource {
-  private(set) var wallets: [Wallet] = []
+  var wallets: [Wallet] = [] {
+    didSet {
+      tableCellVMs = wallets.map({
+        WalletTableCellViewModel(wallet: $0)
+      })
+    }
+  }
   
   private var tableCellVMs: [WalletTableCellViewModelProtocol] = []
   
-  init(wallets: [Wallet]) {
-    self.wallets = wallets
-    
-    self.tableCellVMs = wallets.map({
-      WalletTableCellViewModel(wallet: $0)
-    })
-  }
-
   func tableView(
     _ tableView: UITableView,
     numberOfRowsInSection section: Int
