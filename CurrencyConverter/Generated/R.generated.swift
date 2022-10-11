@@ -211,12 +211,18 @@ struct R: Rswift.Validatable {
 
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 3 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 6 localization keys.
     struct localizable {
       /// Value: Convert
       static let convertNavTitle = Rswift.StringResource(key: "convert.nav.title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Currency Converter
       static let appTitle = Rswift.StringResource(key: "app.title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: No
+      static let alertButtonNo = Rswift.StringResource(key: "alert.button.no", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: OK
+      static let alertButtonOk = Rswift.StringResource(key: "alert.button.ok", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Yes
+      static let alertButtonYes = Rswift.StringResource(key: "alert.button.yes", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: http://api.evp.lt/currency/commercial/exchange/%@-%@/%@/latest
       static let endpointCurrencyExchange = Rswift.StringResource(key: "endpoint.currency-exchange", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
 
@@ -244,6 +250,45 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("app.title", bundle: bundle, comment: "")
+      }
+
+      /// Value: No
+      static func alertButtonNo(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("alert.button.no", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "alert.button.no"
+        }
+
+        return NSLocalizedString("alert.button.no", bundle: bundle, comment: "")
+      }
+
+      /// Value: OK
+      static func alertButtonOk(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("alert.button.ok", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "alert.button.ok"
+        }
+
+        return NSLocalizedString("alert.button.ok", bundle: bundle, comment: "")
+      }
+
+      /// Value: Yes
+      static func alertButtonYes(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("alert.button.yes", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "alert.button.yes"
+        }
+
+        return NSLocalizedString("alert.button.yes", bundle: bundle, comment: "")
       }
 
       /// Value: http://api.evp.lt/currency/commercial/exchange/%@-%@/%@/latest

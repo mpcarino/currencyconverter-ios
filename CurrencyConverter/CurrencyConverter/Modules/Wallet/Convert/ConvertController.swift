@@ -20,19 +20,26 @@ class ConvertController: UIViewController {
 
   var viewModel: ConvertViewModelProtocol!
 
+  private lazy var currencyPickerView: UIPickerView = {
+    let pickerView = UIPickerView()
+
+    return pickerView
+  }()
+
   // MARK: - IBOutlets
 
-  @IBOutlet private var balanceContainerView: UIView!
-  @IBOutlet private var balanceLabel: UILabel!
+  @IBOutlet private(set) var balanceContainerView: UIView!
+  @IBOutlet private(set) var balanceLabel: UILabel!
 
-  @IBOutlet private var sourceContainerVIew: UIView!
-  @IBOutlet private var sourceCodeLabel: UILabel!
-  @IBOutlet private var sourceAmountTextField: CurrencyTextField!
+  @IBOutlet private(set) var sourceContainerVIew: UIView!
+  @IBOutlet private(set) var sourceCodeLabel: UILabel!
+  @IBOutlet private(set) var sourceAmountTextField: CurrencyTextField!
 
-  @IBOutlet private var destinationContainerView: UIView!
-  @IBOutlet private var destinationAmountTextField: CurrencyTextField!
-  @IBOutlet private var destinationCodeButton: UIButton!
-
+  @IBOutlet private(set) var destinationContainerView: UIView!
+  @IBOutlet private(set) var destinationAmountTextField: CurrencyTextField!
+  @IBOutlet private(set) var destinationCurrencyTextField: UITextField!
+  @IBOutlet private(set) var destinationCurrencyButton: UIButton!
+  
   @IBOutlet private var convertButton: UIButton!
 
   // MARK: - Life Cycle
@@ -46,7 +53,7 @@ class ConvertController: UIViewController {
   }
 
   @IBAction func didTapConvertButton(_ sender: Any) {
-    presentErrorAlert(message: "here")
+    presentErrorAlert(message: "Error test")
   }
 }
 
@@ -64,12 +71,23 @@ private extension ConvertController {
 
 private extension ConvertController {
   func setup() {
+    setupLabels()
+    setupTextFields()
+  }
+
+  func setupLabels() {
     balanceLabel.text = viewModel.sourceWallet.formattedBalance
     sourceCodeLabel.text = viewModel.sourceWallet.currency.code.uppercased()
-    destinationCodeButton.setTitle(viewModel.destinationWallet.currency.code.uppercased(), for: .normal)
+  }
 
+  func setupTextFields() {
     sourceAmountTextField.currency = viewModel.sourceWallet.currency
     destinationAmountTextField.currency = viewModel.destinationWallet.currency
+    destinationCurrencyButton.setTitle(viewModel.destinationWallet.currency.code.uppercased(), for: .normal)
+
+    destinationCurrencyTextField.inputView = currencyPickerView
+    currencyPickerView.delegate = self
+    currencyPickerView.dataSource = self
   }
 }
 
@@ -93,20 +111,25 @@ private extension ConvertController {
       .controlEvent(.editingDidBegin)
       .subscribe(onNext: { [unowned self] in
         self.convertButton.isEnabled = false
+
       })
       .disposed(by: rx.disposeBag)
 
     sourceAmountTextField.rx
       .controlEvent(.editingDidEnd)
       .subscribe(onNext: { [unowned self] in
-        self.viewModel.getSourceCurrencyExchange(for: "\(sourceAmountTextField.amount)")
+        guard self.isValidTextInput(from: sourceAmountTextField) else { return }
+
+        self.viewModel.getSourceCurrencyExchange(for: sourceAmountTextField.amount)
       })
       .disposed(by: rx.disposeBag)
 
     destinationAmountTextField.rx
       .controlEvent(.editingDidEnd)
       .subscribe(onNext: { [unowned self] in
-        self.viewModel.getDestinationCurrencyExchange(for: "\(destinationAmountTextField.amount)")
+        guard self.isValidTextInput(from: destinationAmountTextField) else { return }
+
+        self.viewModel.getDestinationCurrencyExchange(for: destinationAmountTextField.amount)
       })
       .disposed(by: rx.disposeBag)
   }
@@ -178,12 +201,49 @@ private extension ConvertController {
     textField.formatText()
   }
 
+  func updateDestinationCurrency() {
+    destinationCurrencyButton.setTitle(viewModel.destinationWallet.currency.code.uppercased(), for: .normal)
+    destinationAmountTextField.currency = viewModel.destinationWallet.currency
+    
+    viewModel.getSourceCurrencyExchange(for: sourceAmountTextField.amount)
+  }
+
+  func isValidTextInput(from textField: UITextField) -> Bool {
+    guard let text = textField.text?.trimmingCharacters(in: .whitespaces),
+          text.count > 0 else { return false }
+
+    return true
+  }
+
   func presentErrorAlert(message: String) {
     let alertController = UIAlertController(
       title: "",
       message: message, preferredStyle: .alert
     )
 
-    alertController.addAction(.init(title: nil, style: .default))
+    alertController.addAction(.init(title: S.alertButtonOk(), style: .default))
+    
+    present(alertController, animated: true)
+  }
+}
+
+// MARK: - UIPickerViewDataSourc, UIPickerViewDelegate
+
+extension ConvertController: UIPickerViewDataSource, UIPickerViewDelegate {
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    1
+  }
+
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return viewModel.supportedCurrencies.count
+  }
+
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return viewModel.getSupportedCurrencyText(at: row)
+  }
+
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    viewModel.changeDestinationWallet(to: row)
+    updateDestinationCurrency()
   }
 }

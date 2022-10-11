@@ -10,6 +10,12 @@
 
 app.title = "Currency Converter";
 
+/* Alert */
+
+alert.button.ok = "OK";
+alert.button.yes = "Yes";
+alert.button.no = "No";
+
 /* Convert */
 
 convert.nav.title = "Convert";

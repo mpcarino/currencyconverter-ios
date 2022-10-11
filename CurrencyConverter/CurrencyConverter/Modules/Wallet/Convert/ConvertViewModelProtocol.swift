@@ -17,8 +17,13 @@ protocol ConvertViewModelProtocol {
   
   var sourceWallet: Wallet { get }
   var destinationWallet: Wallet { get }
+  var supportedCurrencies: [Currency] { get }
   
-  func getSourceCurrencyExchange(for amount: String)
+  func getSourceCurrencyExchange(for amount: Decimal)
   
-  func getDestinationCurrencyExchange(for amount: String)
+  func getDestinationCurrencyExchange(for amount: Decimal)
+  
+  func changeDestinationWallet(to index: Int)
+  
+  func getSupportedCurrencyText(at index: Int) -> String
 }

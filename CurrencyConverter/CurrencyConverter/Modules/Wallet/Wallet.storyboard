@@ -80,7 +80,7 @@
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7nb-Cu-CXs">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7nb-Cu-CXs" userLabel="Source Stack View">
                                                                 <rect key="frame" x="0.0" y="26" width="358" height="54"/>
                                                                 <subviews>
                                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRD-yZ-JeH">
@@ -89,29 +89,20 @@
                                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="kV5-de-Z2b">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="358" height="54"/>
                                                                                 <subviews>
-                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzp-lC-3aT">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0mG-HD-Dky">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="84" height="54"/>
-                                                                                        <subviews>
-                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0mG-HD-Dky">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="84" height="54"/>
-                                                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
-                                                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                <nil key="highlightedColor"/>
-                                                                                            </label>
-                                                                                        </subviews>
                                                                                         <color key="backgroundColor" systemColor="systemRedColor"/>
                                                                                         <constraints>
-                                                                                            <constraint firstItem="0mG-HD-Dky" firstAttribute="leading" secondItem="kzp-lC-3aT" secondAttribute="leading" id="CSd-7q-XUX"/>
-                                                                                            <constraint firstAttribute="bottom" secondItem="0mG-HD-Dky" secondAttribute="bottom" id="O64-YX-g9E"/>
-                                                                                            <constraint firstAttribute="width" constant="84" id="ZeX-Jx-X1Y"/>
-                                                                                            <constraint firstItem="0mG-HD-Dky" firstAttribute="top" secondItem="kzp-lC-3aT" secondAttribute="top" id="ho9-42-bdb"/>
-                                                                                            <constraint firstAttribute="trailing" secondItem="0mG-HD-Dky" secondAttribute="trailing" id="yjH-Oi-Bie"/>
+                                                                                            <constraint firstAttribute="width" constant="84" id="wBw-Mz-Ku5"/>
                                                                                         </constraints>
-                                                                                    </view>
-                                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JJI-QR-HBH" customClass="CurrencyTextField" customModule="CurrencyConverter" customModuleProvider="target">
+                                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="18" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JJI-QR-HBH" customClass="CurrencyTextField" customModule="CurrencyConverter" customModuleProvider="target">
                                                                                         <rect key="frame" x="96" y="0.0" width="262" height="54"/>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                                     </textField>
                                                                                 </subviews>
@@ -155,7 +146,7 @@
                                                                     <constraint firstAttribute="bottom" secondItem="aOH-au-ZIa" secondAttribute="bottom" id="XZb-Dn-FpG"/>
                                                                 </constraints>
                                                             </view>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5zj-hA-thy">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5zj-hA-thy" userLabel="Destination Stack View">
                                                                 <rect key="frame" x="0.0" y="137.99999999999997" width="358" height="54"/>
                                                                 <subviews>
                                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KmR-1v-RqZ">
@@ -164,32 +155,44 @@
                                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="QK4-vQ-OIp">
                                                                                 <rect key="frame" x="12" y="0.0" width="346" height="54"/>
                                                                                 <subviews>
-                                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="rGi-VD-82R" customClass="CurrencyTextField" customModule="CurrencyConverter" customModuleProvider="target">
+                                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="18" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="rGi-VD-82R" customClass="CurrencyTextField" customModule="CurrencyConverter" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="250" height="54"/>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                                     </textField>
-                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6X9-jK-iYE">
+                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTX-HY-Sdy">
                                                                                         <rect key="frame" x="262" y="0.0" width="84" height="54"/>
                                                                                         <subviews>
-                                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wWL-95-Rd7">
+                                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FGA-sd-wgu">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="84" height="54"/>
+                                                                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                            </textField>
+                                                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzP-KZ-aDB">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="54"/>
                                                                                                 <state key="normal" title="Button"/>
-                                                                                                <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="USD" imagePadding="0.0">
+                                                                                                <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" title="USD" imagePadding="2">
                                                                                                     <imageReference key="image" image="chevron.down" catalog="system" symbolScale="medium"/>
-                                                                                                    <fontDescription key="titleFontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                                                                                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                                                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 </buttonConfiguration>
                                                                                             </button>
                                                                                         </subviews>
-                                                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <constraints>
-                                                                                            <constraint firstAttribute="bottom" secondItem="wWL-95-Rd7" secondAttribute="bottom" id="5Jr-Hk-r5j"/>
-                                                                                            <constraint firstItem="wWL-95-Rd7" firstAttribute="top" secondItem="6X9-jK-iYE" secondAttribute="top" id="JBs-tm-lzi"/>
-                                                                                            <constraint firstAttribute="width" constant="84" id="gmK-5F-1CO"/>
-                                                                                            <constraint firstAttribute="trailing" secondItem="wWL-95-Rd7" secondAttribute="trailing" id="khe-9x-FhF"/>
-                                                                                            <constraint firstItem="wWL-95-Rd7" firstAttribute="leading" secondItem="6X9-jK-iYE" secondAttribute="leading" id="rOw-DL-s0L"/>
+                                                                                            <constraint firstItem="FGA-sd-wgu" firstAttribute="leading" secondItem="KTX-HY-Sdy" secondAttribute="leading" id="RCk-wk-Xig"/>
+                                                                                            <constraint firstItem="zzP-KZ-aDB" firstAttribute="leading" secondItem="KTX-HY-Sdy" secondAttribute="leading" id="Sa1-G5-Yng"/>
+                                                                                            <constraint firstAttribute="width" constant="84" id="dep-Nk-i22"/>
+                                                                                            <constraint firstItem="FGA-sd-wgu" firstAttribute="top" secondItem="KTX-HY-Sdy" secondAttribute="top" id="m6v-j8-CJc"/>
+                                                                                            <constraint firstAttribute="bottom" secondItem="zzP-KZ-aDB" secondAttribute="bottom" id="n10-PD-WCm"/>
+                                                                                            <constraint firstAttribute="trailing" secondItem="FGA-sd-wgu" secondAttribute="trailing" id="ooV-Qy-JfB"/>
+                                                                                            <constraint firstItem="zzP-KZ-aDB" firstAttribute="top" secondItem="KTX-HY-Sdy" secondAttribute="top" id="pdh-cL-ybB"/>
+                                                                                            <constraint firstAttribute="trailing" secondItem="zzP-KZ-aDB" secondAttribute="trailing" id="sRA-MY-J1g"/>
+                                                                                            <constraint firstAttribute="bottom" secondItem="FGA-sd-wgu" secondAttribute="bottom" id="sVe-b2-j8v"/>
                                                                                         </constraints>
                                                                                     </view>
                                                                                 </subviews>
@@ -232,7 +235,9 @@
                                                         </constraints>
                                                         <color key="tintColor" systemColor="systemBlueColor"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="filled" title="CONVERT"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="CONVERT">
+                                                            <fontDescription key="titleFontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                                                        </buttonConfiguration>
                                                         <connections>
                                                             <action selector="didTapConvertButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ag5-gr-6ks"/>
                                                         </connections>
@@ -276,8 +281,9 @@
                         <outlet property="balanceLabel" destination="m9f-MU-tWt" id="AiF-Y0-0Od"/>
                         <outlet property="convertButton" destination="RlE-KP-88X" id="1Mo-Sh-EAy"/>
                         <outlet property="destinationAmountTextField" destination="rGi-VD-82R" id="TGK-mC-zIf"/>
-                        <outlet property="destinationCodeButton" destination="wWL-95-Rd7" id="tsE-hU-dA8"/>
                         <outlet property="destinationContainerView" destination="KmR-1v-RqZ" id="PYx-2a-bBC"/>
+                        <outlet property="destinationCurrencyButton" destination="zzP-KZ-aDB" id="BGE-FE-2zF"/>
+                        <outlet property="destinationCurrencyTextField" destination="FGA-sd-wgu" id="25F-Ak-cOY"/>
                         <outlet property="sourceAmountTextField" destination="JJI-QR-HBH" id="aGg-Wj-5Y0"/>
                         <outlet property="sourceCodeLabel" destination="0mG-HD-Dky" id="4x2-Wi-GaX"/>
                         <outlet property="sourceContainerVIew" destination="lRD-yZ-JeH" id="kY1-kj-mgB"/>

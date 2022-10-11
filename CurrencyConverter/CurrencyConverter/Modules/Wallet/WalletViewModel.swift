@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 protocol WalletViewModelProtocol {
   var defaultWallet: Wallet { get }
   var wallets: [Wallet] { get }
