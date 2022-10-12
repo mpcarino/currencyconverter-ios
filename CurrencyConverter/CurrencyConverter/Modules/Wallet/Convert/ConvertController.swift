@@ -242,8 +242,6 @@ private extension ConvertController {
   func updateDestinationCurrency() {
     destinationCurrencyButton.setTitle(viewModel.destinationWallet.currency.code.uppercased(), for: .normal)
     destinationAmountTextField.currency = viewModel.destinationWallet.currency
-    
-    viewModel.exchangeSourceToDestination(for: sourceAmountTextField.amount)
   }
 
   func isValidTextInput(from textField: UITextField) -> Bool {
@@ -289,6 +287,7 @@ extension ConvertController: UIPickerViewDataSource, UIPickerViewDelegate {
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     viewModel.changeDestinationWallet(to: row)
+    viewModel.exchangeSourceToDestination(for: sourceAmountTextField.amount)
     updateDestinationCurrency()
   }
 }

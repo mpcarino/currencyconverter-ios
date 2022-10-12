@@ -49,7 +49,7 @@ class ConvertViewModel: ConvertViewModelProtocol {
     self.user = user
     self.sourceWallet = sourceWallet
     self.destinationWallet = destinationWallet
-    self.supportedCurrencies = supportedCurrencies
+    self.supportedCurrencies = supportedCurrencies.filter({ $0 != sourceWallet.currency })
     self.commissionRate = commissionRate
     self.currencyExchangeService = currencyExchangeService
     self.onConvert = onConvert
@@ -60,7 +60,7 @@ class ConvertViewModel: ConvertViewModelProtocol {
 
 extension ConvertViewModel {
   func convert() {
-    let commissionFee = calculateCommissionFee()
+    let commissionFee = getCommissionFee()
     let totalSourceDeductible = sourceAmount.value + commissionFee
     
     guard totalSourceDeductible <= sourceWallet.balance else {
@@ -147,6 +147,10 @@ extension ConvertViewModel {
       }
     }
   }
+  
+  func getCommissionFee() -> Decimal {
+    return (sourceAmount.value * Decimal(commissionRate)) / 100.0
+  }
 
   func changeDestinationWallet(to index: Int) {
     let selectedCurrency = getSupportedCurrency(at: index)
@@ -199,7 +203,7 @@ private extension ConvertViewModel {
   }
   
   func updateConversionInfo() {
-    let commissionFee = calculateCommissionFee()
+    let commissionFee = getCommissionFee()
     let totalSourceDeductible = sourceAmount.value + commissionFee
     
     let info = S.convertConversionInfo(
@@ -210,9 +214,5 @@ private extension ConvertViewModel {
     )
     
     conversionInfo.accept(info)
-  }
-  
-  func calculateCommissionFee() -> Decimal {
-    return (sourceAmount.value * Decimal(commissionRate)) / 100.0
   }
 }

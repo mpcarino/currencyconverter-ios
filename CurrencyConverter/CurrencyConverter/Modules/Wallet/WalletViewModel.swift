@@ -36,7 +36,7 @@ extension WalletViewModel {
   
   func createConvertVM(for index: Int) -> ConvertViewModelProtocol {
     let sourceWallet = getWallet(at: index)
-    var destinationWallet = getPreferredDestinationWallet(for: sourceWallet)
+    let destinationWallet = getPreferredDestinationWallet(for: sourceWallet)
     
     let convertVM = ConvertViewModel(
       user: user,

@@ -29,6 +29,8 @@ protocol ConvertViewModelProtocol {
   
   func exchangeDestinationToSource(for amount: Decimal)
   
+  func getCommissionFee() -> Decimal
+  
   func changeDestinationWallet(to index: Int)
   
   func getSupportedCurrencyText(at index: Int) -> String
