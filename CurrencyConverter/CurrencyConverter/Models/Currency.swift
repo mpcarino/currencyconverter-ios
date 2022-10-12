@@ -22,6 +22,8 @@ extension Currency: Equatable {
   }
 }
 
+// MARK: - Getters
+
 extension Currency {
   var currencyFormatter: NumberFormatter {
     let formatter = NumberFormatter()

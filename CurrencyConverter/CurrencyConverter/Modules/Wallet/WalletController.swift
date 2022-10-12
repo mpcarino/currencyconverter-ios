@@ -19,7 +19,7 @@ class WalletController: UIViewController {
   private var tableDelegate = WalletTableDelegate()
 
   // MARK: - IBOutlets
-
+  
   @IBOutlet private var tableView: UITableView!
 
   // MARK: - Life Cycle
@@ -31,8 +31,10 @@ class WalletController: UIViewController {
     bind()
   }
 
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+  // MARK: - IBActions
+  
+  @IBAction func didTapTransactionsButton(_ sender: Any) {
+    showTransactions()
   }
 }
 
@@ -44,7 +46,6 @@ private extension WalletController {
     setupHandlers()
   }
   
-
   func setupTableView() {
     tableDataSource.wallets = viewModel.wallets
 
@@ -83,7 +84,6 @@ private extension WalletController {
   }
 }
 
-
 // MARK: - Helpers
 
 private extension WalletController {
@@ -111,6 +111,13 @@ private extension WalletController {
   func showConvert(for index: Int) {
     let controller = R.storyboard.wallet.convertController()!
     controller.viewModel = viewModel.createConvertVM(for: index)
+
+    show(controller, sender: self)
+  }
+  
+  func showTransactions() {
+    let controller = R.storyboard.transactions.transactionsController()!
+    controller.viewModel = viewModel.transactionsVM
 
     show(controller, sender: self)
   }

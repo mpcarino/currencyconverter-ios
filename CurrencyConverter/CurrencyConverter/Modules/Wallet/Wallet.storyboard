@@ -219,10 +219,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SNF-EY-OrU" userLabel="Info Container View">
-                                                        <rect key="frame" x="0.0" y="330.33333333333331" width="358" height="16.333333333333314"/>
+                                                        <rect key="frame" x="0.0" y="330.33333333333331" width="358" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-Mf-4P9">
-                                                                <rect key="frame" x="32" y="0.0" width="294" height="16.333333333333332"/>
+                                                                <rect key="frame" x="32" y="0.0" width="294" height="50"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -237,7 +237,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vtf-DT-Vmh" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="346.66666666666674" width="358" height="302.33333333333326"/>
+                                                        <rect key="frame" x="0.0" y="380.33333333333326" width="358" height="268.66666666666674"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RlE-KP-88X">
@@ -317,9 +317,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jBk-Zz-2Fs">
                                 <rect key="frame" x="0.0" y="143" width="390" height="667"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNk-th-ClM">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNk-th-ClM" userLabel="Spacer">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="0.0"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="0iK-EY-Z55"/>
                                         </constraints>
@@ -328,9 +328,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="667"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36b-Om-xaO">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36b-Om-xaO" userLabel="Spacer">
                                         <rect key="frame" x="0.0" y="667" width="390" height="0.0"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="NVh-fL-k3O"/>
                                         </constraints>
@@ -347,7 +347,13 @@
                             <constraint firstItem="jBk-Zz-2Fs" firstAttribute="top" secondItem="5RC-tt-6h9" secondAttribute="top" id="wMG-Fo-y4t"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Wallet" largeTitleDisplayMode="always" id="4rJ-34-pCo"/>
+                    <navigationItem key="navigationItem" title="Wallet" largeTitleDisplayMode="always" id="4rJ-34-pCo">
+                        <barButtonItem key="rightBarButtonItem" title="Transactions" id="vhD-Aw-oJC">
+                            <connections>
+                                <action selector="didTapTransactionsButton:" destination="kcM-Qf-d5Q" id="nK0-I7-scz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ehy-jB-HQm" id="hIZ-VL-0Ng"/>
                     </connections>

@@ -1,19 +1,19 @@
 //
-//  WalletTableCell.swift
+//  TransactionTableCell.swift
 //  CurrencyConverter
 //
-//  Created by Marwin Carino on 10/7/22.
+//  Created by Marwin Carino on 10/12/22.
 //
 
 import Foundation
 import UIKit
 
-class WalletTableCell: UITableViewCell {
+class TransactionTableCell: UITableViewCell {
   // MARK: - Properties
-  
-  static var preferredHeight: CGFloat { 74.0 }
 
-  var viewModel: WalletTableCellViewModelProtocol! {
+  static var preferredHeight: CGFloat { 74.0 }
+  
+  var viewModel: TransactionTableCellViewModelProtocol! {
     didSet {
       refresh()
     }
@@ -22,8 +22,8 @@ class WalletTableCell: UITableViewCell {
   // MARK: - IBOutlets
 
   @IBOutlet private var containerView: UIView!
-  @IBOutlet private var balanceLabel: UILabel!
-  @IBOutlet private var currencyLabel: UILabel!
+  @IBOutlet private var debitLabel: UILabel!
+  @IBOutlet private var creditLabel: UILabel!
 
   // MARK: - Life Cycle
 
@@ -37,20 +37,20 @@ class WalletTableCell: UITableViewCell {
 
 // MARK: - Methods
 
-private extension WalletTableCell {
+private extension TransactionTableCell {
   func configureUI() {
     containerView.layer.cornerRadius = 10.0
   }
 
   func setup() {
-    balanceLabel.text = nil
-    currencyLabel.text = nil
+    debitLabel.text = nil
+    creditLabel.text = nil
   }
   
   func refresh() {
     guard viewModel != nil else { return }
     
-    currencyLabel.text = viewModel.currencyText
-    balanceLabel.text = viewModel.balanceText
+    debitLabel.text = viewModel.creditText
+    creditLabel.text = viewModel.debitText
   }
 }

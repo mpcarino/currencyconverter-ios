@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CurrencyExchangeResponse: Codable {
+struct CurrencyExchange: Codable {
   let amount: String
   let currency: String
 }

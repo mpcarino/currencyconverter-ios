@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TransactionTableCell" id="8JJ-D3-OX1" customClass="TransactionTableCell" customModule="CurrencyConverter" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8JJ-D3-OX1" id="wUd-82-Y3s">
+                <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ud9-Dc-uj7">
+                        <rect key="frame" x="16" y="4" width="358" height="52"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ffy-ko-wBs">
+                                <rect key="frame" x="16" y="0.0" width="326" height="52"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L2C-rb-mC2">
+                                        <rect key="frame" x="0.0" y="0.0" width="26.666666666666668" height="52"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oRe-5L-LXw">
+                                                <rect key="frame" x="0.0" y="3" width="13.333333333333334" height="46.333333333333336"/>
+                                                <color key="tintColor" systemColor="systemRedColor"/>
+                                                <imageReference key="image" image="arrow.down" catalog="system" symbolScale="small"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="taE-SJ-x6c">
+                                                <rect key="frame" x="13.333333333333336" y="3" width="13.333333333333336" height="46.333333333333336"/>
+                                                <color key="tintColor" systemColor="systemGreenColor"/>
+                                                <imageReference key="image" image="arrow.up" catalog="system" symbolScale="small"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pzY-mZ-7zI" userLabel="Spacer">
+                                        <rect key="frame" x="26.666666666666664" y="0.0" width="16" height="52"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="16" id="lXd-g2-Y8C"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="D9c-eu-KUf">
+                                        <rect key="frame" x="42.666666666666671" y="0.0" width="37.333333333333329" height="52"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKN-Ze-ENp">
+                                                <rect key="frame" x="0.0" y="0.0" width="37.333333333333336" height="26"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                <color key="textColor" systemColor="systemGreenColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRg-uw-GAu">
+                                                <rect key="frame" x="0.0" y="26" width="37.333333333333336" height="26"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                <color key="textColor" systemColor="systemRedColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sA-3y-Ria">
+                                        <rect key="frame" x="80" y="0.0" width="246" height="52"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Ffy-ko-wBs" secondAttribute="bottom" id="1sn-rA-nEa"/>
+                            <constraint firstItem="Ffy-ko-wBs" firstAttribute="top" secondItem="Ud9-Dc-uj7" secondAttribute="top" id="WT0-yg-5WG"/>
+                            <constraint firstAttribute="trailing" secondItem="Ffy-ko-wBs" secondAttribute="trailing" constant="16" id="aUv-gO-jWu"/>
+                            <constraint firstItem="Ffy-ko-wBs" firstAttribute="leading" secondItem="Ud9-Dc-uj7" secondAttribute="leading" constant="16" id="ebs-SC-qQb"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="Ud9-Dc-uj7" firstAttribute="top" secondItem="wUd-82-Y3s" secondAttribute="top" constant="4" id="50e-Pv-fQk"/>
+                    <constraint firstAttribute="bottom" secondItem="Ud9-Dc-uj7" secondAttribute="bottom" constant="4" id="M7n-FH-0Mi"/>
+                    <constraint firstAttribute="trailing" secondItem="Ud9-Dc-uj7" secondAttribute="trailing" constant="16" id="aff-sE-bm9"/>
+                    <constraint firstItem="Ud9-Dc-uj7" firstAttribute="leading" secondItem="wUd-82-Y3s" secondAttribute="leading" constant="16" id="fqc-dw-N3m"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="containerView" destination="Ud9-Dc-uj7" id="exh-QZ-LLM"/>
+                <outlet property="creditLabel" destination="wRg-uw-GAu" id="t0e-79-MGx"/>
+                <outlet property="debitLabel" destination="qKN-Ze-ENp" id="h9c-Sj-5rs"/>
+            </connections>
+            <point key="canvasLocation" x="48" y="3"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="arrow.down" catalog="system" width="118" height="128"/>
+        <image name="arrow.up" catalog="system" width="118" height="128"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

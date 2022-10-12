@@ -85,6 +85,15 @@ extension ConvertViewModel {
       self.user.updateWallet(self.destinationWallet)
       
       self.onConvert(self.sourceWallet, self.destinationWallet)
+      
+      let transaction = Transaction(
+        debitAmount: totalSourceDeductible,
+        debitCurrency: self.sourceWallet.currency,
+        creditAmount: self.destinationAmount.value,
+        creditCurrency: self.destinationWallet.currency
+      )
+      
+      self.user.addTransaction(transaction)
     }
   }
   

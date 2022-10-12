@@ -89,12 +89,14 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 3 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 4 storyboards.
   struct storyboard {
     /// Storyboard `Landing`.
     static let landing = _R.storyboard.landing()
     /// Storyboard `Launch`.
     static let launch = _R.storyboard.launch()
+    /// Storyboard `Transactions`.
+    static let transactions = _R.storyboard.transactions()
     /// Storyboard `Wallet`.
     static let wallet = _R.storyboard.wallet()
 
@@ -109,6 +111,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "Launch", bundle: ...)`
     static func launch(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.launch)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Transactions", bundle: ...)`
+    static func transactions(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.transactions)
     }
     #endif
 
@@ -189,10 +198,20 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 1 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 2 nibs.
   struct nib {
+    /// Nib `TransactionTableCell`.
+    static let transactionTableCell = _R.nib._TransactionTableCell()
     /// Nib `WalletTableCell`.
     static let walletTableCell = _R.nib._WalletTableCell()
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "TransactionTableCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.transactionTableCell) instead")
+    static func transactionTableCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.transactionTableCell)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UINib(name: "WalletTableCell", in: bundle)`
@@ -202,6 +221,10 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    static func transactionTableCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> TransactionTableCell? {
+      return R.nib.transactionTableCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? TransactionTableCell
+    }
+
     static func walletTableCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> WalletTableCell? {
       return R.nib.walletTableCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? WalletTableCell
     }
@@ -209,8 +232,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 1 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 2 reuse identifiers.
   struct reuseIdentifier {
+    /// Reuse identifier `TransactionTableCell`.
+    static let transactionTableCell: Rswift.ReuseIdentifier<TransactionTableCell> = Rswift.ReuseIdentifier(identifier: "TransactionTableCell")
     /// Reuse identifier `WalletTableCell`.
     static let walletTableCell: Rswift.ReuseIdentifier<WalletTableCell> = Rswift.ReuseIdentifier(identifier: "WalletTableCell")
 
@@ -490,12 +515,40 @@ struct R: Rswift.Validatable {
 struct _R: Rswift.Validatable {
   static func validate() throws {
     #if os(iOS) || os(tvOS)
+    try nib.validate()
+    #endif
+    #if os(iOS) || os(tvOS)
     try storyboard.validate()
     #endif
   }
 
   #if os(iOS) || os(tvOS)
-  struct nib {
+  struct nib: Rswift.Validatable {
+    static func validate() throws {
+      try _TransactionTableCell.validate()
+    }
+
+    struct _TransactionTableCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType, Rswift.Validatable {
+      typealias ReusableType = TransactionTableCell
+
+      let bundle = R.hostingBundle
+      let identifier = "TransactionTableCell"
+      let name = "TransactionTableCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> TransactionTableCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? TransactionTableCell
+      }
+
+      static func validate() throws {
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "arrow.down") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'arrow.down' is used in nib 'TransactionTableCell', but couldn't be loaded.") } }
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "arrow.up") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'arrow.up' is used in nib 'TransactionTableCell', but couldn't be loaded.") } }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+      }
+
+      fileprivate init() {}
+    }
+
     struct _WalletTableCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
       typealias ReusableType = WalletTableCell
 
@@ -522,6 +575,9 @@ struct _R: Rswift.Validatable {
       #endif
       #if os(iOS) || os(tvOS)
       try launch.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try transactions.validate()
       #endif
       #if os(iOS) || os(tvOS)
       try wallet.validate()
@@ -562,6 +618,28 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct transactions: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = UIKit.UINavigationController
+
+      let bundle = R.hostingBundle
+      let name = "Transactions"
+      let transactionsController = StoryboardViewControllerResource<TransactionsController>(identifier: "TransactionsController")
+
+      func transactionsController(_: Void = ()) -> TransactionsController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: transactionsController)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.transactions().transactionsController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'transactionsController' could not be loaded from storyboard 'Transactions' as 'TransactionsController'.") }
       }
 
       fileprivate init() {}

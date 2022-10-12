@@ -12,7 +12,7 @@ protocol CurrencyExchangeServiceProtocol {
     amount: String,
     sourceCode: String,
     destinationCode: String
-  ) async throws -> CurrencyExchangeResponse?
+  ) async throws -> CurrencyExchange?
 }
 
 class CurrencyExchangeService: CurrencyExchangeServiceProtocol {
@@ -22,7 +22,7 @@ class CurrencyExchangeService: CurrencyExchangeServiceProtocol {
     amount: String,
     sourceCode: String,
     destinationCode: String
-  ) async throws -> CurrencyExchangeResponse? {
+  ) async throws -> CurrencyExchange? {
     let endpoint = S.endpointCurrencyExchange(
       amount,
       sourceCode.uppercased(),
@@ -31,7 +31,7 @@ class CurrencyExchangeService: CurrencyExchangeServiceProtocol {
 
     if let url = URL(string: endpoint) {
       let (data, _) = try await session.data(from: url)
-      let decodedData = try JSONDecoder().decode(CurrencyExchangeResponse.self, from: data)
+      let decodedData = try JSONDecoder().decode(CurrencyExchange.self, from: data)
 
       return decodedData
     } else {

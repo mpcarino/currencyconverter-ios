@@ -26,7 +26,11 @@ final class App {
   // MARK: - Init
 
   init() {
-    user = User(wallets: [])
+    user = User(
+      wallets: [],
+      transactions: []
+    )
+    
     supportedCurrencies = []
   }
 }
@@ -78,11 +82,16 @@ class User {
   // MARK: - Properties
   
   private(set) var wallets: [Wallet]
+  private(set) var transactions: [Transaction]
   
   // MARK: - Init
   
-  init(wallets: [Wallet]) {
+  init(
+    wallets: [Wallet],
+    transactions: [Transaction]
+  ) {
     self.wallets = wallets
+    self.transactions = transactions
   }
   
   // MARK: - Methods
@@ -106,6 +115,10 @@ class User {
     wallets[index] = wallet
     
     NotificationCenter.default.post(name: Notification.didUpdateWallets, object: nil)
+  }
+  
+  func addTransaction(_ transaction: Transaction) {
+    transactions.append(transaction)
   }
 }
 

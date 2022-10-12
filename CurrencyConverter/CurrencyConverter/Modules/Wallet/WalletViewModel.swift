@@ -10,6 +10,7 @@ import Foundation
 protocol WalletViewModelProtocol {
   var defaultWallet: Wallet { get }
   var wallets: [Wallet] { get }
+  var transactionsVM: TransactionsViewModelProtocol { get }
   
   func getWallet(at index: Int) -> Wallet
   func createConvertVM(for index: Int) -> ConvertViewModelProtocol
@@ -56,8 +57,7 @@ private extension WalletViewModel {
     return { [weak self] (_, _) in
       guard let self = self else { return }
       
-//      self.user.updateWallets(with: sourceWallet)
-//      self.user.updateWallets(with: destinationWallet)
+      
     }
   }
 }
@@ -103,5 +103,9 @@ extension WalletViewModel {
   
   var wallets: [Wallet] {
     user.wallets
+  }
+  
+  var transactionsVM: TransactionsViewModelProtocol {
+    TransactionsViewModel()
   }
 }

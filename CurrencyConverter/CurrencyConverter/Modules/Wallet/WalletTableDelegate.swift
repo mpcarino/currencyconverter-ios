@@ -19,4 +19,3 @@ class WalletTableDelegate: NSObject, UITableViewDelegate {
         onSelect(indexPath)
     }
 }
-

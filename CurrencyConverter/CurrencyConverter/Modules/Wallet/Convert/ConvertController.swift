@@ -53,6 +53,8 @@ class ConvertController: UIViewController {
     setup()
     bind()
   }
+  
+  // MARK: - IBActions
 
   @IBAction func didTapConvertButton(_ sender: Any) {
     viewModel.convert()
