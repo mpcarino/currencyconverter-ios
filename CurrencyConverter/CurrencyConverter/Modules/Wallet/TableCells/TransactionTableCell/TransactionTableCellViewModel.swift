@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import CoreData
 
 protocol TransactionTableCellViewModelProtocol {
   var debitText: String { get }
   var creditText: String { get }
+  var dateText: String { get }
 }
 
 struct TransactionTableCellViewModel: TransactionTableCellViewModelProtocol {
@@ -23,5 +25,13 @@ extension TransactionTableCellViewModel {
   
   var creditText: String {
     transaction.creditCurrency.currencyFormatter.string(amount: transaction.creditAmount as NSNumber)
+  }
+  
+  var dateText: String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .long
+    formatter.dateFormat = "MMM d, h:mm a"
+    
+    return formatter.string(from: transaction.date)
   }
 }

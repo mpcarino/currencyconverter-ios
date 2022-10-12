@@ -10,8 +10,6 @@ import RxSwift
 import RxRelay
 
 protocol ConvertViewModelProtocol {
-  var onConvert: CurrencyConversionClosure { get }
-  
   var contentState: PublishSubject<ContentState> { get }
   var isValidSourceAmount: BehaviorRelay<Bool> { get }
   var sourceAmount: BehaviorRelay<Decimal> { get }
@@ -25,13 +23,13 @@ protocol ConvertViewModelProtocol {
   
   func convert()
   
+  func changeDestinationWallet(to index: Int)
+  
   func exchangeSourceToDestination(for amount: Decimal)
   
   func exchangeDestinationToSource(for amount: Decimal)
   
   func getCommissionFee() -> Decimal
-  
-  func changeDestinationWallet(to index: Int)
   
   func getSupportedCurrencyText(at index: Int) -> String
 }

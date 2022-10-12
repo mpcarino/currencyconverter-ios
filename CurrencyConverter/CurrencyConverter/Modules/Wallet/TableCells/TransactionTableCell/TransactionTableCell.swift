@@ -22,9 +22,10 @@ class TransactionTableCell: UITableViewCell {
   // MARK: - IBOutlets
 
   @IBOutlet private var containerView: UIView!
-  @IBOutlet private var debitLabel: UILabel!
   @IBOutlet private var creditLabel: UILabel!
-
+  @IBOutlet private var debitLabel: UILabel!
+  @IBOutlet private var dateLabel: UILabel!
+  
   // MARK: - Life Cycle
 
   override func awakeFromNib() {
@@ -45,12 +46,14 @@ private extension TransactionTableCell {
   func setup() {
     debitLabel.text = nil
     creditLabel.text = nil
+    dateLabel.text = nil
   }
   
   func refresh() {
     guard viewModel != nil else { return }
     
-    debitLabel.text = viewModel.creditText
-    creditLabel.text = viewModel.debitText
+    creditLabel.text = viewModel.creditText
+    debitLabel.text = viewModel.debitText
+    dateLabel.text = viewModel.dateText
   }
 }

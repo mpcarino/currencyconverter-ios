@@ -15,7 +15,10 @@ class WalletTableDelegate: NSObject, UITableViewDelegate {
     
     // MARK: - Methods
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(
+      _ tableView: UITableView,
+      didSelectRowAt indexPath: IndexPath
+    ) {
         onSelect(indexPath)
     }
 }

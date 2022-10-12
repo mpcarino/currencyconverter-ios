@@ -8,6 +8,13 @@
 import Foundation
 import UIKit
 
+import NSObject_Rx
+import RxCocoa
+import RxRelay
+import RxSwift
+
+import SVProgressHUD
+
 class TransactionsController: UIViewController {
   // MARK: - Properties
   
@@ -23,6 +30,25 @@ class TransactionsController: UIViewController {
     super.viewDidLoad()
     
     setup()
+    
+    viewModel.load()
+    
+    viewModel.contentState
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { [unowned self] contentState in
+        switch contentState {
+        case .loading:
+          SVProgressHUD.show()
+        case .ready,
+            .success:
+          SVProgressHUD.dismiss()
+          
+          self.tableView.reloadData()
+        case let .error(error):
+          SVProgressHUD.showError(withStatus: error.localizedDescription)
+        }
+      })
+      .disposed(by: rx.disposeBag)
   }
 }
 
@@ -65,6 +91,8 @@ extension TransactionsController: UITableViewDataSource {
       withIdentifier: TransactionTableCell.reuseIdentifier,
       for: indexPath
     ) as! TransactionTableCell
+    
+    cell.viewModel = viewModel.getTransactionTableCellVM(at: indexPath)
 
     return cell
   }

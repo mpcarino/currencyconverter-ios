@@ -1,3 +1,4 @@
+
 //
 //  App.swift
 //  CurrencyConverter
@@ -7,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 import IQKeyboardManagerSwift
 
@@ -15,22 +17,30 @@ final class App {
 
   // MARK: - Properties
 
-  private(set) var config: AppConfigProtocol!
-  private(set) var user: User
   private(set) var supportedCurrencies: [Currency]
+  
+  private(set) var config: AppConfigProtocol!
+  private(set) var session: Session!
 
+  private(set) var supportedCurrencyService: JSONDataService<[Currency]>!
+  private(set) var walletService: JSONDataService<[Wallet]>!
+  
   private(set) var currencyExchangeService: CurrencyExchangeServiceProtocol!
-  private(set) var supportedCurrencyDataService: JSONDataService<[Currency]>!
-  private(set) var walletDataService: JSONDataService<[Wallet]>!
-
+  private(set) var transactionService: TransactionService!
+  
+  private lazy var persistentContainer: NSPersistentContainer = {
+    let container = NSPersistentContainer(name: "CurrencyConverter")
+    container.loadPersistentStores(completionHandler: { _, error in
+      if let error = error as NSError? {
+        fatalError("Unresolved error \(error), \(error.userInfo)")
+      }
+    })
+    return container
+  }()
+  
   // MARK: - Init
 
   init() {
-    user = User(
-      wallets: [],
-      transactions: []
-    )
-    
     supportedCurrencies = []
   }
 }
@@ -43,16 +53,16 @@ extension App {
     launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) {
     config = AppConfig()
-
+    
+    supportedCurrencyService = JSONDataService<[Currency]>(decoder: config.jsonDecoder)
+    walletService = JSONDataService<[Wallet]>(decoder: config.jsonDecoder)
+    
     currencyExchangeService = CurrencyExchangeService()
-    supportedCurrencyDataService = JSONDataService<[Currency]>(decoder: config.jsonDecoder)
-    walletDataService = JSONDataService<[Wallet]>(decoder: config.jsonDecoder)
-
+    transactionService = TransactionService(persistentContainer: persistentContainer)
+    
+    session = Session(user: User(wallets: [], transactions: []))
+    
     loadSupportedCurrencies()
-
-    if !UserDefaults.hasUsedInitialWallets {
-      loadInitialUserWallet()
-    }
   }
 }
 
@@ -60,70 +70,10 @@ extension App {
 
 private extension App {
   func loadSupportedCurrencies() {
-    guard let supportedCurrencies = supportedCurrencyDataService.load(fileName: config.supportedCurrenciesFileName) else {
+    guard let supportedCurrencies = supportedCurrencyService.load(fileName: config.supportedCurrenciesFileName) else {
       return
     }
 
     self.supportedCurrencies = supportedCurrencies
   }
-
-  func loadInitialUserWallet() {
-    guard let wallets = walletDataService.load(fileName: config.initialUserWalletsFileName) else {
-      return
-    }
-    
-    wallets.forEach({ user.addWallet($0) })
-  }
-}
-
-class User {
-  struct Notification { }
-  
-  // MARK: - Properties
-  
-  private(set) var wallets: [Wallet]
-  private(set) var transactions: [Transaction]
-  
-  // MARK: - Init
-  
-  init(
-    wallets: [Wallet],
-    transactions: [Transaction]
-  ) {
-    self.wallets = wallets
-    self.transactions = transactions
-  }
-  
-  // MARK: - Methods
-  func addWallet(_ wallet: Wallet) {
-    wallets.append(wallet)
-  }
-  
-  func removeWallet(_ wallet: Wallet) {
-    guard let index = wallets.firstIndex(where: {
-      $0.currency == wallet.currency
-    }) else { return }
-    
-    wallets.remove(at: index)
-  }
-  
-  func updateWallet(_ wallet: Wallet) {
-    guard let index = wallets.firstIndex(where: {
-      $0.currency == wallet.currency
-    }) else { return }
-    
-    wallets[index] = wallet
-    
-    NotificationCenter.default.post(name: Notification.didUpdateWallets, object: nil)
-  }
-  
-  func addTransaction(_ transaction: Transaction) {
-    transactions.append(transaction)
-  }
-}
-
-// MARK: - Notifications
-
-extension User.Notification {
-  static let didUpdateWallets = Notification.Name(rawValue: "notification.name.user.didUpdateWallets")
 }

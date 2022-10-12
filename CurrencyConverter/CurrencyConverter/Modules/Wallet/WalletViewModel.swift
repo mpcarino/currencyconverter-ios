@@ -6,27 +6,41 @@
 //
 
 import Foundation
-
-protocol WalletViewModelProtocol {
-  var defaultWallet: Wallet { get }
-  var wallets: [Wallet] { get }
-  var transactionsVM: TransactionsViewModelProtocol { get }
-  
-  func getWallet(at index: Int) -> Wallet
-  func createConvertVM(for index: Int) -> ConvertViewModelProtocol
-}
+import RxSwift
+import RxRelay
 
 class WalletViewModel: WalletViewModelProtocol {
-  private let user: User
+  // MARK: - Properties
   
-  init(user: User = App.shared.user) {
-    self.user = user
+  let contentState = PublishSubject<ContentState>()
+  
+  private let session: Session
+  private let walletService: JSONDataService<[Wallet]>
+  
+  // MARK: - Init
+  
+  init(
+    session: Session = App.shared.session,
+    walletService: JSONDataService<[Wallet]> = App.shared.walletService
+  ) {
+    self.session = session
+    self.walletService = walletService
   }
 }
 
 // MARK: - Methods
 
 extension WalletViewModel {
+  func loadWallets() {
+    contentState.onNext(.loading)
+    
+    if let initialWallets = walletService.load(fileName: App.shared.config.initialUserWalletsFileName) {
+      session.user.setWallets(initialWallets)
+    }
+    
+    contentState.onNext(.ready)
+  }
+  
   func getWallet(at index: Int) -> Wallet {
     guard index < wallets.count else {
       preconditionFailure("Index must be less than the size of wallets")
@@ -35,30 +49,16 @@ extension WalletViewModel {
     return wallets[index]
   }
   
-  func createConvertVM(for index: Int) -> ConvertViewModelProtocol {
+  func getConvertVM(for index: Int) -> ConvertViewModelProtocol {
     let sourceWallet = getWallet(at: index)
     let destinationWallet = getPreferredDestinationWallet(for: sourceWallet)
     
     let convertVM = ConvertViewModel(
-      user: user,
       sourceWallet: sourceWallet,
-      destinationWallet: destinationWallet,
-      onConvert: handleConvert()
+      destinationWallet: destinationWallet
     )
     
     return convertVM
-  }
-}
-
-// MARK: - Handlers
-
-private extension WalletViewModel {
-  func handleConvert() -> CurrencyConversionClosure {
-    return { [weak self] (_, _) in
-      guard let self = self else { return }
-      
-      
-    }
   }
 }
 
@@ -69,15 +69,15 @@ private extension WalletViewModel {
     let preferredCurency = Currency.default
     
     if wallet.currency != preferredCurency {
-      return createDestinationWallet(for: preferredCurency)
+      return getDestinationWallet(for: preferredCurency)
     } else {
-      return createDestinationWallet(
+      return getDestinationWallet(
         for: getPreferredCurrency(excluding: [preferredCurency]) ?? preferredCurency
       )
     }
   }
   
-  func createDestinationWallet(for currency: Currency) -> Wallet {
+  func getDestinationWallet(for currency: Currency) -> Wallet {
     if let preferredWallet = wallets.first(where: { $0.currency == currency }) {
       return preferredWallet
     } else {
@@ -101,11 +101,11 @@ extension WalletViewModel {
     App.shared.config.defaultWallet
   }
   
-  var wallets: [Wallet] {
-    user.wallets
-  }
-  
   var transactionsVM: TransactionsViewModelProtocol {
     TransactionsViewModel()
+  }
+  
+  var wallets: [Wallet] {
+    session.user.wallets
   }
 }

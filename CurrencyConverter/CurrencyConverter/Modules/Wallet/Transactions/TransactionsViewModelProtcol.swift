@@ -6,9 +6,15 @@
 //
 
 import Foundation
+import RxSwift
+import RxRelay
 
 protocol TransactionsViewModelProtocol {
+  var contentState: PublishSubject<ContentState> { get }
+  
   var transactions: [Transaction] { get }
+  
+  func load()
   
   func getTransactionTableCellVM(at indexPath: IndexPath) -> TransactionTableCellViewModelProtocol
 }

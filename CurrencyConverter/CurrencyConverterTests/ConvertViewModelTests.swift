@@ -20,7 +20,6 @@ final class ConvertViewModelTests: XCTestCase {
   private let mockCommissionRate = 0.7
   
   private var mockWallets: [Wallet] = []
-  private var mockUser: User = User(wallets: [])
   private var mockWalletVM: WalletViewModelProtocol = WalletViewModel()
   
   // MARK: - Setup
@@ -34,19 +33,16 @@ final class ConvertViewModelTests: XCTestCase {
       mockWalletE
     ]
     
-    mockUser = User(wallets: mockWallets)
-    mockWalletVM = WalletViewModel(user: mockUser)
+    mockWalletVM = WalletViewModel()
   }
 
   // MARK: - Methods
   
   func test_commissionRate() {
     let sut: ConvertViewModelProtocol = ConvertViewModel(
-      user: mockUser,
       sourceWallet: mockWalletWithBalance,
       destinationWallet: mockWalletWithoutBalance,
-      commissionRate: mockCommissionRate,
-      onConvert: { (_, _) in }
+      commissionRate: mockCommissionRate
     )
     
     XCTAssertEqual(mockCommissionRate, sut.commissionRate)
@@ -54,11 +50,9 @@ final class ConvertViewModelTests: XCTestCase {
   
   func test_getCommissionFee() {
     let sut: ConvertViewModelProtocol = ConvertViewModel(
-      user: mockUser,
       sourceWallet: mockWalletWithBalance,
       destinationWallet: mockWalletWithoutBalance,
-      commissionRate: mockCommissionRate,
-      onConvert: { (_, _) in }
+      commissionRate: mockCommissionRate
     )
     
     sut.sourceAmount.accept(100)
@@ -70,11 +64,9 @@ final class ConvertViewModelTests: XCTestCase {
   
   func test_convert_zero_sourceAmount() {
     let sut: ConvertViewModelProtocol = ConvertViewModel(
-      user: mockUser,
       sourceWallet: mockWalletWithBalance,
       destinationWallet: mockWalletWithoutBalance,
-      commissionRate: mockCommissionRate,
-      onConvert: { (_, _) in }
+      commissionRate: mockCommissionRate
     )
     
     sut.sourceAmount.accept(0)
@@ -87,11 +79,9 @@ final class ConvertViewModelTests: XCTestCase {
   
   func test_convert_negative_sourceAmount() {
     let sut: ConvertViewModelProtocol = ConvertViewModel(
-      user: mockUser,
       sourceWallet: mockWalletWithBalance,
       destinationWallet: mockWalletWithoutBalance,
-      commissionRate: mockCommissionRate,
-      onConvert: { (_, _) in }
+      commissionRate: mockCommissionRate
     )
     
     sut.sourceAmount.accept(-100)
@@ -104,11 +94,9 @@ final class ConvertViewModelTests: XCTestCase {
   
   func test_convert_sourceAmount_equalBalance() {
     let sut: ConvertViewModelProtocol = ConvertViewModel(
-      user: mockUser,
       sourceWallet: mockWalletWithBalance,
       destinationWallet: mockWalletWithoutBalance,
-      commissionRate: mockCommissionRate,
-      onConvert: { (_, _) in }
+      commissionRate: mockCommissionRate
     )
     
     sut.sourceAmount.accept(1_000)
@@ -121,11 +109,9 @@ final class ConvertViewModelTests: XCTestCase {
   
   func test_convert_sourceAmount_greaterThanBalance() {
     let sut: ConvertViewModelProtocol = ConvertViewModel(
-      user: mockUser,
       sourceWallet: mockWalletWithBalance,
       destinationWallet: mockWalletWithoutBalance,
-      commissionRate: mockCommissionRate,
-      onConvert: { (_, _) in }
+      commissionRate: mockCommissionRate
     )
     
     sut.sourceAmount.accept(1_001)

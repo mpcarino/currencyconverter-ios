@@ -39,9 +39,9 @@ class ConvertController: UIViewController {
   @IBOutlet private(set) var destinationAmountTextField: CurrencyTextField!
   @IBOutlet private(set) var destinationCurrencyTextField: UITextField!
   @IBOutlet private(set) var destinationCurrencyButton: UIButton!
-  
+
   @IBOutlet private(set) var infoLabel: UILabel!
-  
+
   @IBOutlet private var convertButton: UIButton!
 
   // MARK: - Life Cycle
@@ -53,7 +53,7 @@ class ConvertController: UIViewController {
     setup()
     bind()
   }
-  
+
   // MARK: - IBActions
 
   @IBAction func didTapConvertButton(_ sender: Any) {
@@ -94,7 +94,7 @@ private extension ConvertController {
     currencyPickerView.delegate = self
     currencyPickerView.dataSource = self
   }
-  
+
   func reset() {
     balanceLabel.text = nil
     sourceCodeLabel.text = nil
@@ -159,9 +159,9 @@ private extension ConvertController {
           SVProgressHUD.dismiss()
         case .success:
           SVProgressHUD.dismiss()
-          
+
           self.presentSuccessAlert()
-          
+
           self.balanceLabel.text = viewModel.sourceWallet.formattedBalance
           self.sourceAmountTextField.text = nil
           self.destinationAmountTextField.text = nil
@@ -171,7 +171,7 @@ private extension ConvertController {
         }
       })
       .disposed(by: rx.disposeBag)
-    
+
     viewModel.sourceAmount
       .startWith(.zero)
       .observe(on: MainScheduler.instance)
@@ -184,7 +184,7 @@ private extension ConvertController {
         }
       })
       .disposed(by: rx.disposeBag)
-    
+
     viewModel.destinationAmount
       .startWith(.zero)
       .observe(on: MainScheduler.instance)
@@ -205,14 +205,14 @@ private extension ConvertController {
         switch event {
         case let .next(isValid):
           self.convertButton.isEnabled = isValid
-        case let .error(_):
+        case .error:
           self.convertButton.isEnabled = false
         default:
           return
         }
       })
       .disposed(by: rx.disposeBag)
-    
+
     viewModel.conversionInfo
       .startWith(.empty)
       .observe(on: MainScheduler.instance)
@@ -260,10 +260,12 @@ private extension ConvertController {
       actions: [.ok]
     )
   }
-  
+
   func presentSuccessAlert() {
-    let recievedAmount = viewModel.destinationWallet.currency.currencyFormatter.string(amount: viewModel.destinationAmount.value as NSNumber)
-    
+    let recievedAmount = viewModel.destinationWallet.currency.currencyFormatter.string(
+      amount: viewModel.destinationAmount.value as NSNumber
+    )
+
     presentAlert(
       title: S.alertTitleSuccess(),
       message: S.alertConvertConversionSuccess(recievedAmount),

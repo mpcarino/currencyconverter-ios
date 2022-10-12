@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class WalletTableDataSource: NSObject, UITableViewDataSource {
+  // MARK: - Properties
+  
   var wallets: [Wallet] = [] {
     didSet {
       tableCellVMs = wallets.map({
@@ -18,6 +20,8 @@ class WalletTableDataSource: NSObject, UITableViewDataSource {
   }
   
   private var tableCellVMs: [WalletTableCellViewModelProtocol] = []
+  
+  // MARK: - Methods
   
   func tableView(
     _ tableView: UITableView,

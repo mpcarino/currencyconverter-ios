@@ -9,7 +9,7 @@ import Foundation
 
 protocol LocalDataServiceProtocol {
   associatedtype T
-  
+
   var fileExtension: String { get }
 
   func load(fileName: String) -> T?

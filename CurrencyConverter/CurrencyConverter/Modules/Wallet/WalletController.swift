@@ -8,7 +8,12 @@
 import Foundation
 import UIKit
 
+import NSObject_Rx
+import RxCocoa
+import RxRelay
 import RxSwift
+
+import SVProgressHUD
 
 class WalletController: UIViewController {
   // MARK: - Properties
@@ -29,6 +34,8 @@ class WalletController: UIViewController {
 
     setup()
     bind()
+    
+    viewModel.loadWallets()
   }
 
   // MARK: - IBActions
@@ -71,7 +78,27 @@ private extension WalletController {
 
 private extension WalletController {
   func bind() {
+    bindModel()
     bindNotifications()
+  }
+  
+  func bindModel() {
+    viewModel.contentState
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { [unowned self] contentState in
+        switch contentState {
+        case .loading:
+          SVProgressHUD.show()
+        case .ready,
+            .success:
+          self.reloadTable()
+          
+          SVProgressHUD.dismiss()
+        case let .error(error):
+          SVProgressHUD.showError(withStatus: error.localizedDescription)
+        }
+      })
+      .disposed(by: rx.disposeBag)
   }
   
   func bindNotifications() {
@@ -110,7 +137,7 @@ private extension WalletController {
 private extension WalletController {
   func showConvert(for index: Int) {
     let controller = R.storyboard.wallet.convertController()!
-    controller.viewModel = viewModel.createConvertVM(for: index)
+    controller.viewModel = viewModel.getConvertVM(for: index)
 
     show(controller, sender: self)
   }

@@ -51,6 +51,11 @@
 		DDBDB3E328F5ABE40023C321 /* NumberFormatterUSDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDB3E228F5ABE40023C321 /* NumberFormatterUSDTests.swift */; };
 		DDBDB3E528F5ABF90023C321 /* NumberFormatterEURTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDB3E428F5ABF90023C321 /* NumberFormatterEURTests.swift */; };
 		DDBDB3E728F5AC190023C321 /* NumberFormatterJPYTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDB3E628F5AC190023C321 /* NumberFormatterJPYTests.swift */; };
+		DDC5A07028F6F59F0087774D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC5A06F28F6F59F0087774D /* User.swift */; };
+		DDC5A07228F704CF0087774D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC5A07128F704CF0087774D /* Session.swift */; };
+		DDC5A07428F705DB0087774D /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC5A07328F705DB0087774D /* TransactionService.swift */; };
+		DDC5A07628F705FB0087774D /* LocalStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC5A07528F705FB0087774D /* LocalStorageService.swift */; };
+		DDC5A07928F70B700087774D /* WalletViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC5A07828F70B700087774D /* WalletViewModelProtocol.swift */; };
 		DDDC6CE728F40D85002D20A7 /* ConvertViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDC6CE628F40D85002D20A7 /* ConvertViewModelProtocol.swift */; };
 		DDF95C4528F04E9700FD619F /* NumberFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF95C4428F04E9700FD619F /* NumberFormatter+.swift */; };
 		DDF95C4728F055CC00FD619F /* SupportedCurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = DDF95C4628F055CC00FD619F /* SupportedCurrencies.json */; };
@@ -136,6 +141,11 @@
 		DDBDB3E228F5ABE40023C321 /* NumberFormatterUSDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterUSDTests.swift; sourceTree = "<group>"; };
 		DDBDB3E428F5ABF90023C321 /* NumberFormatterEURTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterEURTests.swift; sourceTree = "<group>"; };
 		DDBDB3E628F5AC190023C321 /* NumberFormatterJPYTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterJPYTests.swift; sourceTree = "<group>"; };
+		DDC5A06F28F6F59F0087774D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DDC5A07128F704CF0087774D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		DDC5A07328F705DB0087774D /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
+		DDC5A07528F705FB0087774D /* LocalStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageService.swift; sourceTree = "<group>"; };
+		DDC5A07828F70B700087774D /* WalletViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModelProtocol.swift; sourceTree = "<group>"; };
 		DDDC6CE628F40D85002D20A7 /* ConvertViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertViewModelProtocol.swift; sourceTree = "<group>"; };
 		DDF95C4428F04E9700FD619F /* NumberFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+.swift"; sourceTree = "<group>"; };
 		DDF95C4628F055CC00FD619F /* SupportedCurrencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SupportedCurrencies.json; sourceTree = "<group>"; };
@@ -183,14 +193,6 @@
 				1AC45307AC5F5EB8BA8B2FD2 /* Pods-CurrencyConverterTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		DD01AEFB28F1432900F922D5 /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				DD01AEFC28F1433200F922D5 /* AppConfig.swift */,
-			);
-			path = Config;
 			sourceTree = "<group>";
 		};
 		DD01AEFE28F1543200F922D5 /* API */ = {
@@ -259,7 +261,8 @@
 				DD7AD81328EFD55500F59DA2 /* AppDelegate.swift */,
 				DD7AD86028EFE4CE00F59DA2 /* AppDelegate+RootController.swift */,
 				DDF95C5228F072C700FD619F /* App.swift */,
-				DD01AEFB28F1432900F922D5 /* Config */,
+				DDC5A07128F704CF0087774D /* Session.swift */,
+				DD01AEFC28F1433200F922D5 /* AppConfig.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				DD7AD85A28EFE24400F59DA2 /* Wallet.storyboard */,
 				DD7AD86428EFF63300F59DA2 /* WalletController.swift */,
 				DDF95C5D28F0857D00FD619F /* WalletViewModel.swift */,
+				DDC5A07828F70B700087774D /* WalletViewModelProtocol.swift */,
 				DD7AD87128EFFC2A00F59DA2 /* WalletTableDataSource.swift */,
 				DD7AD87528F00A9A00F59DA2 /* WalletTableDelegate.swift */,
 				DD7AD87728F00B7200F59DA2 /* Convert */,
@@ -400,6 +404,15 @@
 			path = "UIKit+Custom";
 			sourceTree = "<group>";
 		};
+		DDC5A07728F706140087774D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DDBDB3DA28F598290023C321 /* LocalDataService.swift */,
+				DDC5A07528F705FB0087774D /* LocalStorageService.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		DDF95C4028F04AC900FD619F /* NumberFormatter */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				DD01AEFE28F1543200F922D5 /* API */,
+				DDC5A06F28F6F59F0087774D /* User.swift */,
 				DDF95C6128F08A1C00FD619F /* Wallet.swift */,
 				DDF95C4828F0568400FD619F /* Currency.swift */,
 				DD7B01CF28F6ADCB008D4B34 /* Transaction.swift */,
@@ -445,9 +459,10 @@
 		DDF95C4F28F065F100FD619F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				DDBDB3DA28F598290023C321 /* LocalDataService.swift */,
+				DDC5A07728F706140087774D /* Protocols */,
 				DDBDB3DC28F5988F0023C321 /* JSONDataService.swift */,
 				DD01AF0328F15CAD00F922D5 /* CurrencyExchangeService.swift */,
+				DDC5A07328F705DB0087774D /* TransactionService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -696,7 +711,9 @@
 				DDF95C4928F0568400FD619F /* Currency.swift in Sources */,
 				DD01AEF828F13D5B00F922D5 /* String+.swift in Sources */,
 				DDF95C6D28F095B000FD619F /* WalletTableCellViewModel.swift in Sources */,
+				DDC5A07028F6F59F0087774D /* User.swift in Sources */,
 				DDF95C5C28F0793F00FD619F /* UserDefaults+.swift in Sources */,
+				DDC5A07628F705FB0087774D /* LocalStorageService.swift in Sources */,
 				DD01AF0028F1545100F922D5 /* CurrencyExchange.swift in Sources */,
 				DDB131A428F183BF0038F883 /* Error+.swift in Sources */,
 				DD01AEF628F13C1100F922D5 /* ConvertViewModel.swift in Sources */,
@@ -706,14 +723,17 @@
 				DDF95C6228F08A1C00FD619F /* Wallet.swift in Sources */,
 				DD7AD87028EFFAFA00F59DA2 /* WalletTableCell.swift in Sources */,
 				DD01AF0228F1576700F922D5 /* Typealias.swift in Sources */,
+				DDC5A07228F704CF0087774D /* Session.swift in Sources */,
 				DD7AD85628EFE16F00F59DA2 /* R.generated.swift in Sources */,
 				DDDC6CE728F40D85002D20A7 /* ConvertViewModelProtocol.swift in Sources */,
 				DD7B01CD28F6ACA4008D4B34 /* TransactionsViewModel.swift in Sources */,
+				DDC5A07928F70B700087774D /* WalletViewModelProtocol.swift in Sources */,
 				DD7B01D028F6ADCB008D4B34 /* Transaction.swift in Sources */,
 				DDBDB3DB28F598290023C321 /* LocalDataService.swift in Sources */,
 				DD7AD87428F004CA00F59DA2 /* UIView+Nib.swift in Sources */,
 				DDF95C5E28F0857D00FD619F /* WalletViewModel.swift in Sources */,
 				DDF95C6B28F0909700FD619F /* LandingController.swift in Sources */,
+				DDC5A07428F705DB0087774D /* TransactionService.swift in Sources */,
 				DDB131A728F1A6900038F883 /* CurrencyTextField.swift in Sources */,
 				DD01AEFD28F1433300F922D5 /* AppConfig.swift in Sources */,
 				DD7AD85D28EFE3ED00F59DA2 /* ConvertController.swift in Sources */,

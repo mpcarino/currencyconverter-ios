@@ -6,18 +6,33 @@
 //
 
 import Foundation
+import RxRelay
+import RxSwift
 
 class TransactionsViewModel: TransactionsViewModelProtocol {
+  
   // MARK: - Properties
   
-  // MARK: - Init
+  let contentState = PublishSubject<ContentState>()
   
-  init() { }
+  private let transactionService: TransactionService
+  
+  private(set) var transactions: [Transaction] = []
+  
+  // MARK: - Init
+
+  init(transactionService: TransactionService = App.shared.transactionService) {
+    self.transactionService = transactionService
+  }
 }
 
 // MARK: - Methods
 
 extension TransactionsViewModel {
+  func load() {
+    transactions = transactionService.load() ?? []
+  }
+  
   func getTransactionTableCellVM(at indexPath: IndexPath) -> TransactionTableCellViewModelProtocol {
     return TransactionTableCellViewModel(transaction: getTransaction(at: indexPath.row))
   }
@@ -26,6 +41,8 @@ extension TransactionsViewModel {
 // MARK: - Helpers
 
 private extension TransactionsViewModel {
+
+  
   func getTransaction(at index: Int) -> Transaction {
     guard index < transactions.count else {
       preconditionFailure("Index must be less than the size of transactions")
@@ -38,7 +55,5 @@ private extension TransactionsViewModel {
 // MARK: - Getters
 
 extension TransactionsViewModel {
-  var transactions: [Transaction] {
-    App.shared.user.transactions
-  }
+  
 }

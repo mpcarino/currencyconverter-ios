@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class JSONDataService<T: Decodable>: LocalDataServiceProtocol {
+class JSONDataService<T: Decodable>: LocalDataServiceProtocol {
   // MARK: - Properties
   
   let decoder: JSONDecoder
