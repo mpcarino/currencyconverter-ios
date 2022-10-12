@@ -10,6 +10,7 @@ import Foundation
 protocol AppConfigProtocol {
   var defaultWallet: Wallet { get }
   var defaultDestinationWallet: Wallet { get }
+  var defaultDestinationCurrency: Currency { get }
   
   var minimumFractionDigits: Int { get }
   var maximumFractionDigits: Int { get }
@@ -25,6 +26,7 @@ protocol AppConfigProtocol {
 extension AppConfigProtocol {
   var defaultWallet: Wallet { .default }
   var defaultDestinationWallet: Wallet { .default }
+  var defaultDestinationCurrency: Currency { .default }
   
   var minimumFractionDigits: Int { 2 }
   var maximumFractionDigits: Int { 2 }

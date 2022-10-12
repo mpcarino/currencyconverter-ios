@@ -73,9 +73,9 @@ private extension ConvertController {
 
 private extension ConvertController {
   func setup() {
+    reset()
     setupLabels()
     setupTextFields()
-    setupHandlers()
   }
 
   func setupLabels() {
@@ -93,9 +93,13 @@ private extension ConvertController {
     currencyPickerView.dataSource = self
   }
   
-  func setupHandlers() {
-    viewModel.onUpdateSourceAmount = handleUpdateSourceAmount()
-    viewModel.onUpdateDestinationAmount = handleUpdateDestinationAmount()
+  func reset() {
+    balanceLabel.text = nil
+    sourceCodeLabel.text = nil
+    sourceAmountTextField.text = nil
+    destinationAmountTextField.text = nil
+    destinationCurrencyButton.setTitle(nil, for: .normal)
+    infoLabel.text = nil
   }
 }
 
@@ -154,11 +158,40 @@ private extension ConvertController {
         case .success:
           SVProgressHUD.dismiss()
           
-          balanceLabel.text = viewModel.sourceWallet.formattedBalance
-          sourceAmountTextField.text = nil
-          destinationAmountTextField.text = nil
-        case .error:
-          SVProgressHUD.showError(withStatus: "")
+          self.presentSuccessAlert()
+          
+          self.balanceLabel.text = viewModel.sourceWallet.formattedBalance
+          self.sourceAmountTextField.text = nil
+          self.destinationAmountTextField.text = nil
+          self.infoLabel.text = nil
+        case let .error(error):
+          SVProgressHUD.showError(withStatus: error.localizedDescription)
+        }
+      })
+      .disposed(by: rx.disposeBag)
+    
+    viewModel.sourceAmount
+      .startWith(.zero)
+      .observe(on: MainScheduler.instance)
+      .subscribe({ [unowned self] event in
+        if let amount = event.element {
+          self.updateCurrencyTextField(
+            self.sourceAmountTextField,
+            with: "\(amount)"
+          )
+        }
+      })
+      .disposed(by: rx.disposeBag)
+    
+    viewModel.destinationAmount
+      .startWith(.zero)
+      .observe(on: MainScheduler.instance)
+      .subscribe({ [unowned self] event in
+        if let amount = event.element {
+          self.updateCurrencyTextField(
+            self.destinationAmountTextField,
+            with: "\(amount)"
+          )
         }
       })
       .disposed(by: rx.disposeBag)
@@ -169,11 +202,9 @@ private extension ConvertController {
       .subscribe({ [unowned self] event in
         switch event {
         case let .next(isValid):
-          print(isValid)
           self.convertButton.isEnabled = isValid
-        case let .error(error):
+        case let .error(_):
           self.convertButton.isEnabled = false
-          print(error.localizedDescription)
         default:
           return
         }
@@ -184,7 +215,6 @@ private extension ConvertController {
       .startWith(.empty)
       .observe(on: MainScheduler.instance)
       .subscribe({ [unowned self] event in
-        
         switch event {
         case let .next(info):
           self.infoLabel.text = info
@@ -224,44 +254,21 @@ private extension ConvertController {
   }
 
   func presentErrorAlert(message: String) {
-    let alertController = UIAlertController(
-      title: "",
-      message: message, preferredStyle: .alert
+    presentAlert(
+      title: .empty,
+      message: message,
+      actions: [.ok]
     )
-
-    alertController.addAction(.init(title: S.alertButtonOk(), style: .default))
-    
-    present(alertController, animated: true)
-  }
-}
-
-// MARK: - Handlers
-
-private extension ConvertController {
-  func handleUpdateSourceAmount() -> ((Decimal) -> Void) {
-    return { [weak self] amount in
-      guard let self = self else { return }
-      
-      DispatchQueue.main.async {
-        self.updateCurrencyTextField(
-          self.sourceAmountTextField,
-          with: "\(amount)"
-        )
-      }
-    }
   }
   
-  func handleUpdateDestinationAmount() -> ((Decimal) -> Void) {
-    return { [weak self] amount in
-      guard let self = self else { return }
-      
-      DispatchQueue.main.async {
-        self.updateCurrencyTextField(
-          self.destinationAmountTextField,
-          with: "\(amount)"
-        )
-      }
-    }
+  func presentSuccessAlert() {
+    let recievedAmount = viewModel.destinationWallet.currency.currencyFormatter.string(amount: viewModel.destinationAmount.value as NSNumber)
+    
+    presentAlert(
+      title: S.alertTitleSuccess(),
+      message: S.alertConvertConversionSuccess(recievedAmount),
+      actions: [.ok]
+    )
   }
 }
 

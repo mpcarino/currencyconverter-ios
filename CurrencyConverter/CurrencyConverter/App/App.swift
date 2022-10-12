@@ -98,7 +98,7 @@ class User {
     wallets.remove(at: index)
   }
   
-  func updateWallets(with wallet: Wallet) {
+  func updateWallet(_ wallet: Wallet) {
     guard let index = wallets.firstIndex(where: {
       $0.currency == wallet.currency
     }) else { return }

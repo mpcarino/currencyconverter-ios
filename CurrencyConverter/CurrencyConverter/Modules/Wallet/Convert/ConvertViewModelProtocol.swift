@@ -10,13 +10,12 @@ import RxSwift
 import RxRelay
 
 protocol ConvertViewModelProtocol {
-  var onUpdateSourceAmount: ((Decimal) -> Void) { get set }
-  var onUpdateDestinationAmount: ((Decimal) -> Void) { get set }
-  
   var onConvert: CurrencyConversionClosure { get }
   
   var contentState: PublishSubject<ContentState> { get }
   var isValidSourceAmount: BehaviorRelay<Bool> { get }
+  var sourceAmount: BehaviorRelay<Decimal> { get }
+  var destinationAmount: BehaviorRelay<Decimal> { get }
   var conversionInfo: BehaviorRelay<String> { get }
   
   var sourceWallet: Wallet { get }

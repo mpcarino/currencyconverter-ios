@@ -81,7 +81,6 @@ private extension WalletController {
       })
       .disposed(by: rx.disposeBag)
   }
-
 }
 
 

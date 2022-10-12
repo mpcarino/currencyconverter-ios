@@ -36,9 +36,12 @@ extension WalletViewModel {
   
   func createConvertVM(for index: Int) -> ConvertViewModelProtocol {
     let sourceWallet = getWallet(at: index)
+    var destinationWallet = getPreferredDestinationWallet(for: sourceWallet)
     
     let convertVM = ConvertViewModel(
+      user: user,
       sourceWallet: sourceWallet,
+      destinationWallet: destinationWallet,
       onConvert: handleConvert()
     )
     
@@ -50,11 +53,11 @@ extension WalletViewModel {
 
 private extension WalletViewModel {
   func handleConvert() -> CurrencyConversionClosure {
-    return { [weak self] (sourceWallet, destinationWallet) in
+    return { [weak self] (_, _) in
       guard let self = self else { return }
       
-      self.user.updateWallets(with: sourceWallet)
-      self.user.updateWallets(with: destinationWallet)
+//      self.user.updateWallets(with: sourceWallet)
+//      self.user.updateWallets(with: destinationWallet)
     }
   }
 }
@@ -62,7 +65,33 @@ private extension WalletViewModel {
 // MARK: - Helpers
 
 private extension WalletViewModel {
+  func getPreferredDestinationWallet(for wallet: Wallet) -> Wallet {
+    let preferredCurency = Currency.default
+    
+    if wallet.currency != preferredCurency {
+      return createDestinationWallet(for: preferredCurency)
+    } else {
+      return createDestinationWallet(
+        for: getPreferredCurrency(excluding: [preferredCurency]) ?? preferredCurency
+      )
+    }
+  }
   
+  func createDestinationWallet(for currency: Currency) -> Wallet {
+    if let preferredWallet = wallets.first(where: { $0.currency == currency }) {
+      return preferredWallet
+    } else {
+      return Wallet.init(balance: .zero, currency: currency)
+    }
+  }
+  
+  func getPreferredCurrency(excluding currencies: [Currency]) -> Currency? {
+    let filteredCurrencies = App.shared.supportedCurrencies.filter({
+      !currencies.contains($0)
+    })
+    
+    return filteredCurrencies.first
+  }
 }
 
 // MARK: - Getters

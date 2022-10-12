@@ -219,22 +219,53 @@ struct R: Rswift.Validatable {
 
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 7 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 16 localization keys.
     struct localizable {
+      /// Value: An unknown error has occured
+      static let errorAppUnknown = Rswift.StringResource(key: "error.app.unknown", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Convert
       static let convertNavTitle = Rswift.StringResource(key: "convert.nav.title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Currency Converter
       static let appTitle = Rswift.StringResource(key: "app.title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Data not found
+      static let errorApiDataNotFound = Rswift.StringResource(key: "error.api.dataNotFound", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Invalid amount
+      static let errorCurrencyExchangeInvalidAmount = Rswift.StringResource(key: "error.currencyExchange.invalidAmount", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Invalid destination wallet. Please select a different one
+      static let errorCurrencyExchangeInvalidDestinationWallet = Rswift.StringResource(key: "error.currencyExchange.invalidDestinationWallet", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: No
       static let alertButtonNo = Rswift.StringResource(key: "alert.button.no", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: OK
       static let alertButtonOk = Rswift.StringResource(key: "alert.button.ok", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Sorry, we are having trouble processing your request right now. Please try again later
+      static let errorApiInvalidRequest = Rswift.StringResource(key: "error.api.invalidRequest", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Sorry, we are having trouble processing your request right now. Please try again later
+      static let errorApiInvalidURL = Rswift.StringResource(key: "error.api.invalidURL", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Success
+      static let alertTitleSuccess = Rswift.StringResource(key: "alert.title.success", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: This transaction has commission rate of %@ which amounts to %@. A total of %@ will be deducted from your balance and you will receive a total of %@.
       static let convertConversionInfo = Rswift.StringResource(key: "convert.conversion-info", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Yes
       static let alertButtonYes = Rswift.StringResource(key: "alert.button.yes", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: You have insufficient balance for this transaction
+      static let errorCurrencyExchangeInsufficientBalance = Rswift.StringResource(key: "error.currencyExchange.insufficientBalance", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: You have received %@
+      static let alertConvertConversionSuccess = Rswift.StringResource(key: "alert.convert.conversion-success", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: http://api.evp.lt/currency/commercial/exchange/%@-%@/%@/latest
       static let endpointCurrencyExchange = Rswift.StringResource(key: "endpoint.currency-exchange", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+
+      /// Value: An unknown error has occured
+      static func errorAppUnknown(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.app.unknown", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error.app.unknown"
+        }
+
+        return NSLocalizedString("error.app.unknown", bundle: bundle, comment: "")
+      }
 
       /// Value: Convert
       static func convertNavTitle(preferredLanguages: [String]? = nil) -> String {
@@ -260,6 +291,45 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("app.title", bundle: bundle, comment: "")
+      }
+
+      /// Value: Data not found
+      static func errorApiDataNotFound(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.api.dataNotFound", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error.api.dataNotFound"
+        }
+
+        return NSLocalizedString("error.api.dataNotFound", bundle: bundle, comment: "")
+      }
+
+      /// Value: Invalid amount
+      static func errorCurrencyExchangeInvalidAmount(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.currencyExchange.invalidAmount", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error.currencyExchange.invalidAmount"
+        }
+
+        return NSLocalizedString("error.currencyExchange.invalidAmount", bundle: bundle, comment: "")
+      }
+
+      /// Value: Invalid destination wallet. Please select a different one
+      static func errorCurrencyExchangeInvalidDestinationWallet(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.currencyExchange.invalidDestinationWallet", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error.currencyExchange.invalidDestinationWallet"
+        }
+
+        return NSLocalizedString("error.currencyExchange.invalidDestinationWallet", bundle: bundle, comment: "")
       }
 
       /// Value: No
@@ -288,6 +358,45 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("alert.button.ok", bundle: bundle, comment: "")
       }
 
+      /// Value: Sorry, we are having trouble processing your request right now. Please try again later
+      static func errorApiInvalidRequest(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.api.invalidRequest", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error.api.invalidRequest"
+        }
+
+        return NSLocalizedString("error.api.invalidRequest", bundle: bundle, comment: "")
+      }
+
+      /// Value: Sorry, we are having trouble processing your request right now. Please try again later
+      static func errorApiInvalidURL(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.api.invalidURL", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error.api.invalidURL"
+        }
+
+        return NSLocalizedString("error.api.invalidURL", bundle: bundle, comment: "")
+      }
+
+      /// Value: Success
+      static func alertTitleSuccess(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("alert.title.success", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "alert.title.success"
+        }
+
+        return NSLocalizedString("alert.title.success", bundle: bundle, comment: "")
+      }
+
       /// Value: This transaction has commission rate of %@ which amounts to %@. A total of %@ will be deducted from your balance and you will receive a total of %@.
       static func convertConversionInfo(_ value1: String, _ value2: String, _ value3: String, _ value4: String, preferredLanguages: [String]? = nil) -> String {
         guard let preferredLanguages = preferredLanguages else {
@@ -314,6 +423,34 @@ struct R: Rswift.Validatable {
         }
 
         return NSLocalizedString("alert.button.yes", bundle: bundle, comment: "")
+      }
+
+      /// Value: You have insufficient balance for this transaction
+      static func errorCurrencyExchangeInsufficientBalance(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error.currencyExchange.insufficientBalance", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error.currencyExchange.insufficientBalance"
+        }
+
+        return NSLocalizedString("error.currencyExchange.insufficientBalance", bundle: bundle, comment: "")
+      }
+
+      /// Value: You have received %@
+      static func alertConvertConversionSuccess(_ value1: String, preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          let format = NSLocalizedString("alert.convert.conversion-success", bundle: hostingBundle, comment: "")
+          return String(format: format, locale: applicationLocale, value1)
+        }
+
+        guard let (locale, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "alert.convert.conversion-success"
+        }
+
+        let format = NSLocalizedString("alert.convert.conversion-success", bundle: bundle, comment: "")
+        return String(format: format, locale: locale, value1)
       }
 
       /// Value: http://api.evp.lt/currency/commercial/exchange/%@-%@/%@/latest

@@ -12,6 +12,10 @@ app.title = "Currency Converter";
 
 /* Alert */
 
+alert.title.success = "Success";
+
+alert.convert.conversion-success = "You have received %@";
+
 alert.button.ok = "OK";
 alert.button.yes = "Yes";
 alert.button.no = "No";
@@ -24,3 +28,15 @@ convert.conversion-info = "This transaction has commission rate of %@ which amou
 /* Endpoint */
 
 endpoint.currency-exchange = "http://api.evp.lt/currency/commercial/exchange/%@-%@/%@/latest";
+
+/* Error */
+
+error.app.unknown = "An unknown error has occured";
+
+error.api.invalidURL = "Sorry, we are having trouble processing your request right now. Please try again later";
+error.api.invalidRequest = "Sorry, we are having trouble processing your request right now. Please try again later";
+error.api.dataNotFound = "Data not found";
+
+error.currencyExchange.invalidDestinationWallet = "Invalid destination wallet. Please select a different one";
+error.currencyExchange.invalidAmount = "Invalid amount";
+error.currencyExchange.insufficientBalance = "You have insufficient balance for this transaction";
