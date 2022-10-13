@@ -1,5 +1,5 @@
 //
-//  ManagedObjectTransformerProtocol.swift
+//  ManagedObjectMapProtocol.swift
 //  CurrencyConverter
 //
 //  Created by Marwin Carino on 10/13/22.

@@ -14,6 +14,7 @@
 		DD01AF0028F1545100F922D5 /* CurrencyExchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD01AEFF28F1545100F922D5 /* CurrencyExchange.swift */; };
 		DD01AF0228F1576700F922D5 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD01AF0128F1576700F922D5 /* Typealias.swift */; };
 		DD01AF0428F15CAE00F922D5 /* CurrencyExchangeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD01AF0328F15CAD00F922D5 /* CurrencyExchangeService.swift */; };
+		DD5A0D4D28F82EFB00594961 /* ManagedObjectMapProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5A0D4C28F82EFB00594961 /* ManagedObjectMapProtocol.swift */; };
 		DD7AD81428EFD55500F59DA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7AD81328EFD55500F59DA2 /* AppDelegate.swift */; };
 		DD7AD81E28EFD55500F59DA2 /* CurrencyConverter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD7AD81C28EFD55500F59DA2 /* CurrencyConverter.xcdatamodeld */; };
 		DD7AD82028EFD55600F59DA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD7AD81F28EFD55600F59DA2 /* Assets.xcassets */; };
@@ -44,7 +45,6 @@
 		DD7B01D528F6B43D008D4B34 /* TransactionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B01D428F6B43D008D4B34 /* TransactionTableCell.swift */; };
 		DD7B01D728F6B889008D4B34 /* TransactionTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B01D628F6B889008D4B34 /* TransactionTableCellViewModel.swift */; };
 		DD901AFE28F7B654001B39BE /* WalletService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD901AFD28F7B654001B39BE /* WalletService.swift */; };
-		DD901B0828F7FAC7001B39BE /* ManagedObjectTransformerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD901B0728F7FAC7001B39BE /* ManagedObjectTransformerProtocol.swift */; };
 		DD901B0A28F7FAD7001B39BE /* WalletMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD901B0928F7FAD7001B39BE /* WalletMapper.swift */; };
 		DD901B0C28F7FC4A001B39BE /* TransactionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD901B0B28F7FC4A001B39BE /* TransactionMapper.swift */; };
 		DDB131A428F183BF0038F883 /* Error+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB131A328F183BF0038F883 /* Error+.swift */; };
@@ -105,6 +105,7 @@
 		DD01AEFF28F1545100F922D5 /* CurrencyExchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchange.swift; sourceTree = "<group>"; };
 		DD01AF0128F1576700F922D5 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		DD01AF0328F15CAD00F922D5 /* CurrencyExchangeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeService.swift; sourceTree = "<group>"; };
+		DD5A0D4C28F82EFB00594961 /* ManagedObjectMapProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectMapProtocol.swift; sourceTree = "<group>"; };
 		DD7AD81028EFD55500F59DA2 /* CurrencyConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD7AD81328EFD55500F59DA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD7AD81D28EFD55500F59DA2 /* CurrencyConverter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CurrencyConverter.xcdatamodel; sourceTree = "<group>"; };
@@ -138,7 +139,6 @@
 		DD7B01D428F6B43D008D4B34 /* TransactionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableCell.swift; sourceTree = "<group>"; };
 		DD7B01D628F6B889008D4B34 /* TransactionTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableCellViewModel.swift; sourceTree = "<group>"; };
 		DD901AFD28F7B654001B39BE /* WalletService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletService.swift; sourceTree = "<group>"; };
-		DD901B0728F7FAC7001B39BE /* ManagedObjectTransformerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectTransformerProtocol.swift; sourceTree = "<group>"; };
 		DD901B0928F7FAD7001B39BE /* WalletMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMapper.swift; sourceTree = "<group>"; };
 		DD901B0B28F7FC4A001B39BE /* TransactionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionMapper.swift; sourceTree = "<group>"; };
 		DDB131A328F183BF0038F883 /* Error+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+.swift"; sourceTree = "<group>"; };
@@ -209,6 +209,16 @@
 				DD01AEFF28F1545100F922D5 /* CurrencyExchange.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		DD5A0D4B28F82EE700594961 /* ManagedObject */ = {
+			isa = PBXGroup;
+			children = (
+				DD5A0D4C28F82EFB00594961 /* ManagedObjectMapProtocol.swift */,
+				DD901B0928F7FAD7001B39BE /* WalletMapper.swift */,
+				DD901B0B28F7FC4A001B39BE /* TransactionMapper.swift */,
+			);
+			path = ManagedObject;
 			sourceTree = "<group>";
 		};
 		DD7AD80728EFD55500F59DA2 = {
@@ -424,19 +434,9 @@
 		DD901B0528F7FAA9001B39BE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				DD901B0628F7FAB2001B39BE /* ManagedObjectTransformer */,
+				DD5A0D4B28F82EE700594961 /* ManagedObject */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		DD901B0628F7FAB2001B39BE /* ManagedObjectTransformer */ = {
-			isa = PBXGroup;
-			children = (
-				DD901B0728F7FAC7001B39BE /* ManagedObjectTransformerProtocol.swift */,
-				DD901B0928F7FAD7001B39BE /* WalletMapper.swift */,
-				DD901B0B28F7FC4A001B39BE /* TransactionMapper.swift */,
-			);
-			path = ManagedObjectTransformer;
 			sourceTree = "<group>";
 		};
 		DDB131A528F1A6460038F883 /* UIKit+Custom */ = {
@@ -753,6 +753,7 @@
 				DD7AD81E28EFD55500F59DA2 /* CurrencyConverter.xcdatamodeld in Sources */,
 				DD901AFE28F7B654001B39BE /* WalletService.swift in Sources */,
 				DD7B01CB28F6AC9D008D4B34 /* TransactionsViewModelProtcol.swift in Sources */,
+				DD5A0D4D28F82EFB00594961 /* ManagedObjectMapProtocol.swift in Sources */,
 				DD7AD81428EFD55500F59DA2 /* AppDelegate.swift in Sources */,
 				DDF95C4928F0568400FD619F /* Currency.swift in Sources */,
 				DD01AEF828F13D5B00F922D5 /* String+.swift in Sources */,
@@ -779,7 +780,6 @@
 				DDBDB3DB28F598290023C321 /* LocalDataService.swift in Sources */,
 				DD7AD87428F004CA00F59DA2 /* UIView+Nib.swift in Sources */,
 				DDF95C5E28F0857D00FD619F /* WalletViewModel.swift in Sources */,
-				DD901B0828F7FAC7001B39BE /* ManagedObjectTransformerProtocol.swift in Sources */,
 				DDF95C6B28F0909700FD619F /* LandingController.swift in Sources */,
 				DDC5A07428F705DB0087774D /* TransactionService.swift in Sources */,
 				DDB131A728F1A6900038F883 /* CurrencyTextField.swift in Sources */,

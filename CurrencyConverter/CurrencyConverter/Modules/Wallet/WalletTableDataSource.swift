@@ -10,7 +10,7 @@ import UIKit
 
 class WalletTableDataSource: NSObject, UITableViewDataSource {
   // MARK: - Properties
-  
+
   var wallets: [Wallet] = [] {
     didSet {
       tableCellVMs = wallets.map({
@@ -18,11 +18,11 @@ class WalletTableDataSource: NSObject, UITableViewDataSource {
       })
     }
   }
-  
+
   private var tableCellVMs: [WalletTableCellViewModelProtocol] = []
-  
+
   // MARK: - Methods
-  
+
   func tableView(
     _ tableView: UITableView,
     numberOfRowsInSection section: Int
@@ -38,7 +38,7 @@ class WalletTableDataSource: NSObject, UITableViewDataSource {
       withIdentifier: WalletTableCell.reuseIdentifier,
       for: indexPath
     ) as! WalletTableCell
-    
+
     cell.viewModel = tableCellVMs[indexPath.row]
 
     return cell

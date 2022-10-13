@@ -6,21 +6,21 @@
 //
 
 import Foundation
-import RxSwift
 import RxRelay
+import RxSwift
 
 protocol WalletViewModelProtocol {
   var contentState: PublishSubject<ContentState> { get }
-  
+
   var defaultWallet: Wallet { get }
-  
+
   var wallets: [Wallet] { get }
-  
+
   var transactionsVM: TransactionsViewModelProtocol { get }
-  
+
   func loadWallets()
-  
+
   func getWallet(at index: Int) -> Wallet
-  
+
   func getConvertVM(for index: Int) -> ConvertViewModelProtocol
 }

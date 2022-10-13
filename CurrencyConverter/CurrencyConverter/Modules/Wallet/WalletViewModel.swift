@@ -39,9 +39,9 @@ extension WalletViewModel {
       contentState.onNext(.error(APIError.dataNotFound))
       return
     }
-    
+
     user.setWallets(wallets)
-    
+
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
       self.contentState.onNext(.ready)
     }
@@ -78,7 +78,7 @@ private extension WalletViewModel {
 
       self.user.updateWallet(sourceWallet)
       self.user.updateWallet(destinationWallet)
-      
+
       self.walletService.update(sourceWallet)
       self.walletService.update(destinationWallet)
     }
@@ -127,7 +127,7 @@ extension WalletViewModel {
   var transactionsVM: TransactionsViewModelProtocol {
     TransactionsViewModel()
   }
-  
+
   private var user: User {
     session.user
   }

@@ -18,14 +18,14 @@ enum ContentState {
 
 class ConvertViewModel: ConvertViewModelProtocol {
   // MARK: - Properties
-  
-  private(set) var onCurrencyExchange: CurrencyExchangeClosure = { (_, _) in }
 
   let contentState = PublishSubject<ContentState>()
   let isValidSourceAmount = BehaviorRelay<Bool>(value: false)
   let sourceAmount = BehaviorRelay<Decimal>(value: .zero)
   let destinationAmount = BehaviorRelay<Decimal>(value: .zero)
   let conversionInfo = BehaviorRelay<String>(value: .empty)
+
+  private(set) var onCurrencyExchange: CurrencyExchangeClosure = { _, _ in }
 
   private(set) var sourceWallet: Wallet
   private(set) var destinationWallet: Wallet
@@ -80,14 +80,14 @@ extension ConvertViewModel {
       self.sourceWallet.subtract(amount: totalSourceDeductible)
       self.destinationWallet.add(amount: self.destinationAmount.value)
       self.postTransaction(debitAmount: totalSourceDeductible)
-      
+
       self.contentState.onNext(.success)
-      
+
       self.resetObservables()
       self.onCurrencyExchange(self.sourceWallet, self.destinationWallet)
     }
   }
-  
+
   func changeDestinationWallet(to index: Int) {
     let selectedCurrency = getSupportedCurrency(at: index)
     var selectedWallet = Wallet(
@@ -194,14 +194,6 @@ private extension ConvertViewModel {
     isValidSourceAmount.accept(true)
   }
 
-  func getSupportedCurrency(at index: Int) -> Currency {
-    guard index < supportedCurrencies.count else {
-      preconditionFailure("Index must be less than the size of supported currencies")
-    }
-
-    return supportedCurrencies[index]
-  }
-
   func updateConversionInfo() {
     let commissionFee = getCommissionFee()
     let totalSourceDeductible = sourceAmount.value + commissionFee
@@ -215,7 +207,7 @@ private extension ConvertViewModel {
 
     conversionInfo.accept(info)
   }
-  
+
   func postTransaction(debitAmount: Decimal) {
     let transaction = Transaction(
       debitAmount: debitAmount,
@@ -224,15 +216,23 @@ private extension ConvertViewModel {
       creditCurrency: destinationWallet.currency,
       date: Date()
     )
-    
+
     transactionService.add(transaction)
   }
-  
+
   func resetObservables() {
     sourceAmount.accept(.zero)
     destinationAmount.accept(.zero)
     conversionInfo.accept(.empty)
     isValidSourceAmount.accept(false)
+  }
+
+  func getSupportedCurrency(at index: Int) -> Currency {
+    guard index < supportedCurrencies.count else {
+      preconditionFailure("Index must be less than the size of supported currencies")
+    }
+
+    return supportedCurrencies[index]
   }
 }
 

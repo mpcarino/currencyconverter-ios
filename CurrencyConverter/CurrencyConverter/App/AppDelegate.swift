@@ -23,11 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       with: application,
       launchOptions: launchOptions
     )
-    
+
+    setupKeyboardManager()
+
+    return true
+  }
+}
+
+// MARK: - Helpers
+
+private extension AppDelegate {
+  func setupKeyboardManager() {
     IQKeyboardManager.shared.enable = true
     IQKeyboardManager.shared.enableAutoToolbar = true
     IQKeyboardManager.shared.keyboardDistanceFromTextField = 24.0
-
-    return true
   }
 }

@@ -11,7 +11,6 @@ import Foundation
 class TransactionService:
   LocalStorageAddServiceProtocol,
   LocalStorageLoadServiceProtocol {
-  
   // MARK: - Properties
 
   typealias T = Transaction
@@ -23,7 +22,7 @@ class TransactionService:
 
   init(persistentContainer: NSPersistentContainer) {
     self.persistentContainer = persistentContainer
-    self.transactionMapper = TransactionMapper(persistentContainer: persistentContainer)
+    transactionMapper = TransactionMapper(persistentContainer: persistentContainer)
   }
 }
 
@@ -33,7 +32,6 @@ extension TransactionService {
   func add(_ item: Transaction) {
     do {
       let transaction = transactionMapper.map(item)
-      let request = NSFetchRequest<NSManagedObject>(entityName: entityName)
       var transactions = try managedContext.fetch(request)
 
       transactions.append(transaction)
@@ -46,7 +44,6 @@ extension TransactionService {
 
   func load() -> [Transaction]? {
     do {
-      let request = NSFetchRequest<NSManagedObject>(entityName: entityName)
       let transactions = try managedContext.fetch(request)
 
       let mappedTransactions = transactions.map({
@@ -71,5 +68,9 @@ private extension TransactionService {
 
   var entityName: String {
     "CDTransaction"
+  }
+
+  var request: NSFetchRequest<NSManagedObject> {
+    NSFetchRequest<NSManagedObject>(entityName: entityName)
   }
 }

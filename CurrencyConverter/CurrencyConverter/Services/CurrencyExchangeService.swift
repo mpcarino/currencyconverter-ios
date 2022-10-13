@@ -16,7 +16,11 @@ protocol CurrencyExchangeServiceProtocol {
 }
 
 class CurrencyExchangeService: CurrencyExchangeServiceProtocol {
+  // MARK: - Properties
+
   private let session = URLSession.shared
+
+  // MARK: - Methods
 
   func convert(
     amount: String,

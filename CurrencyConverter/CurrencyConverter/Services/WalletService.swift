@@ -12,7 +12,6 @@ class WalletService:
   LocalStorageAddServiceProtocol,
   LocalStorageLoadServiceProtocol,
   LocalStorageUpdateServiceProtocol {
-  
   // MARK: - Properties
 
   typealias T = Wallet
@@ -36,7 +35,6 @@ extension WalletService {
   func add(_ item: Wallet) {
     do {
       let wallet = walletMapper.map(item)
-      let request = NSFetchRequest<NSManagedObject>(entityName: entityName)
       var wallets = try managedContext.fetch(request)
 
       wallets.append(wallet)
@@ -49,7 +47,6 @@ extension WalletService {
 
   func load() -> [Wallet]? {
     do {
-      let request = NSFetchRequest<NSManagedObject>(entityName: entityName)
       wallets = try managedContext.fetch(request)
 
       let mappedWalelts = wallets.map({
@@ -103,5 +100,9 @@ private extension WalletService {
 
   var entityName: String {
     "CDWallet"
+  }
+  
+  var request: NSFetchRequest<NSManagedObject> {
+    NSFetchRequest<NSManagedObject>(entityName: entityName)
   }
 }

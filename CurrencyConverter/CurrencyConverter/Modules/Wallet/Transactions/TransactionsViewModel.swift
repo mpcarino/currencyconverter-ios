@@ -11,12 +11,12 @@ import RxSwift
 
 class TransactionsViewModel: TransactionsViewModelProtocol {
   // MARK: - Properties
-  
+
   let contentState = PublishSubject<ContentState>()
-  
+
   private let session: Session
   private let transactionService: TransactionService
-  
+
   // MARK: - Init
 
   init(
@@ -33,16 +33,16 @@ class TransactionsViewModel: TransactionsViewModelProtocol {
 extension TransactionsViewModel {
   func load() {
     contentState.onNext(.loading)
-    
+
     guard let transactions = transactionService.load() else {
       contentState.onNext(.error(APIError.dataNotFound))
       return
     }
-    
+
     user.setTransactions(transactions)
     contentState.onNext(.ready)
   }
-  
+
   func getTransactionTableCellVM(at indexPath: IndexPath) -> TransactionTableCellViewModelProtocol {
     return TransactionTableCellViewModel(transaction: getTransaction(at: indexPath.row))
   }
@@ -55,7 +55,7 @@ private extension TransactionsViewModel {
     guard index < transactions.count else {
       preconditionFailure("Index must be less than the size of transactions")
     }
-    
+
     return transactions[index]
   }
 }
@@ -66,7 +66,7 @@ extension TransactionsViewModel {
   private var user: User {
     session.user
   }
-  
+
   var transactions: [Transaction] {
     session.user.transactions
   }

@@ -50,7 +50,6 @@ private extension TransactionsController {
     )
 
     tableView.dataSource = self
-
     tableView.contentInset.top = 8.0
     tableView.contentInset.bottom = 8.0
     tableView.rowHeight = TransactionTableCell.preferredHeight
