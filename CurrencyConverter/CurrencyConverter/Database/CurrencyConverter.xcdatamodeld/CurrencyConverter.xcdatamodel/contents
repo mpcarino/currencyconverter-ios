@@ -8,6 +8,10 @@
         <attribute name="debitAmount" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="debitCode" optional="YES" attributeType="String"/>
         <attribute name="debitLocale" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="CDWallet" representedClassName="CDWallet" syncable="YES" codeGenerationType="class">
+        <attribute name="balance" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="code" optional="YES" attributeType="String"/>
+        <attribute name="locale" optional="YES" attributeType="String" customClassName="CDCurrency"/>
     </entity>
 </model>

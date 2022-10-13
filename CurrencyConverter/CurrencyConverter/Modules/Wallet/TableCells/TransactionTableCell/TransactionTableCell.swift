@@ -22,8 +22,8 @@ class TransactionTableCell: UITableViewCell {
   // MARK: - IBOutlets
 
   @IBOutlet private var containerView: UIView!
-  @IBOutlet private var creditLabel: UILabel!
   @IBOutlet private var debitLabel: UILabel!
+  @IBOutlet private var creditLabel: UILabel!
   @IBOutlet private var dateLabel: UILabel!
   
   // MARK: - Life Cycle
@@ -52,8 +52,8 @@ private extension TransactionTableCell {
   func refresh() {
     guard viewModel != nil else { return }
     
-    creditLabel.text = viewModel.creditText
     debitLabel.text = viewModel.debitText
+    creditLabel.text = viewModel.creditText
     dateLabel.text = viewModel.dateText
   }
 }

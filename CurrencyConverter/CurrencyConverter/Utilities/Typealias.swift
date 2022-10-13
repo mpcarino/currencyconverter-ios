@@ -11,4 +11,4 @@ typealias S = R.string.localizable
 
 // MARK: - Closures
 
-typealias CurrencyConversionClosure = ((Wallet, Wallet) -> Void)
+typealias CurrencyExchangeClosure = ((Wallet, Wallet) -> Void)

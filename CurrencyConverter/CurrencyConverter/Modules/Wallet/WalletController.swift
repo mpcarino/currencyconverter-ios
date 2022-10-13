@@ -24,7 +24,7 @@ class WalletController: UIViewController {
   private var tableDelegate = WalletTableDelegate()
 
   // MARK: - IBOutlets
-  
+
   @IBOutlet private var tableView: UITableView!
 
   // MARK: - Life Cycle
@@ -34,12 +34,12 @@ class WalletController: UIViewController {
 
     setup()
     bind()
-    
+
     viewModel.loadWallets()
   }
 
   // MARK: - IBActions
-  
+
   @IBAction func didTapTransactionsButton(_ sender: Any) {
     showTransactions()
   }
@@ -52,7 +52,7 @@ private extension WalletController {
     setupTableView()
     setupHandlers()
   }
-  
+
   func setupTableView() {
     tableDataSource.wallets = viewModel.wallets
 
@@ -81,7 +81,7 @@ private extension WalletController {
     bindModel()
     bindNotifications()
   }
-  
+
   func bindModel() {
     viewModel.contentState
       .observe(on: MainScheduler.instance)
@@ -90,9 +90,8 @@ private extension WalletController {
         case .loading:
           SVProgressHUD.show()
         case .ready,
-            .success:
+             .success:
           self.reloadTable()
-          
           SVProgressHUD.dismiss()
         case let .error(error):
           SVProgressHUD.showError(withStatus: error.localizedDescription)
@@ -100,7 +99,7 @@ private extension WalletController {
       })
       .disposed(by: rx.disposeBag)
   }
-  
+
   func bindNotifications() {
     NotificationCenter.default.rx.notification(User.Notification.didUpdateWallets)
       .observe(on: MainScheduler.instance)
@@ -115,8 +114,8 @@ private extension WalletController {
 
 private extension WalletController {
   func reloadTable() {
-    self.tableDataSource.wallets = viewModel.wallets
-    self.tableView.reloadData()
+    tableDataSource.wallets = viewModel.wallets
+    tableView.reloadData()
   }
 }
 
@@ -141,7 +140,7 @@ private extension WalletController {
 
     show(controller, sender: self)
   }
-  
+
   func showTransactions() {
     let controller = R.storyboard.transactions.transactionsController()!
     controller.viewModel = viewModel.transactionsVM

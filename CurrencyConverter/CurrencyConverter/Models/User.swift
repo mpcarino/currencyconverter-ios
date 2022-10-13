@@ -53,6 +53,10 @@ class User {
     NotificationCenter.default.post(name: Notification.didUpdateWallets, object: nil)
   }
   
+  func setTransactions(_ newTransaction: [Transaction]) {
+    transactions = newTransaction
+  }
+  
   func addTransaction(_ transaction: Transaction) {
     transactions.append(transaction)
   }

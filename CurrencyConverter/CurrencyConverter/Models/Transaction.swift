@@ -8,7 +8,7 @@
 import Foundation
 
 struct Transaction: Codable {
-  var id: UUID = UUID()
+  var id = UUID()
   
   let debitAmount: Decimal
   let debitCurrency: Currency

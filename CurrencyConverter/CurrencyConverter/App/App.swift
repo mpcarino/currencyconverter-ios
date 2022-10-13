@@ -19,13 +19,14 @@ final class App {
 
   private(set) var supportedCurrencies: [Currency]
   
-  private(set) var config: AppConfigProtocol!
+  private(set) var config: ConfigurationProtocol!
   private(set) var session: Session!
 
-  private(set) var supportedCurrencyService: JSONDataService<[Currency]>!
-  private(set) var walletService: JSONDataService<[Wallet]>!
+  private(set) var supportedCurrencyJSONService: JSONDataService<[Currency]>!
+  private(set) var walletJSONService: JSONDataService<[Wallet]>!
   
   private(set) var currencyExchangeService: CurrencyExchangeServiceProtocol!
+  private(set) var walletService: WalletService!
   private(set) var transactionService: TransactionService!
   
   private lazy var persistentContainer: NSPersistentContainer = {
@@ -52,17 +53,19 @@ extension App {
     with application: UIApplication,
     launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) {
-    config = AppConfig()
+    config = AppConfiguration()
     
-    supportedCurrencyService = JSONDataService<[Currency]>(decoder: config.jsonDecoder)
-    walletService = JSONDataService<[Wallet]>(decoder: config.jsonDecoder)
+    supportedCurrencyJSONService = JSONDataService<[Currency]>(decoder: config.jsonDecoder)
+    walletJSONService = JSONDataService<[Wallet]>(decoder: config.jsonDecoder)
     
     currencyExchangeService = CurrencyExchangeService()
+    walletService = WalletService(persistentContainer: persistentContainer)
     transactionService = TransactionService(persistentContainer: persistentContainer)
     
     session = Session(user: User(wallets: [], transactions: []))
     
     loadSupportedCurrencies()
+    postInitialWallets()
   }
 }
 
@@ -70,10 +73,22 @@ extension App {
 
 private extension App {
   func loadSupportedCurrencies() {
-    guard let supportedCurrencies = supportedCurrencyService.load(fileName: config.supportedCurrenciesFileName) else {
+    guard let supportedCurrencies = supportedCurrencyJSONService.load(fileName: config.supportedCurrenciesFileName) else {
       return
     }
 
     self.supportedCurrencies = supportedCurrencies
+  }
+  
+  func postInitialWallets() {
+    if !UserDefaults.hasUsedInitialWallets {
+      if let initialWallets = walletJSONService.load(fileName: App.shared.config.initialUserWalletsFileName) {
+        for initialWallet in initialWallets {
+          walletService.add(initialWallet)
+        }
+        
+        UserDefaults.hasUsedInitialWallets = true
+      }
+    }
   }
 }

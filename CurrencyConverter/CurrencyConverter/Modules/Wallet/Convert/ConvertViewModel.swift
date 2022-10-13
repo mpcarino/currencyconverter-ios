@@ -18,6 +18,8 @@ enum ContentState {
 
 class ConvertViewModel: ConvertViewModelProtocol {
   // MARK: - Properties
+  
+  private(set) var onCurrencyExchange: CurrencyExchangeClosure = { (_, _) in }
 
   let contentState = PublishSubject<ContentState>()
   let isValidSourceAmount = BehaviorRelay<Bool>(value: false)
@@ -43,7 +45,8 @@ class ConvertViewModel: ConvertViewModelProtocol {
     commissionRate: Double = App.shared.config.commissionRate,
     session: Session = App.shared.session,
     currencyExchangeService: CurrencyExchangeServiceProtocol = App.shared.currencyExchangeService,
-    transactionService: TransactionService = App.shared.transactionService
+    transactionService: TransactionService = App.shared.transactionService,
+    onCurrencyExchange: @escaping CurrencyExchangeClosure
   ) {
     self.session = session
     self.sourceWallet = sourceWallet
@@ -52,6 +55,7 @@ class ConvertViewModel: ConvertViewModelProtocol {
     self.commissionRate = commissionRate
     self.currencyExchangeService = currencyExchangeService
     self.transactionService = transactionService
+    self.onCurrencyExchange = onCurrencyExchange
   }
 }
 
@@ -70,26 +74,17 @@ extension ConvertViewModel {
 
     contentState.onNext(.loading)
 
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [weak self] in
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
       guard let self = self else { return }
 
       self.sourceWallet.subtract(amount: totalSourceDeductible)
       self.destinationWallet.add(amount: self.destinationAmount.value)
-
-      self.contentState.onNext(.success)
-
-      self.user.updateWallet(self.sourceWallet)
-      self.user.updateWallet(self.destinationWallet)
-
-      let transaction = Transaction(
-        debitAmount: totalSourceDeductible,
-        debitCurrency: self.destinationWallet.currency,
-        creditAmount: self.sourceAmount.value,
-        creditCurrency: self.sourceWallet.currency,
-        date: Date()
-      )
+      self.postTransaction(debitAmount: totalSourceDeductible)
       
-      self.transactionService.add(transaction)
+      self.contentState.onNext(.success)
+      
+      self.resetObservables()
+      self.onCurrencyExchange(self.sourceWallet, self.destinationWallet)
     }
   }
   
@@ -219,6 +214,25 @@ private extension ConvertViewModel {
     )
 
     conversionInfo.accept(info)
+  }
+  
+  func postTransaction(debitAmount: Decimal) {
+    let transaction = Transaction(
+      debitAmount: debitAmount,
+      debitCurrency: sourceWallet.currency,
+      creditAmount: destinationAmount.value,
+      creditCurrency: destinationWallet.currency,
+      date: Date()
+    )
+    
+    transactionService.add(transaction)
+  }
+  
+  func resetObservables() {
+    sourceAmount.accept(.zero)
+    destinationAmount.accept(.zero)
+    conversionInfo.accept(.empty)
+    isValidSourceAmount.accept(false)
   }
 }
 

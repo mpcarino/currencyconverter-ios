@@ -10,6 +10,8 @@ import RxSwift
 import RxRelay
 
 protocol ConvertViewModelProtocol {
+  var onCurrencyExchange: CurrencyExchangeClosure { get }
+  
   var contentState: PublishSubject<ContentState> { get }
   var isValidSourceAmount: BehaviorRelay<Bool> { get }
   var sourceAmount: BehaviorRelay<Decimal> { get }

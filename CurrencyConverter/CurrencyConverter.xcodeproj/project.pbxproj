@@ -10,7 +10,7 @@
 		DD01AEF428F136FB00F922D5 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD01AEF328F136FB00F922D5 /* Colors.xcassets */; };
 		DD01AEF628F13C1100F922D5 /* ConvertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD01AEF528F13C1100F922D5 /* ConvertViewModel.swift */; };
 		DD01AEF828F13D5B00F922D5 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD01AEF728F13D5B00F922D5 /* String+.swift */; };
-		DD01AEFD28F1433300F922D5 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD01AEFC28F1433200F922D5 /* AppConfig.swift */; };
+		DD01AEFD28F1433300F922D5 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD01AEFC28F1433200F922D5 /* Configuration.swift */; };
 		DD01AF0028F1545100F922D5 /* CurrencyExchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD01AEFF28F1545100F922D5 /* CurrencyExchange.swift */; };
 		DD01AF0228F1576700F922D5 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD01AF0128F1576700F922D5 /* Typealias.swift */; };
 		DD01AF0428F15CAE00F922D5 /* CurrencyExchangeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD01AF0328F15CAD00F922D5 /* CurrencyExchangeService.swift */; };
@@ -43,6 +43,10 @@
 		DD7B01D328F6B2A1008D4B34 /* TransactionTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD7B01D228F6B2A1008D4B34 /* TransactionTableCell.xib */; };
 		DD7B01D528F6B43D008D4B34 /* TransactionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B01D428F6B43D008D4B34 /* TransactionTableCell.swift */; };
 		DD7B01D728F6B889008D4B34 /* TransactionTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B01D628F6B889008D4B34 /* TransactionTableCellViewModel.swift */; };
+		DD901AFE28F7B654001B39BE /* WalletService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD901AFD28F7B654001B39BE /* WalletService.swift */; };
+		DD901B0828F7FAC7001B39BE /* ManagedObjectTransformerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD901B0728F7FAC7001B39BE /* ManagedObjectTransformerProtocol.swift */; };
+		DD901B0A28F7FAD7001B39BE /* WalletMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD901B0928F7FAD7001B39BE /* WalletMapper.swift */; };
+		DD901B0C28F7FC4A001B39BE /* TransactionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD901B0B28F7FC4A001B39BE /* TransactionMapper.swift */; };
 		DDB131A428F183BF0038F883 /* Error+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB131A328F183BF0038F883 /* Error+.swift */; };
 		DDB131A728F1A6900038F883 /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB131A628F1A6900038F883 /* CurrencyTextField.swift */; };
 		DDBDB3D928F596910023C321 /* InitialUserWallets.json in Resources */ = {isa = PBXBuildFile; fileRef = DDBDB3D828F596910023C321 /* InitialUserWallets.json */; };
@@ -97,7 +101,7 @@
 		DD01AEF328F136FB00F922D5 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		DD01AEF528F13C1100F922D5 /* ConvertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertViewModel.swift; sourceTree = "<group>"; };
 		DD01AEF728F13D5B00F922D5 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		DD01AEFC28F1433200F922D5 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		DD01AEFC28F1433200F922D5 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		DD01AEFF28F1545100F922D5 /* CurrencyExchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchange.swift; sourceTree = "<group>"; };
 		DD01AF0128F1576700F922D5 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		DD01AF0328F15CAD00F922D5 /* CurrencyExchangeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeService.swift; sourceTree = "<group>"; };
@@ -133,6 +137,10 @@
 		DD7B01D228F6B2A1008D4B34 /* TransactionTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionTableCell.xib; sourceTree = "<group>"; };
 		DD7B01D428F6B43D008D4B34 /* TransactionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableCell.swift; sourceTree = "<group>"; };
 		DD7B01D628F6B889008D4B34 /* TransactionTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableCellViewModel.swift; sourceTree = "<group>"; };
+		DD901AFD28F7B654001B39BE /* WalletService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletService.swift; sourceTree = "<group>"; };
+		DD901B0728F7FAC7001B39BE /* ManagedObjectTransformerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectTransformerProtocol.swift; sourceTree = "<group>"; };
+		DD901B0928F7FAD7001B39BE /* WalletMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMapper.swift; sourceTree = "<group>"; };
+		DD901B0B28F7FC4A001B39BE /* TransactionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionMapper.swift; sourceTree = "<group>"; };
 		DDB131A328F183BF0038F883 /* Error+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+.swift"; sourceTree = "<group>"; };
 		DDB131A628F1A6900038F883 /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
 		DDBDB3D828F596910023C321 /* InitialUserWallets.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InitialUserWallets.json; sourceTree = "<group>"; };
@@ -228,8 +236,11 @@
 			children = (
 				DD7AD84928EFD6C500F59DA2 /* Info */,
 				DD7AD84728EFD6B000F59DA2 /* App */,
+				DD901AFF28F7D959001B39BE /* Session */,
+				DD901B0028F7D962001B39BE /* Configuration */,
 				DDF95C4F28F065F100FD619F /* Services */,
 				DD7AD84828EFD6B800F59DA2 /* Modules */,
+				DD901B0528F7FAA9001B39BE /* Helpers */,
 				DDF95C4B28F062D900FD619F /* Models */,
 				DD7AD84A28EFD6D600F59DA2 /* Database */,
 				DDF95C4E28F063AE00FD619F /* Data */,
@@ -261,8 +272,6 @@
 				DD7AD81328EFD55500F59DA2 /* AppDelegate.swift */,
 				DD7AD86028EFE4CE00F59DA2 /* AppDelegate+RootController.swift */,
 				DDF95C5228F072C700FD619F /* App.swift */,
-				DDC5A07128F704CF0087774D /* Session.swift */,
-				DD01AEFC28F1433200F922D5 /* AppConfig.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -396,6 +405,40 @@
 			path = TransactionTableCell;
 			sourceTree = "<group>";
 		};
+		DD901AFF28F7D959001B39BE /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				DDC5A07128F704CF0087774D /* Session.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		DD901B0028F7D962001B39BE /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				DD01AEFC28F1433200F922D5 /* Configuration.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		DD901B0528F7FAA9001B39BE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DD901B0628F7FAB2001B39BE /* ManagedObjectTransformer */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DD901B0628F7FAB2001B39BE /* ManagedObjectTransformer */ = {
+			isa = PBXGroup;
+			children = (
+				DD901B0728F7FAC7001B39BE /* ManagedObjectTransformerProtocol.swift */,
+				DD901B0928F7FAD7001B39BE /* WalletMapper.swift */,
+				DD901B0B28F7FC4A001B39BE /* TransactionMapper.swift */,
+			);
+			path = ManagedObjectTransformer;
+			sourceTree = "<group>";
+		};
 		DDB131A528F1A6460038F883 /* UIKit+Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -462,6 +505,7 @@
 				DDC5A07728F706140087774D /* Protocols */,
 				DDBDB3DC28F5988F0023C321 /* JSONDataService.swift */,
 				DD01AF0328F15CAD00F922D5 /* CurrencyExchangeService.swift */,
+				DD901AFD28F7B654001B39BE /* WalletService.swift */,
 				DDC5A07328F705DB0087774D /* TransactionService.swift */,
 			);
 			path = Services;
@@ -704,8 +748,10 @@
 				DD7AD86A28EFF7E900F59DA2 /* UITableViewCell+.swift in Sources */,
 				DD7B01C428F69E47008D4B34 /* UIAlertAction.swift in Sources */,
 				DD7B01C228F69E3E008D4B34 /* UIViewController+.swift in Sources */,
+				DD901B0C28F7FC4A001B39BE /* TransactionMapper.swift in Sources */,
 				DD7AD87628F00A9A00F59DA2 /* WalletTableDelegate.swift in Sources */,
 				DD7AD81E28EFD55500F59DA2 /* CurrencyConverter.xcdatamodeld in Sources */,
+				DD901AFE28F7B654001B39BE /* WalletService.swift in Sources */,
 				DD7B01CB28F6AC9D008D4B34 /* TransactionsViewModelProtcol.swift in Sources */,
 				DD7AD81428EFD55500F59DA2 /* AppDelegate.swift in Sources */,
 				DDF95C4928F0568400FD619F /* Currency.swift in Sources */,
@@ -720,6 +766,7 @@
 				DDBDB3DD28F598900023C321 /* JSONDataService.swift in Sources */,
 				DD01AF0428F15CAE00F922D5 /* CurrencyExchangeService.swift in Sources */,
 				DD7B01D528F6B43D008D4B34 /* TransactionTableCell.swift in Sources */,
+				DD901B0A28F7FAD7001B39BE /* WalletMapper.swift in Sources */,
 				DDF95C6228F08A1C00FD619F /* Wallet.swift in Sources */,
 				DD7AD87028EFFAFA00F59DA2 /* WalletTableCell.swift in Sources */,
 				DD01AF0228F1576700F922D5 /* Typealias.swift in Sources */,
@@ -732,10 +779,11 @@
 				DDBDB3DB28F598290023C321 /* LocalDataService.swift in Sources */,
 				DD7AD87428F004CA00F59DA2 /* UIView+Nib.swift in Sources */,
 				DDF95C5E28F0857D00FD619F /* WalletViewModel.swift in Sources */,
+				DD901B0828F7FAC7001B39BE /* ManagedObjectTransformerProtocol.swift in Sources */,
 				DDF95C6B28F0909700FD619F /* LandingController.swift in Sources */,
 				DDC5A07428F705DB0087774D /* TransactionService.swift in Sources */,
 				DDB131A728F1A6900038F883 /* CurrencyTextField.swift in Sources */,
-				DD01AEFD28F1433300F922D5 /* AppConfig.swift in Sources */,
+				DD01AEFD28F1433300F922D5 /* Configuration.swift in Sources */,
 				DD7AD85D28EFE3ED00F59DA2 /* ConvertController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

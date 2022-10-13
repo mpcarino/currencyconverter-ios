@@ -42,7 +42,8 @@ final class ConvertViewModelTests: XCTestCase {
     let sut: ConvertViewModelProtocol = ConvertViewModel(
       sourceWallet: mockWalletWithBalance,
       destinationWallet: mockWalletWithoutBalance,
-      commissionRate: mockCommissionRate
+      commissionRate: mockCommissionRate,
+      onCurrencyExchange: { (_, _) in }
     )
     
     XCTAssertEqual(mockCommissionRate, sut.commissionRate)
@@ -52,7 +53,8 @@ final class ConvertViewModelTests: XCTestCase {
     let sut: ConvertViewModelProtocol = ConvertViewModel(
       sourceWallet: mockWalletWithBalance,
       destinationWallet: mockWalletWithoutBalance,
-      commissionRate: mockCommissionRate
+      commissionRate: mockCommissionRate,
+      onCurrencyExchange: { (_, _) in }
     )
     
     sut.sourceAmount.accept(100)
@@ -66,7 +68,8 @@ final class ConvertViewModelTests: XCTestCase {
     let sut: ConvertViewModelProtocol = ConvertViewModel(
       sourceWallet: mockWalletWithBalance,
       destinationWallet: mockWalletWithoutBalance,
-      commissionRate: mockCommissionRate
+      commissionRate: mockCommissionRate,
+      onCurrencyExchange: { (_, _) in }
     )
     
     sut.sourceAmount.accept(0)
@@ -81,7 +84,8 @@ final class ConvertViewModelTests: XCTestCase {
     let sut: ConvertViewModelProtocol = ConvertViewModel(
       sourceWallet: mockWalletWithBalance,
       destinationWallet: mockWalletWithoutBalance,
-      commissionRate: mockCommissionRate
+      commissionRate: mockCommissionRate,
+      onCurrencyExchange: { (_, _) in }
     )
     
     sut.sourceAmount.accept(-100)
@@ -96,7 +100,8 @@ final class ConvertViewModelTests: XCTestCase {
     let sut: ConvertViewModelProtocol = ConvertViewModel(
       sourceWallet: mockWalletWithBalance,
       destinationWallet: mockWalletWithoutBalance,
-      commissionRate: mockCommissionRate
+      commissionRate: mockCommissionRate,
+      onCurrencyExchange: { (_, _) in }
     )
     
     sut.sourceAmount.accept(1_000)
@@ -111,7 +116,8 @@ final class ConvertViewModelTests: XCTestCase {
     let sut: ConvertViewModelProtocol = ConvertViewModel(
       sourceWallet: mockWalletWithBalance,
       destinationWallet: mockWalletWithoutBalance,
-      commissionRate: mockCommissionRate
+      commissionRate: mockCommissionRate,
+      onCurrencyExchange: { (_, _) in }
     )
     
     sut.sourceAmount.accept(1_001)

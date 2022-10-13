@@ -159,13 +159,8 @@ private extension ConvertController {
           SVProgressHUD.dismiss()
         case .success:
           SVProgressHUD.dismiss()
-
           self.presentSuccessAlert()
-
           self.balanceLabel.text = viewModel.sourceWallet.formattedBalance
-          self.sourceAmountTextField.text = nil
-          self.destinationAmountTextField.text = nil
-          self.infoLabel.text = nil
         case let .error(error):
           SVProgressHUD.showError(withStatus: error.localizedDescription)
         }

@@ -17,38 +17,22 @@ import SVProgressHUD
 
 class TransactionsController: UIViewController {
   // MARK: - Properties
-  
+
   var viewModel: TransactionsViewModelProtocol!
-  
+
   // MARK: - IBOutlets
-  
+
   @IBOutlet private var tableView: UITableView!
-  
+
   // MARK: - Life Cycle
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setup()
-    
+    bind()
+
     viewModel.load()
-    
-    viewModel.contentState
-      .observe(on: MainScheduler.instance)
-      .subscribe(onNext: { [unowned self] contentState in
-        switch contentState {
-        case .loading:
-          SVProgressHUD.show()
-        case .ready,
-            .success:
-          SVProgressHUD.dismiss()
-          
-          self.tableView.reloadData()
-        case let .error(error):
-          SVProgressHUD.showError(withStatus: error.localizedDescription)
-        }
-      })
-      .disposed(by: rx.disposeBag)
   }
 }
 
@@ -58,7 +42,7 @@ private extension TransactionsController {
   func setup() {
     setupTableView()
   }
-  
+
   func setupTableView() {
     tableView.register(
       TransactionTableCell.nib,
@@ -73,6 +57,32 @@ private extension TransactionsController {
   }
 }
 
+// MARK: - Binding
+
+private extension TransactionsController {
+  func bind() {
+    bindModel()
+  }
+
+  func bindModel() {
+    viewModel.contentState
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { [unowned self] contentState in
+        switch contentState {
+        case .loading:
+          SVProgressHUD.show()
+        case .ready,
+             .success:
+          self.tableView.reloadData()
+          SVProgressHUD.dismiss()
+        case let .error(error):
+          SVProgressHUD.showError(withStatus: error.localizedDescription)
+        }
+      })
+      .disposed(by: rx.disposeBag)
+  }
+}
+
 // MARK: - UITableViewDataSource
 
 extension TransactionsController: UITableViewDataSource {
@@ -82,7 +92,7 @@ extension TransactionsController: UITableViewDataSource {
   ) -> Int {
     return viewModel.transactions.count
   }
-  
+
   func tableView(
     _ tableView: UITableView,
     cellForRowAt indexPath: IndexPath
@@ -91,7 +101,7 @@ extension TransactionsController: UITableViewDataSource {
       withIdentifier: TransactionTableCell.reuseIdentifier,
       for: indexPath
     ) as! TransactionTableCell
-    
+
     cell.viewModel = viewModel.getTransactionTableCellVM(at: indexPath)
 
     return cell

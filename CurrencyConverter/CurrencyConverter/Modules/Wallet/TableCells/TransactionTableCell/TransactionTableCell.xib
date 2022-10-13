@@ -105,9 +105,9 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="containerView" destination="Ud9-Dc-uj7" id="exh-QZ-LLM"/>
-                <outlet property="creditLabel" destination="wRg-uw-GAu" id="t0e-79-MGx"/>
+                <outlet property="creditLabel" destination="qKN-Ze-ENp" id="MST-jB-n3H"/>
                 <outlet property="dateLabel" destination="URx-kF-fKS" id="QY6-84-0of"/>
-                <outlet property="debitLabel" destination="qKN-Ze-ENp" id="h9c-Sj-5rs"/>
+                <outlet property="debitLabel" destination="wRg-uw-GAu" id="fdj-x9-RKl"/>
             </connections>
             <point key="canvasLocation" x="48" y="3"/>
         </tableViewCell>

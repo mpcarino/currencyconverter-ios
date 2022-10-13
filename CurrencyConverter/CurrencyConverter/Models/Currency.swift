@@ -8,12 +8,17 @@
 import Foundation
 
 struct Currency: Codable {
-  static var `default`: Self {
-    Currency(locale: "es_ES", code: "EUR")
-  }
-
   let locale: String
   let code: String
+}
+
+extension Currency {
+  static var `default`: Self {
+    .init(
+      locale: "es_ES",
+      code: "EUR"
+    )
+  }
 }
 
 extension Currency: Equatable {

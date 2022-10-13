@@ -16,11 +16,7 @@ extension AppDelegate {
   func setRootToWallet() {
     let navigationController = R.storyboard.wallet.instantiateInitialViewController()
     let walletController = navigationController?.viewControllers.first as! WalletController
-    
-    walletController.viewModel = WalletViewModel(
-      session: App.shared.session,
-      walletService: App.shared.walletService
-    )
+    walletController.viewModel = WalletViewModel()
     
     window?.rootViewController = navigationController
   }

@@ -8,15 +8,17 @@
 import Foundation
 
 struct Wallet: Codable {
+  var balance: Decimal
+  let currency: Currency
+}
+
+extension Wallet {
   static var `default`: Self {
     .init(
       balance: .zero,
       currency: Currency.default
     )
   }
-  
-  var balance: Decimal
-  let currency: Currency
 }
 
 extension Wallet: Equatable {

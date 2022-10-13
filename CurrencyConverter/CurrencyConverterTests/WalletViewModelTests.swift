@@ -62,7 +62,7 @@ final class WalletViewModelTests: XCTestCase {
   }
   
   func test_createConvertVM_defaultDestinationWallet() {
-    let defaultDestinationWallet = AppConfig().defaultDestinationWallet
+    let defaultDestinationWallet = AppConfiguration().defaultDestinationWallet
     let sut: WalletViewModelProtocol = WalletViewModel(session: mockSession)
     
     let convertVM = sut.getConvertVM(for: 0)

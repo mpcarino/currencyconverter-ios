@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol AppConfigProtocol {
+protocol ConfigurationProtocol {
   var defaultWallet: Wallet { get }
   var defaultDestinationWallet: Wallet { get }
   var defaultDestinationCurrency: Currency { get }
@@ -21,9 +21,10 @@ protocol AppConfigProtocol {
   var initialUserWalletsFileName: String { get }
   
   var jsonDecoder: JSONDecoder { get }
+  var dateFormatter: DateFormatter { get }
 }
 
-extension AppConfigProtocol {
+extension ConfigurationProtocol {
   var defaultWallet: Wallet { .default }
   var defaultDestinationWallet: Wallet { .default }
   var defaultDestinationCurrency: Currency { .default }
@@ -42,6 +43,13 @@ extension AppConfigProtocol {
     
     return decoder
   }
+  
+  var dateFormatter: DateFormatter {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMM d, h:mm a"
+    
+    return formatter
+  }
 }
 
-class AppConfig: AppConfigProtocol { }
+class AppConfiguration: ConfigurationProtocol { }

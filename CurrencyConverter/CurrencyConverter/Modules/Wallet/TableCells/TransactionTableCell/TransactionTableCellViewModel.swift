@@ -28,10 +28,6 @@ extension TransactionTableCellViewModel {
   }
   
   var dateText: String {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .long
-    formatter.dateFormat = "MMM d, h:mm a"
-    
-    return formatter.string(from: transaction.date)
+    return App.shared.config.dateFormatter.string(from: transaction.date)
   }
 }
