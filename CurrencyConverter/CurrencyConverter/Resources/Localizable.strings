@@ -1,0 +1,43 @@
+/* 
+  Localizable.strings
+  CurrencyConverter
+
+  Created by Marwin Carino on 10/7/22.
+  
+*/
+
+/* App */
+
+app.title = "Currency Converter";
+
+/* Alert */
+
+alert.title.success = "Success";
+
+alert.convert.conversion-success = "You have received %@";
+
+alert.button.ok = "OK";
+alert.button.yes = "Yes";
+alert.button.no = "No";
+
+/* Convert */
+
+convert.nav.title = "Convert";
+convert.conversion-info = "This transaction has a commission rate of %@ that amounts to %@.\nA total of %@ will be deducted from your wallet and you will receive a total of %@.";
+convert.conversion-info-free = "This transaction is FREE of charge.\nA total of %@ will be deducted from your wallet and you will receive a total of %@.";
+
+/* Endpoint */
+
+endpoint.currency-exchange = "http://api.evp.lt/currency/commercial/exchange/%@-%@/%@/latest";
+
+/* Error */
+
+error.app.unknown = "An unknown error has occured";
+
+error.api.invalidURL = "Sorry, we are having trouble processing your request right now. Please try again later";
+error.api.invalidRequest = "Sorry, we are having trouble processing your request right now. Please try again later";
+error.api.dataNotFound = "Data not found";
+
+error.currencyExchange.invalidDestinationWallet = "Invalid destination wallet. Please select a different one";
+error.currencyExchange.invalidAmount = "Invalid amount";
+error.currencyExchange.insufficientBalance = "You have insufficient balance for this transaction";

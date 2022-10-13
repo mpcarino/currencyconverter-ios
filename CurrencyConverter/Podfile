@@ -1,0 +1,32 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+def app_pods
+  pod 'IQKeyboardManagerSwift', '6.3.0'
+  
+  pod 'R.swift',              '6.1.0'
+  
+  pod 'Reusable',             '4.1.2'
+  
+  pod 'RxSwift',              '6.5.0'
+  pod 'RxCocoa',              '6.5.0'
+  pod 'RxRelay',              '6.5.0'
+  pod 'NSObject+Rx',          '5.2.2'
+  
+  pod 'SVProgressHUD'
+end
+
+target 'CurrencyConverter' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for CurrencyConverter
+  
+  app_pods
+
+  target 'CurrencyConverterTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
