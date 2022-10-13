@@ -12,6 +12,7 @@ protocol TransactionTableCellViewModelProtocol {
   var debitText: String { get }
   var creditText: String { get }
   var dateText: String { get }
+  var shouldHideNoCommissionTag: Bool { get }
 }
 
 struct TransactionTableCellViewModel: TransactionTableCellViewModelProtocol {
@@ -29,5 +30,9 @@ extension TransactionTableCellViewModel {
   
   var dateText: String {
     return App.shared.config.dateFormatter.string(from: transaction.date)
+  }
+  
+  var shouldHideNoCommissionTag: Bool {
+    return !transaction.isFreeCommission
   }
 }

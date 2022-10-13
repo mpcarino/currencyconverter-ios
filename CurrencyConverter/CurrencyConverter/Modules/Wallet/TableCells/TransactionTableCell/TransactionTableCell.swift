@@ -25,6 +25,7 @@ class TransactionTableCell: UITableViewCell {
   @IBOutlet private var debitLabel: UILabel!
   @IBOutlet private var creditLabel: UILabel!
   @IBOutlet private var dateLabel: UILabel!
+  @IBOutlet private var noCommissionView: UIView!
   
   // MARK: - Life Cycle
 
@@ -41,12 +42,14 @@ class TransactionTableCell: UITableViewCell {
 private extension TransactionTableCell {
   func configureUI() {
     containerView.layer.cornerRadius = 10.0
+    noCommissionView.layer.cornerRadius = noCommissionView.frame.size.height / 2
   }
 
   func setup() {
     debitLabel.text = nil
     creditLabel.text = nil
     dateLabel.text = nil
+    noCommissionView.isHidden = true
   }
   
   func refresh() {
@@ -55,5 +58,6 @@ private extension TransactionTableCell {
     debitLabel.text = viewModel.debitText
     creditLabel.text = viewModel.creditText
     dateLabel.text = viewModel.dateText
+    noCommissionView.isHidden = viewModel.shouldHideNoCommissionTag
   }
 }

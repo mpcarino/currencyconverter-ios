@@ -176,12 +176,20 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.file` struct is generated, and contains static references to 2 files.
+  /// This `R.file` struct is generated, and contains static references to 3 files.
   struct file {
+    /// Resource file `CurrencyExchangeRules.json`.
+    static let currencyExchangeRulesJson = Rswift.FileResource(bundle: R.hostingBundle, name: "CurrencyExchangeRules", pathExtension: "json")
     /// Resource file `InitialUserWallets.json`.
     static let initialUserWalletsJson = Rswift.FileResource(bundle: R.hostingBundle, name: "InitialUserWallets", pathExtension: "json")
     /// Resource file `SupportedCurrencies.json`.
     static let supportedCurrenciesJson = Rswift.FileResource(bundle: R.hostingBundle, name: "SupportedCurrencies", pathExtension: "json")
+
+    /// `bundle.url(forResource: "CurrencyExchangeRules", withExtension: "json")`
+    static func currencyExchangeRulesJson(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.currencyExchangeRulesJson
+      return fileResource.bundle.url(forResource: fileResource)
+    }
 
     /// `bundle.url(forResource: "InitialUserWallets", withExtension: "json")`
     static func initialUserWalletsJson(_: Void = ()) -> Foundation.URL? {
@@ -244,7 +252,7 @@ struct R: Rswift.Validatable {
 
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 16 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 17 localization keys.
     struct localizable {
       /// Value: An unknown error has occured
       static let errorAppUnknown = Rswift.StringResource(key: "error.app.unknown", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
@@ -270,6 +278,8 @@ struct R: Rswift.Validatable {
       static let alertTitleSuccess = Rswift.StringResource(key: "alert.title.success", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: This transaction has a commission rate of %@ that amounts to %@. A total of %@ will be deducted from your wallet and you will receive a total of %@.
       static let convertConversionInfo = Rswift.StringResource(key: "convert.conversion-info", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: This transaction is FREE of charge. A total of %@ will be deducted from your wallet and you will receive a total of %@.
+      static let convertConversionInfoFree = Rswift.StringResource(key: "convert.conversion-info-free", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Yes
       static let alertButtonYes = Rswift.StringResource(key: "alert.button.yes", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: You have insufficient balance for this transaction
@@ -435,6 +445,21 @@ struct R: Rswift.Validatable {
 
         let format = NSLocalizedString("convert.conversion-info", bundle: bundle, comment: "")
         return String(format: format, locale: locale, value1, value2, value3, value4)
+      }
+
+      /// Value: This transaction is FREE of charge. A total of %@ will be deducted from your wallet and you will receive a total of %@.
+      static func convertConversionInfoFree(_ value1: String, _ value2: String, preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          let format = NSLocalizedString("convert.conversion-info-free", bundle: hostingBundle, comment: "")
+          return String(format: format, locale: applicationLocale, value1, value2)
+        }
+
+        guard let (locale, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "convert.conversion-info-free"
+        }
+
+        let format = NSLocalizedString("convert.conversion-info-free", bundle: bundle, comment: "")
+        return String(format: format, locale: locale, value1, value2)
       }
 
       /// Value: Yes

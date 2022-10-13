@@ -31,9 +31,12 @@ class ConvertViewModel: ConvertViewModelProtocol {
   private(set) var destinationWallet: Wallet
   private(set) var supportedCurrencies: [Currency]
   private(set) var commissionRate: Double
+  
+  private var conversionApplicableRule: CurrencyExchangeRule?
 
   private let session: Session
   private let currencyExchangeService: CurrencyExchangeServiceProtocol
+  private let currencyExchangeRuleService: CurrencyExchangeRuleServiceProtocol
   private let transactionService: TransactionService
 
   // MARK: - Init
@@ -45,6 +48,7 @@ class ConvertViewModel: ConvertViewModelProtocol {
     commissionRate: Double = App.shared.config.commissionRate,
     session: Session = App.shared.session,
     currencyExchangeService: CurrencyExchangeServiceProtocol = App.shared.currencyExchangeService,
+    currencyExchangeRuleService: CurrencyExchangeRuleServiceProtocol = App.shared.currencyExchangeRuleService,
     transactionService: TransactionService = App.shared.transactionService,
     onCurrencyExchange: @escaping CurrencyExchangeClosure
   ) {
@@ -54,6 +58,7 @@ class ConvertViewModel: ConvertViewModelProtocol {
     self.supportedCurrencies = supportedCurrencies.filter({ $0 != sourceWallet.currency })
     self.commissionRate = commissionRate
     self.currencyExchangeService = currencyExchangeService
+    self.currencyExchangeRuleService = currencyExchangeRuleService
     self.transactionService = transactionService
     self.onCurrencyExchange = onCurrencyExchange
   }
@@ -79,11 +84,18 @@ extension ConvertViewModel {
 
       self.sourceWallet.subtract(amount: totalSourceDeductible)
       self.destinationWallet.add(amount: self.destinationAmount.value)
-      self.postTransaction(debitAmount: totalSourceDeductible)
-
+      
+      self.saveTransaction(debitAmount: totalSourceDeductible)
+      
+      if let conversionApplicableRule = self.conversionApplicableRule {
+        self.currencyExchangeRuleService.apply(conversionApplicableRule)
+        self.conversionApplicableRule = nil
+      }
+      
       self.contentState.onNext(.success)
-
+    
       self.resetObservables()
+    
       self.onCurrencyExchange(self.sourceWallet, self.destinationWallet)
     }
   }
@@ -105,9 +117,13 @@ extension ConvertViewModel {
   }
 
   func exchangeSourceToDestination(for amount: Decimal) {
+    conversionApplicableRule = nil
     validate(amount: amount)
 
-    guard isValidSourceAmount.value else { return }
+    guard isValidSourceAmount.value else {
+      resetObservables()
+      return
+    }
 
     Task.init {
       do {
@@ -125,8 +141,9 @@ extension ConvertViewModel {
         sourceAmount.accept(amount)
         destinationAmount.accept(Decimal(string: currencyExchange.amount) ?? .zero)
 
+        getConversionApplicableRule()
         updateConversionInfo()
-
+        
         contentState.onNext(.ready)
       } catch {
         contentState.onNext(.error(APIError.invalidRequest))
@@ -135,9 +152,13 @@ extension ConvertViewModel {
   }
 
   func exchangeDestinationToSource(for amount: Decimal) {
+    conversionApplicableRule = nil
     validate(amount: amount)
 
-    guard isValidSourceAmount.value else { return }
+    guard isValidSourceAmount.value else {
+      resetObservables()
+      return
+    }
 
     Task.init {
       do {
@@ -155,8 +176,9 @@ extension ConvertViewModel {
         destinationAmount.accept(amount)
         sourceAmount.accept(Decimal(string: currencyExchange.amount) ?? .zero)
 
+        getConversionApplicableRule()
         updateConversionInfo()
-
+      
         contentState.onNext(.ready)
       } catch {
         contentState.onNext(.error(APIError.invalidRequest))
@@ -165,6 +187,10 @@ extension ConvertViewModel {
   }
 
   func getCommissionFee() -> Decimal {
+    if conversionApplicableRule != nil {
+      return .zero
+    }
+    
     return (sourceAmount.value * Decimal(commissionRate)) / 100.0
   }
 
@@ -193,27 +219,47 @@ private extension ConvertViewModel {
 
     isValidSourceAmount.accept(true)
   }
+  
+  func getConversionApplicableRule() {
+    conversionApplicableRule = currencyExchangeRuleService.getApplicableRule(
+      for: user,
+      sourceAmount: sourceAmount.value,
+      sourceCode: sourceWallet.currency.code,
+      destinationAmount: destinationAmount.value,
+      destinationCode: destinationWallet.currency.code
+    )
+  }
 
   func updateConversionInfo() {
     let commissionFee = getCommissionFee()
     let totalSourceDeductible = sourceAmount.value + commissionFee
-
-    let info = S.convertConversionInfo(
-      "\(commissionRate)%",
-      sourceWallet.currency.currencyFormatter.string(amount: commissionFee as NSNumber),
-      sourceWallet.currency.currencyFormatter.string(amount: totalSourceDeductible as NSNumber),
-      destinationWallet.currency.currencyFormatter.string(amount: destinationAmount.value as NSNumber)
-    )
-
+    
+    var info = String.empty
+    
+    if conversionApplicableRule != nil {
+      info = S.convertConversionInfoFree(
+        sourceWallet.currency.currencyFormatter.string(amount: totalSourceDeductible as NSNumber),
+        destinationWallet.currency.currencyFormatter.string(amount: destinationAmount.value as NSNumber)
+      )
+    } else {
+      info = S.convertConversionInfo(
+        "\(commissionRate)%",
+        sourceWallet.currency.currencyFormatter.string(amount: commissionFee as NSNumber),
+        sourceWallet.currency.currencyFormatter.string(amount: totalSourceDeductible as NSNumber),
+        destinationWallet.currency.currencyFormatter.string(amount: destinationAmount.value as NSNumber)
+      )
+    }
+    
     conversionInfo.accept(info)
   }
 
-  func postTransaction(debitAmount: Decimal) {
+  func saveTransaction(debitAmount: Decimal) {
     let transaction = Transaction(
       debitAmount: debitAmount,
       debitCurrency: sourceWallet.currency,
       creditAmount: destinationAmount.value,
       creditCurrency: destinationWallet.currency,
+      isFreeCommission: isFreeCommission,
       date: Date()
     )
 
@@ -245,5 +291,9 @@ private extension ConvertViewModel {
 
   var wallets: [Wallet] {
     session.user.wallets
+  }
+  
+  var isFreeCommission: Bool {
+    conversionApplicableRule != nil
   }
 }

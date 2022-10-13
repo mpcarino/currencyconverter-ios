@@ -24,6 +24,7 @@ alert.button.no = "No";
 
 convert.nav.title = "Convert";
 convert.conversion-info = "This transaction has a commission rate of %@ that amounts to %@.\nA total of %@ will be deducted from your wallet and you will receive a total of %@.";
+convert.conversion-info-free = "This transaction is FREE of charge.\nA total of %@ will be deducted from your wallet and you will receive a total of %@.";
 
 /* Endpoint */
 

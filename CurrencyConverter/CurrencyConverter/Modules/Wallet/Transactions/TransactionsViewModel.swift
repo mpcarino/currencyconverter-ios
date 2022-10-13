@@ -68,6 +68,6 @@ extension TransactionsViewModel {
   }
 
   var transactions: [Transaction] {
-    session.user.transactions
+    session.user.transactions.reversed()
   }
 }

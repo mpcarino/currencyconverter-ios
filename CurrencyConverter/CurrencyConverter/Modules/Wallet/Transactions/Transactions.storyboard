@@ -27,10 +27,36 @@
                                             <constraint firstAttribute="height" id="4TH-75-kUn"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mVc-d7-YGq">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQU-aA-Dok">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="719"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mVc-d7-YGq">
+                                                <rect key="frame" x="0.0" y="0.0" width="390" height="719"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </tableView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="d8J-Jl-BhW">
+                                                <rect key="frame" x="32" y="359.66666666666669" width="326" height="0.0"/>
+                                                <subviews>
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No transactions found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q95-Gy-W40">
+                                                        <rect key="frame" x="0.0" y="0.0" width="191" height="0.0"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableView>
+                                        <constraints>
+                                            <constraint firstItem="d8J-Jl-BhW" firstAttribute="leading" secondItem="KQU-aA-Dok" secondAttribute="leading" constant="32" id="59f-Le-Td1"/>
+                                            <constraint firstAttribute="bottom" secondItem="mVc-d7-YGq" secondAttribute="bottom" id="K3v-wC-6Zx"/>
+                                            <constraint firstAttribute="trailing" secondItem="d8J-Jl-BhW" secondAttribute="trailing" constant="32" id="KnO-qx-j2i"/>
+                                            <constraint firstAttribute="trailing" secondItem="mVc-d7-YGq" secondAttribute="trailing" id="aqE-7j-dRS"/>
+                                            <constraint firstItem="d8J-Jl-BhW" firstAttribute="centerY" secondItem="KQU-aA-Dok" secondAttribute="centerY" id="gDj-YP-3Q2"/>
+                                            <constraint firstItem="mVc-d7-YGq" firstAttribute="top" secondItem="KQU-aA-Dok" secondAttribute="top" id="gFz-GK-Im2"/>
+                                            <constraint firstItem="mVc-d7-YGq" firstAttribute="leading" secondItem="KQU-aA-Dok" secondAttribute="leading" id="uNB-JG-pmv"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4QE-3u-TGZ" userLabel="Spacer">
                                         <rect key="frame" x="0.0" y="719" width="390" height="0.0"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -39,6 +65,12 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="KQU-aA-Dok" firstAttribute="leading" secondItem="67U-vM-vbA" secondAttribute="leading" id="Mfj-tW-ldD"/>
+                                    <constraint firstAttribute="trailing" secondItem="KQU-aA-Dok" secondAttribute="trailing" id="gpi-h0-Kuf"/>
+                                    <constraint firstItem="KQU-aA-Dok" firstAttribute="top" secondItem="bT3-2W-Q5h" secondAttribute="bottom" id="qWR-Xt-isQ"/>
+                                    <constraint firstItem="4QE-3u-TGZ" firstAttribute="top" secondItem="KQU-aA-Dok" secondAttribute="bottom" id="zmd-hK-dCM"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -52,6 +84,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Transactions" id="oH5-sU-VuV"/>
                     <connections>
+                        <outlet property="emptyStateLabel" destination="Q95-Gy-W40" id="ozp-mg-WN7"/>
                         <outlet property="tableView" destination="mVc-d7-YGq" id="EOT-Rx-tmI"/>
                     </connections>
                 </viewController>

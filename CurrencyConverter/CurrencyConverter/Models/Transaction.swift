@@ -8,11 +8,10 @@
 import Foundation
 
 struct Transaction: Codable {
-  var id = UUID()
-  
   let debitAmount: Decimal
   let debitCurrency: Currency
   let creditAmount: Decimal
   let creditCurrency: Currency
+  let isFreeCommission: Bool
   let date: Date
 }

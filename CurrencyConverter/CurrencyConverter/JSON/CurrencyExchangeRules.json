@@ -1,0 +1,65 @@
+[
+    {
+      "id": "CER_1",
+      "type": "Source",
+      "code": "EUR",
+      "transaction_count": 1,
+      "minimum": 0
+    },
+    {
+      "id": "CER_2",
+      "type": "Source",
+      "code": "USD",
+      "transaction_count": 1,
+      "minimum": 0
+    },
+    {
+      "id": "CER_3",
+      "type": "Source",
+      "code": "JPY",
+      "transaction_count": 1,
+      "minimum": 0
+    },
+    {
+      "id": "CER_4",
+      "type": "Source",
+      "code": "EUR",
+      "transaction_count": 3,
+      "minimum": 200
+    },
+    {
+      "id": "CER_5",
+      "type": "Source",
+      "code": "USD",
+      "transaction_count": 3,
+      "minimum": 200
+    },
+    {
+      "id": "CER_6",
+      "type": "Source",
+      "code": "JPY",
+      "transaction_count": 3,
+      "minimum": 200
+    },
+    {
+      "id": "CER_7",
+      "type": "Destination",
+      "code": "EUR",
+      "transaction_count": 10,
+      "minimum": 500
+    },
+    {
+      "id": "CER_8",
+      "type": "Destination",
+      "code": "USD",
+      "transaction_count": 10,
+      "minimum": 500
+    },
+    {
+      "id": "CER_9",
+      "type": "Destination",
+      "code": "JPY",
+      "transaction_count": 10,
+      "minimum": 500
+    }
+]

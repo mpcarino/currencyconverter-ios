@@ -35,6 +35,7 @@ extension TransactionMapper {
         locale: item.value(forKeyPath: "creditLocale") as! String,
         code: item.value(forKeyPath: "creditCode") as! String
       ),
+      isFreeCommission: item.value(forKeyPath: "isFreeCommission") as! Bool,
       date: item.value(forKeyPath: "date") as! Date
     )
 
@@ -50,6 +51,7 @@ extension TransactionMapper {
     transaction.setValue(item.creditAmount, forKeyPath: "creditAmount")
     transaction.setValue(item.creditCurrency.locale, forKeyPath: "creditLocale")
     transaction.setValue(item.creditCurrency.code, forKeyPath: "creditCode")
+    transaction.setValue(item.isFreeCommission, forKeyPath: "isFreeCommission")
     transaction.setValue(item.date, forKeyPath: "date")
 
     return transaction

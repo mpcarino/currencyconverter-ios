@@ -18,7 +18,7 @@ protocol CurrencyExchangeServiceProtocol {
 class CurrencyExchangeService: CurrencyExchangeServiceProtocol {
   // MARK: - Properties
 
-  private let session = URLSession.shared
+  private let urlSession = URLSession.shared
 
   // MARK: - Methods
 
@@ -34,7 +34,7 @@ class CurrencyExchangeService: CurrencyExchangeServiceProtocol {
     )
 
     if let url = URL(string: endpoint) {
-      let (data, _) = try await session.data(from: url)
+      let (data, _) = try await urlSession.data(from: url)
       let decodedData = try JSONDecoder().decode(CurrencyExchange.self, from: data)
 
       return decodedData

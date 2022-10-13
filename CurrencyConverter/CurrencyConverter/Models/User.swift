@@ -56,10 +56,6 @@ class User {
   func setTransactions(_ newTransaction: [Transaction]) {
     transactions = newTransaction
   }
-  
-  func addTransaction(_ transaction: Transaction) {
-    transactions.append(transaction)
-  }
 }
 
 // MARK: - Notifications

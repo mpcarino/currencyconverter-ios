@@ -23,7 +23,8 @@ class TransactionsController: UIViewController {
   // MARK: - IBOutlets
 
   @IBOutlet private var tableView: UITableView!
-
+  @IBOutlet private var emptyStateLabel: UILabel!
+  
   // MARK: - Life Cycle
 
   override func viewDidLoad() {
@@ -72,7 +73,7 @@ private extension TransactionsController {
           SVProgressHUD.show()
         case .ready,
              .success:
-          self.tableView.reloadData()
+          self.reloadTable()
           SVProgressHUD.dismiss()
         case let .error(error):
           SVProgressHUD.showError(withStatus: error.localizedDescription)
@@ -81,6 +82,16 @@ private extension TransactionsController {
       .disposed(by: rx.disposeBag)
   }
 }
+
+// MARK: - Helpers
+
+private extension TransactionsController {
+  func reloadTable() {
+    emptyStateLabel.isHidden = !viewModel.transactions.isEmpty
+    tableView.reloadData()
+  }
+}
+
 
 // MARK: - UITableViewDataSource
 

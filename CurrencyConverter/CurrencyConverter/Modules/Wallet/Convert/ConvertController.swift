@@ -154,14 +154,18 @@ private extension ConvertController {
       .subscribe(onNext: { [unowned self] contentState in
         switch contentState {
         case .loading:
+          view.isUserInteractionEnabled = false
           SVProgressHUD.show()
         case .ready:
+          view.isUserInteractionEnabled = true
           SVProgressHUD.dismiss()
         case .success:
+          view.isUserInteractionEnabled = true
           SVProgressHUD.dismiss()
           self.presentSuccessAlert()
           self.balanceLabel.text = viewModel.sourceWallet.formattedBalance
         case let .error(error):
+          view.isUserInteractionEnabled = true
           SVProgressHUD.showError(withStatus: error.localizedDescription)
         }
       })
